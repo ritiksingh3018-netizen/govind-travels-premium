@@ -10,7 +10,7 @@ export default function PackagesPage() {
     {
       name: "Char Dham Yatra",
       image: "/chardham.jpg",
-      price: "₹29,999",
+      price: "₹34,999",
       duration: "10 Days / 9 Nights",
       description: "Yamunotri, Gangotri, Kedarnath & Badrinath Tour",
     },
