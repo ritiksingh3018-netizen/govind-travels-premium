@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import WhatsappButton from "@/components/WhatsappButton";
 
 export const metadata = {
-  title: "Govind Travels",
+  title: "Yorra Travels",
   description: "Premium Travel Experiences",
 };
 

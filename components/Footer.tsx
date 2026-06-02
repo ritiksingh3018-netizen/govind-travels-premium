@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Company */}
           <div>
             <h2 className="text-3xl font-black mb-4">
-              Govind Travels
+              Yorra Travels
             </h2>
 
             <p className="text-gray-400">
@@ -66,7 +66,7 @@ export default function Footer() {
         <div className="border-t border-white/10 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
 
           <p className="text-gray-500">
-            © 2026 Govind Travels. All Rights Reserved.
+            © 2026 Yorra Travels. All Rights Reserved.
           </p>
 
           <div className="flex gap-6 text-gray-400 mt-4 md:mt-0">

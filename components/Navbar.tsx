@@ -15,7 +15,7 @@ export default function Navbar() {
           href="/"
           className="text-white text-2xl font-black tracking-wide"
         >
-          GOVIND TRAVELS
+          Yorra Travels
         </Link>
 
         {/* Desktop Menu */}
