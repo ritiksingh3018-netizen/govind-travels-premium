@@ -33,7 +33,7 @@ export default function Navbar() {
           </Link>
 
           <a
-            href="https://wa.me/919717367006"
+            href="https://wa.me/919717367006?text=Hi,%20I%20am%20interested%20in.%20Please%20share%20details."
             target="_blank"
             className="bg-orange-500 px-5 py-2 rounded-lg font-semibold hover:bg-orange-600 transition"
           >
@@ -79,7 +79,7 @@ export default function Navbar() {
             </Link>
 
             <a
-              href="https://wa.me/919717367006"
+              href="https://wa.me/919717367006?text=Hi,%20I%20am%20interested%20in.%20Please%20share%20details."
               target="_blank"
               className="bg-orange-500 text-center py-3 rounded-xl font-bold"
             >

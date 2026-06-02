@@ -5,8 +5,8 @@ export default function Home() {
       image: "/kedarnath.jpg",
     },
     {
-      name: "Kashmir",
-      image: "/kashmir.jpg",
+      name: "Char Dham",
+      image: "/chardham.jpg",
     },
     {
       name: "Manali",
@@ -37,18 +37,18 @@ export default function Home() {
               </span>
 
               <h1 className="mt-6 text-6xl md:text-8xl font-black text-white">
-                Explore The
+                Explore Sacred
                 <br />
-                Himalayas
+                India
               </h1>
 
               <p className="mt-6 text-xl text-gray-200">
-                Kedarnath • Kashmir • Manali • Spiti
+                Kedarnath • Char Dham • Manali • Spiti
               </p>
 
               <div className="mt-8 flex gap-4 flex-wrap">
                 <a
-                  href="https://wa.me/919717367006"
+                  href="https://wa.me/919717367006?text=Hi,%20I%20am%20interested%20in.%20Please%20share%20details."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold transition"
@@ -67,6 +67,90 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Featured Tours */}
+<section className="bg-[#111827] py-24">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="flex justify-between items-end flex-wrap gap-4 mb-14">
+      <div>
+        <p className="uppercase tracking-[4px] text-orange-500 font-bold">
+          Featured Tours
+        </p>
+
+        <h2 className="text-5xl md:text-6xl font-black text-white mt-3">
+          Handpicked Travel Packages
+        </h2>
+      </div>
+
+      <a
+        href="/packages"
+        className="text-orange-500 font-semibold text-lg"
+      >
+        View All →
+      </a>
+    </div>
+
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          title: "Kedarnath Yatra",
+          image: "/kedarnath.jpg",
+          price: "₹18,999",
+          days: "5 Days",
+        },
+        {
+          title: "Char Dham Yatra",
+          image: "/chardham.jpg",
+          price: "₹34,999",
+          days: "10 Days",
+        },
+        {
+          title: "Manali Tour",
+          image: "/manali.jpg",
+          price: "₹12,999",
+          days: "4 Days",
+        },
+      ].map((tour) => (
+        <div
+          key={tour.title}
+          className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-300"
+        >
+          <img
+            src={tour.image}
+            alt={tour.title}
+            className="h-72 w-full object-cover"
+          />
+
+          <div className="p-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-2xl font-bold text-white">
+                {tour.title}
+              </h3>
+
+              <span className="text-sm bg-white/10 text-white px-3 py-1 rounded-full">
+                {tour.days}
+              </span>
+            </div>
+
+            <div className="flex justify-between items-center mt-8">
+              <span className="text-3xl font-black text-orange-500">
+                {tour.price}
+              </span>
+
+              <a
+                href="https://wa.me/919717367006?text=Hi,%20I%20am%20interested%20in.%20Please%20share%20details."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-xl font-semibold"
+              >
+                Book Now
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Popular Destinations */}
       <section className="bg-[#0B1220] py-20">
@@ -141,7 +225,7 @@ export default function Home() {
           </p>
 
           <a
-            href="https://wa.me/919717367006"
+            href="https://wa.me/919717367006?text=Hi,%20I%20am%20interested%20in.%20Please%20share%20details."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block mt-8 bg-white text-black px-10 py-4 rounded-xl font-bold text-lg"

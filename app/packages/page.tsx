@@ -90,7 +90,7 @@ export default function PackagesPage() {
                   </span>
 
                   <a
-                    href="https://wa.me/919717367006"
+                    href="https://wa.me/919717367006?text=Hi,%20I%20am%20interested%20in.%20Please%20share%20details."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-xl font-bold"
