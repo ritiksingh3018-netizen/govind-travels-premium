@@ -56,7 +56,7 @@ export default function Footer() {
 
             <ul className="space-y-3 text-gray-400">
               <li>📞 +91 9717367006</li>
-              <li>📧 info@govindtravels.com</li>
+              <li>📧 info@yorra.in</li>
               <li>📍 New Delhi, India</li>
             </ul>
           </div>
