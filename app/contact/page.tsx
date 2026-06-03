@@ -9,7 +9,7 @@ export default function ContactPage() {
         {/* Heading */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-2 rounded-full bg-white/10 border border-white/20 text-blue-300 text-sm">
-            Contact Govind Travel
+            Contact Yorra Travels
           </span>
 
           <h1 className="mt-6 text-5xl md:text-6xl font-bold text-white">
@@ -98,7 +98,7 @@ export default function ContactPage() {
                     Email
                   </p>
                   <h3 className="text-xl text-white font-semibold">
-                    info@govindtravel.com
+                    info@yorra.in
                   </h3>
                 </div>
 
