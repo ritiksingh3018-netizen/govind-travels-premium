@@ -1,4 +1,21 @@
+"use client";
+
+import { useState } from "react";
+
 export default function HomePage() {
+  const [formData, setFormData] = useState({
+  name: "",
+  phone: "",
+  email: "",
+  destination: "",
+  message: "",
+});
+
+const [captcha, setCaptcha] = useState("");
+const [loading, setLoading] = useState(false);
+const [submitted, setSubmitted] = useState(false);
+
+
   const destinations = [
     { name: "Kedarnath", image: "/kedarnath.jpg" },
     { name: "Char Dham", image: "/chardham.jpg" },
@@ -283,6 +300,7 @@ export default function HomePage() {
 </section>
 
 {/* Inquiry Form */}
+{/* Inquiry Form */}
 <section className="py-24">
   <div className="max-w-3xl mx-auto px-6">
 
@@ -293,45 +311,145 @@ export default function HomePage() {
     <p className="text-center text-gray-400 mb-12">
       Fill the form and our travel expert will contact you.
     </p>
+{submitted && (
+  <div className="mb-6 p-4 rounded-xl bg-green-500 text-white text-center animate-pulse">
+    ✅ Inquiry Sent Successfully!
+    <br />
+    Our team will contact you shortly.
+  </div>
+)}
+    <form
+      className="space-y-5"
+      onSubmit={async (e) => {
+        e.preventDefault();
 
-    <form className="space-y-5">
+        if (!/^[0-9]{10}$/.test(formData.phone)) {
+          alert("Please enter a valid 10-digit mobile number");
+          return;
+        }
+
+        if (
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+        ) {
+          alert("Please enter a valid email address");
+          return;
+        }
+
+   if (captcha !== "8") {
+  alert("Wrong captcha answer");
+  return;
+}
+
+setLoading(true);
+
+const response = await fetch("/api/inquiry", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(formData),
+});
+
+setLoading(false);
+
+if (response.ok) {
+  setSubmitted(true);
+
+  setFormData({
+    name: "",
+    phone: "",
+    email: "",
+    destination: "",
+    message: "",
+  });
+
+  setCaptcha("");
+
+  
+}
+      }}
+    >
 
       <input
         type="text"
         placeholder="Full Name"
+        required
+        value={formData.name}
+        onChange={(e) =>
+          setFormData({ ...formData, name: e.target.value })
+        }
         className="w-full bg-white/5 border border-white/10 p-4 rounded-xl"
       />
 
       <input
         type="tel"
-        placeholder="Phone Number"
+        placeholder="10 Digit Mobile Number"
+        required
+        maxLength={10}
+        value={formData.phone}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            phone: e.target.value.replace(/\D/g, ""),
+          })
+        }
         className="w-full bg-white/5 border border-white/10 p-4 rounded-xl"
       />
 
       <input
         type="email"
         placeholder="Email Address"
+        required
+        value={formData.email}
+        onChange={(e) =>
+          setFormData({ ...formData, email: e.target.value })
+        }
         className="w-full bg-white/5 border border-white/10 p-4 rounded-xl"
       />
 
       <input
         type="text"
         placeholder="Destination"
+        required
+        value={formData.destination}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            destination: e.target.value,
+          })
+        }
         className="w-full bg-white/5 border border-white/10 p-4 rounded-xl"
       />
 
       <textarea
         rows={4}
         placeholder="Tell us about your trip..."
+        value={formData.message}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            message: e.target.value,
+          })
+        }
+        className="w-full bg-white/5 border border-white/10 p-4 rounded-xl"
+      />
+
+      <input
+        type="text"
+        placeholder="What is 5 + 3 ?"
+        required
+        value={captcha}
+        onChange={(e) => setCaptcha(e.target.value)}
         className="w-full bg-white/5 border border-white/10 p-4 rounded-xl"
       />
 
       <button
-        type="submit"
-        className="w-full bg-orange-500 hover:bg-orange-600 py-4 rounded-xl font-bold"
-      >
-        Submit Inquiry
-      </button>
+  type="submit"
+  disabled={loading}
+  className="w-full bg-orange-500 hover:bg-orange-600 py-4 rounded-xl font-bold disabled:opacity-50"
+>
+  {loading ? "Sending..." : "Submit Inquiry"}
+</button>
 
     </form>
 

@@ -1,4 +1,18 @@
+"use client";
+
+import { useState } from "react";
+
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    destination: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 py-20 overflow-hidden">
       {/* Background Blur Effects */}
@@ -32,46 +46,131 @@ export default function ContactPage() {
               <h2 className="text-3xl font-bold text-white mb-8">
                 Send an Inquiry
               </h2>
+              {submitted && (
+  <div className="mb-6 p-4 rounded-xl bg-green-500 text-white text-center">
+    ✅ Inquiry Sent Successfully!
+  </div>
+)}
 
-              <form className="space-y-5">
+              <form
+  className="space-y-5"
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    if (!/^[0-9]{10}$/.test(formData.phone)) {
+      alert("Please enter a valid 10-digit mobile number");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    setLoading(true);
+
+    const response = await fetch("/api/inquiry", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    setLoading(false);
+
+    if (response.ok) {
+      setSubmitted(true);
+
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        destination: "",
+        message: "",
+      });
+    }
+  }}
+>
                 <div className="grid md:grid-cols-2 gap-5">
                   <input
-                    type="text"
-                    placeholder="Full Name"
-                    className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none"
-                  />
+  type="text"
+  placeholder="Full Name"
+  required
+  value={formData.name}
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      name: e.target.value,
+    })
+  }
+  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none"
+/>
 
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none"
-                  />
+                <input
+  type="tel"
+  placeholder="Phone Number"
+  required
+  maxLength={10}
+  value={formData.phone}
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      phone: e.target.value.replace(/\D/g, ""),
+    })
+  }
+  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none"
+/>  
                 </div>
 
                 <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none"
-                />
+  type="email"
+  placeholder="Email Address"
+  required
+  value={formData.email}
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      email: e.target.value,
+    })
+  }
+  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none"
+/>
 
                 <input
-                  type="text"
-                  placeholder="Destination (e.g. Kedarnath, Manali, Goa)"
-                  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none"
-                />
+  type="text"
+  placeholder="Destination (e.g. Kedarnath, Manali, Goa)"
+  required
+  value={formData.destination}
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      destination: e.target.value,
+    })
+  }
+  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none"
+/>
 
                 <textarea
-                  rows={6}
-                  placeholder="Tell us about your trip requirements..."
-                  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none resize-none"
-                />
+  rows={6}
+  placeholder="Tell us about your trip requirements..."
+  value={formData.message}
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      message: e.target.value,
+    })
+  }
+  className="w-full bg-white/10 border border-white/20 text-white placeholder:text-slate-400 rounded-xl px-4 py-4 outline-none resize-none"
+/>
 
                 <button
-                  type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold transition-all"
-                >
-                  Submit Inquiry →
-                </button>
+  type="submit"
+  disabled={loading}
+  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold transition-all disabled:opacity-50"
+>
+  {loading ? "Sending..." : "Submit Inquiry →"}
+</button>
               </form>
             </div>
           </div>
