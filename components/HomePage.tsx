@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function HomePage() {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const [submitted, setSubmitted] = useState(false);
   const destinations = [
     { name: "Kedarnath", image: "/kedarnath.jpg" },
     { name: "Char Dham", image: "/chardham.jpg" },
-    { name: "Kashmir", image: "/kashmir.jpg" },
+    { name: "Manali", image: "/manali.jpg" },
     { name: "Kerala", image: "/kerala.jpg" },
   ];
 
@@ -49,7 +50,7 @@ const [submitted, setSubmitted] = useState(false);
               </h1>
 
               <p className="mt-6 text-xl text-gray-300">
-                Kedarnath • Char Dham • Kashmir • Kerala • Goa
+                Kedarnath • Char Dham • Manali • Kerala • Goa
               </p>
 
               <div className="mt-10 flex gap-4 flex-wrap">
@@ -112,96 +113,114 @@ const [submitted, setSubmitted] = useState(false);
 
           <div className="grid md:grid-cols-4 gap-6">
             {destinations.map((item) => (
-              <div
-                key={item.name}
-                className="group relative rounded-3xl overflow-hidden"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="h-[400px] w-full object-cover group-hover:scale-110 transition duration-700"
-                />
+  <Link
+    key={item.name}
+    href={
+  item.name === "Kedarnath"
+    ? "/packages/kedarnath"
+    : item.name === "Char Dham"
+    ? "/packages/chardham"
+    : item.name === "Manali"
+? "/packages/manali"
+    : "#"
+}
+  >
+    <div className="group relative rounded-3xl overflow-hidden cursor-pointer">
+      <img
+        src={item.image}
+        alt={item.name}
+        className="h-[400px] w-full object-cover group-hover:scale-110 transition duration-700"
+      />
 
-                <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/40" />
 
-                <h3 className="absolute bottom-6 left-6 text-3xl font-bold">
-                  {item.name}
-                </h3>
-              </div>
-            ))}
+      <h3 className="absolute bottom-6 left-6 text-3xl font-bold">
+        {item.name}
+      </h3>
+    </div>
+  </Link>
+))}
           </div>
 
         </div>
       </section>
 
       {/* Featured Packages */}
-      <section className="py-24 bg-[#0B1220]">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* Featured Packages */}
+<section className="py-24 bg-[#0B1220]">
+  <div className="max-w-7xl mx-auto px-6">
 
-          <h2 className="text-5xl font-black text-center mb-14">
-            Featured Packages
-          </h2>
+    <h2 className="text-5xl font-black text-center mb-14">
+      Featured Packages
+    </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+    <div className="grid md:grid-cols-3 gap-8">
 
-            {[
-              {
-                title: "Kedarnath Yatra",
-                image: "/kedarnath.jpg",
-                price: "₹18,999",
-              },
-              {
-                title: "Char Dham Yatra",
-                image: "/chardham.jpg",
-                price: "₹34,999",
-              },
-              {
-                title: "Kashmir Tour",
-                image: "/kashmir.jpg",
-                price: "₹24,999",
-              },
-            ].map((tour) => (
-              <div
-                key={tour.title}
-                className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/40 transition-all"
-              >
-                <img
-                  src={tour.image}
-                  alt={tour.title}
-                  className="h-52 w-full object-cover"
-                />
+      {[
+        {
+          title: "Kedarnath Yatra",
+          image: "/kedarnath.jpg",
+          price: "₹18,999",
+        },
+        {
+          title: "Char Dham Yatra",
+          image: "/chardham.jpg",
+          price: "₹34,999",
+        },
+        {
+  title: "Manali Tour",
+  image: "/manali.jpg",
+  price: "₹9,999",
+},
+      ].map((tour) => (
+        <Link
+          key={tour.title}
+          href={
+  tour.title === "Kedarnath Yatra"
+    ? "/packages/kedarnath"
+    : tour.title === "Char Dham Yatra"
+    ? "/packages/chardham"
+    : tour.title === "Manali Tour"
+    ? "/packages/manali"
+    : "#"
+}
+        >
+          <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/40 transition-all cursor-pointer hover:scale-105">
 
-                <div className="p-4">
-                  <h3 className="text-xl font-bold">
-                    {tour.title}
-                  </h3>
+            <img
+              src={tour.image}
+              alt={tour.title}
+              className="h-52 w-full object-cover"
+            />
 
-                  <p className="mt-3 text-gray-400">
-                    Hotel • Transport • Sightseeing
-                  </p>
+            <div className="p-4">
+              <h3 className="text-xl font-bold">
+                {tour.title}
+              </h3>
 
-                  <div className="mt-6 flex justify-between items-center">
-                    <span className="text-2xl font-black text-orange-500">
-                      {tour.price}
-                    </span>
+              <p className="mt-3 text-gray-400">
+                Hotel • Transport • Sightseeing
+              </p>
 
-                    <a
-                      href="https://wa.me/919717367006?text=Hi,%20I%20am%20interested%20in.%20Please%20share%20details."
-                      target="_blank"
-                      className="bg-orange-500 px-5 py-3 rounded-xl font-bold"
-                    >
-                      Book Now
-                    </a>
-                  </div>
-                </div>
+              <div className="mt-6 flex justify-between items-center">
+                <span className="text-2xl font-black text-orange-500">
+                  {tour.price}
+                </span>
+
+                <span className="bg-orange-500 px-5 py-3 rounded-xl font-bold">
+                  View Details
+                </span>
               </div>
-            ))}
+            </div>
 
           </div>
+        </Link>
+      ))}
 
-        </div>
-      </section>
+    </div>
 
+  </div>
+</section>
     
 {/* Why Choose Yorra */}
 <section className="py-24">

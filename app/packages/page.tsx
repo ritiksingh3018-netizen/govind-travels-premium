@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function PackagesPage() {
@@ -246,10 +247,26 @@ export default function PackagesPage() {
       pkg.description.toLowerCase().includes(search.toLowerCase())
   )
   .map((pkg) => (
-                <div
-                  key={pkg.name}
-                  className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden hover:border-orange-500 hover:-translate-y-2 transition-all duration-300"
-                >
+  <Link
+    key={pkg.name}
+    href={
+  pkg.name === "Kedarnath Yatra"
+    ? "/packages/kedarnath"
+    : pkg.name === "Char Dham Yatra"
+    ? "/packages/chardham"
+    : pkg.name === "Manali Tour"
+    ? "/packages/manali"
+    : pkg.name === "Spiti Valley"
+    ? "/packages/spiti"
+    : pkg.name === "Leh Ladakh"
+    ? "/packages/ladakh"
+    : "#"
+}
+
+  >
+    <div
+      className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden hover:border-orange-500 hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+    >
                   <div className="overflow-hidden">
                     <img
                       src={pkg.image}
@@ -282,19 +299,15 @@ export default function PackagesPage() {
                         </span>
                       </div>
 
-                      <a
-                        href={`https://wa.me/919717367006?text=${encodeURIComponent(
-                          `Hi, I am interested in ${pkg.name}. Please share details.`
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-lg font-semibold text-sm transition"
-                      >
-                        Book Now
-                      </a>
+                      <span
+  className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-lg font-semibold text-sm transition"
+>
+  View Details
+</span>
                     </div>
                   </div>
                 </div>
+                </Link>
               ))}
             </div>
           </section>
