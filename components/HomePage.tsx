@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import { useRef, useState } from "react";
 
@@ -7,6 +8,7 @@ export default function HomePage() {
 const [phone, setPhone] = useState("");
 const [destination, setDestination] = useState("");
 const [submitted, setSubmitted] = useState(false);
+const [searchDestination, setSearchDestination] = useState("");
 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -37,6 +39,15 @@ const handleSubmit = async (e: React.FormEvent) => {
   
 }
 };
+const handleSearch = () => {
+  if (searchDestination) {
+    const destination = searchDestination;
+
+    setSearchDestination("");
+
+    window.location.href = `/packages/${destination}`;
+  }
+};
 
 
   const packageSliderRef = useRef<HTMLDivElement>(null);
@@ -48,48 +59,147 @@ const categorySliderRef = useRef<HTMLDivElement>(null);
       image: "/kedarnath.jpg",
       duration: "4D / 3N",
       price: "₹9,999",
-    },
-    {
-      name: "Kashmir Tour",
-      image: "/kashmir.jpg",
-      duration: "5D / 4N",
-      price: "₹14,999",
-    },
-    {
-      name: "Ladakh Trip",
-      image: "/ladakh.jpg",
-      duration: "6D / 5N",
-      price: "₹18,999",
+      slug: "kedarnath",
     },
     {
       name: "Char Dham",
       image: "/chardham.jpg",
       duration: "10D / 9N",
       price: "₹24,999",
+      slug: "chardham",
+    },
+    
+    {
+      name: "Ladakh Trip",
+      image: "/ladakh.jpg",
+      duration: "6D / 5N",
+      price: "₹18,999",
+      slug: "ladakh",
     },
     {
       name: "Manali Tour",
       image: "/manali.jpg",
       duration: "4D / 3N",
       price: "₹8,999",
+      slug: "manali",
     },
+   { name: "Meghalaya Explorer",
+    image: "/meghalaya.jpg",
+    duration:  "5D / 4N",
+    price:  "₹18,999",
+    slug: "meghalaya",
+  },
+  {
+  name: "Andaman Escape",
+  image: "/andaman.jpg",
+  duration: "6D / 5N",
+  price: "₹24,999",
+  slug: "andaman",
+},
+{
+  name: "Jim Corbett & Nainital",
+  image: "/jimcorbett.jpg",
+  duration: "4D / 3N",
+  price: "₹9,999",
+  slug: "jim-corbett-nainital",
+},
+{
+  name: "Sikkim Special",
+  image: "/sikkim.jpg",
+  duration: "6D / 5N",
+  price: "₹19,999",
+  slug: "sikkim",
+},
+{
+  name: "Tawang Adventure",
+  image: "/tawang.jpg",
+  duration: "7D / 6N",
+  price: "₹24,999",
+  slug: "tawang",
+},
+{
+  name: "Lakshadweep Premium",
+  image: "/lakshadweep.jpg",
+  duration: "5D / 4N",
+  price: "₹34,999",
+  slug: "lakshadweep",
+},
+{
+  name: "Ayodhya & Varanasi Darshan",
+  image: "/ayodhya-varanasi.jpg",
+  duration: "4D / 3N",
+  price: "₹8,999",
+  slug: "ayodhya-varanasi",
+},
+{
+  name: "Mathura Vrindavan",
+  image: "/mathura-vrindavan.jpg",
+  duration: "3D / 2N",
+  price: "₹6,999",
+  slug: "mathura-vrindavan",
+},
+{
+  name: "Spiti Valley Expedition",
+  image: "/spiti.jpg",
+  duration: "7D / 6N",
+  price: "₹17,999",
+  slug: "spiti-valley",
+},
+{
+  name: "Pondicherry Retreat",
+  image: "/pondicherry.jpg",
+  duration: "4D / 3N",
+  price: "₹10,999",
+  slug: "pondicherry",
+},
+{
+  name: "Ooty & Kodaikanal",
+  image: "/ooty-kodaikanal.jpg",
+  duration: "5D / 4N",
+  price: "₹14,999",
+  slug: "ooty-kodaikanal",
+},
+{
+  name: "Coorg & Mysore",
+  image: "/coorg-mysore.jpg",
+  duration: "5D / 4N",
+  price: "₹13,999",
+  slug: "coorg-mysore",
+},
+{
+  name: "Gokarna Beach Tour",
+  image: "/gokarna.jpg",
+  duration: "4D / 3N",
+  price: "₹9,999",
+  slug: "gokarna",
+},
+{
+  name: "Darjeeling & Gangtok",
+  image: "/darjeeling-gangtok.jpg",
+  duration: "6D / 5N",
+  price: "₹18,999",
+  slug: "darjeeling-gangtok",
+},
     {
       name: "Kerala Tour",
       image: "/kerala.jpg",
       duration: "5D / 4N",
       price: "₹16,999",
+      slug: "kerala",
     },
     {
       name: "Goa Tour",
       image: "/goa.jpg",
       duration: "4D / 3N",
       price: "₹12,999",
+      slug: "goa",
     },
     {
       name: "Rajasthan Tour",
       image: "/rajasthan.jpg",
       duration: "6D / 5N",
       price: "₹17,999",
+      slug: "rajasthan",
     },
   ];
 
@@ -171,13 +281,20 @@ const scrollCategoriesRight = () => {
 
             <div className="grid md:grid-cols-4 gap-4">
 
-              <select className="bg-black/40 border border-white/20 rounded-xl p-4">
-                <option>Destination</option>
-                <option>Kedarnath</option>
-                <option>Kashmir</option>
-                <option>Ladakh</option>
-                <option>Goa</option>
-              </select>
+              <select
+  value={searchDestination}
+  onChange={(e) => setSearchDestination(e.target.value)}
+  className="bg-black/40 border border-white/20 rounded-xl p-4"
+>
+  <option value="">Destination</option>
+  <option value="kedarnath">Kedarnath</option>
+  <option value="chardham">Char Dham</option>
+  <option value="ladakh">Ladakh</option>
+  <option value="manali">Manali</option>
+  <option value="kerala">Kerala</option>
+  <option value="goa">Goa</option>
+  <option value="rajasthan">Rajasthan</option>
+</select>
 
               <select className="bg-black/40 border border-white/20 rounded-xl p-4">
                 <option>Duration</option>
@@ -193,9 +310,12 @@ const scrollCategoriesRight = () => {
                 <option>₹40k+</option>
               </select>
 
-              <button className="bg-orange-500 hover:bg-orange-600 rounded-xl font-bold">
-                Search Packages
-              </button>
+              <button
+  onClick={handleSearch}
+  className="bg-orange-500 hover:bg-orange-600 rounded-xl font-bold"
+>
+  Search Packages
+</button>
 
             </div>
           </div>
@@ -262,9 +382,13 @@ const scrollCategoriesRight = () => {
                     {pkg.price}
                   </p>
 
-                  <button className="mt-5 w-full bg-orange-500 py-3 rounded-xl font-semibold hover:bg-orange-600">
-                    View Details
-                  </button>
+                  
+                <Link
+  href={`/packages/${pkg.slug}`}
+  className="block mt-5 w-full bg-orange-500 py-3 rounded-xl font-semibold hover:bg-orange-600 text-center"
+>
+  View Details
+</Link>
                   
 
                 </div>
