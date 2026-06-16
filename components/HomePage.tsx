@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 export default function HomePage() {
@@ -257,177 +257,254 @@ const scrollCategoriesRight = () => {
     <main className="bg-black text-white">
 
       {/* HERO SECTION */}
-      <section
-        className="h-screen bg-cover bg-center relative"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1501785888041-af3ef285b470')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60" />
+<section className="relative min-h-screen overflow-hidden">
 
-        <div className="relative z-10 h-full flex flex-col justify-center items-center px-6">
+  <Image
+    src="/hero-banner.jpg"
+    alt="Yorra Travels India Tour Packages"
+    fill
+    priority
+    quality={100}
+    className="object-cover"
+  />
 
-          <h1 className="text-5xl md:text-7xl font-black text-center">
-            Explore Incredible India
-          </h1>
+  <div className="absolute inset-0 bg-black/70" />
 
-          <p className="mt-4 text-gray-300 text-center text-lg">
-            Find Your Perfect Travel Package
-          </p>
+  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black" />
 
-          {/* SEARCH BOX */}
-          <div className="mt-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 w-full max-w-5xl">
+  <div className="relative z-10 min-h-screen flex items-center">
 
-            <div className="grid md:grid-cols-4 gap-4">
+    <div className="max-w-7xl mx-auto px-6 w-full">
 
-              <select
-  value={searchDestination}
-  onChange={(e) => setSearchDestination(e.target.value)}
-  className="bg-black/40 border border-white/20 rounded-xl p-4"
->
-  <option value="">Destination</option>
-  <option value="kedarnath">Kedarnath</option>
-  <option value="chardham">Char Dham</option>
-  <option value="ladakh">Ladakh</option>
-  <option value="manali">Manali</option>
-  <option value="kerala">Kerala</option>
-  <option value="goa">Goa</option>
-  <option value="rajasthan">Rajasthan</option>
-</select>
+      <div className="max-w-4xl">
 
-              <select className="bg-black/40 border border-white/20 rounded-xl p-4">
-                <option>Duration</option>
-                <option>3-5 Days</option>
-                <option>5-7 Days</option>
-                <option>7+ Days</option>
-              </select>
+        <span className="inline-flex items-center px-5 py-2 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-400 text-sm font-medium">
+          Luxury Travel Experiences Across India
+        </span>
 
-              <select className="bg-black/40 border border-white/20 rounded-xl p-4">
-                <option>Budget</option>
-                <option>₹10k - ₹20k</option>
-                <option>₹20k - ₹40k</option>
-                <option>₹40k+</option>
-              </select>
+        <h1 className="mt-8 text-5xl md:text-7xl xl:text-8xl font-black leading-tight">
+          Discover
+          <span className="block text-amber-400">
+            Extraordinary India
+          </span>
+          With Yorra
+        </h1>
 
-              <button
-  onClick={handleSearch}
-  className="bg-orange-500 hover:bg-orange-600 rounded-xl font-bold"
->
-  Search Packages
-</button>
+        <p className="mt-6 text-xl text-gray-300 max-w-3xl leading-relaxed">
+          Curated spiritual journeys, luxury escapes, family holidays,
+          adventure expeditions and unforgettable experiences across India.
+        </p>
 
-            </div>
-          </div>
+      </div>
+
+      {/* PREMIUM SEARCH BOX */}
+
+      <div className="mt-14 bg-white/10 backdrop-blur-2xl border border-white/10 rounded-[32px] p-6 max-w-6xl">
+
+        <div className="grid md:grid-cols-4 gap-4">
+
+          <select
+            value={searchDestination}
+            onChange={(e) => setSearchDestination(e.target.value)}
+            className="bg-black/40 border border-white/10 rounded-2xl p-4"
+          >
+            <option value="">Destination</option>
+            <option value="kedarnath-tour-package">Kedarnath</option>
+            <option value="chardham-tour-package">Char Dham</option>
+            <option value="ladakh-tour-package">Ladakh</option>
+            <option value="manali-tour-package">Manali</option>
+            <option value="kerala-tour-package">Kerala</option>
+            <option value="goa-tour-package">Goa</option>
+            <option value="rajasthan-tour-package">Rajasthan</option>
+          </select>
+
+          <select className="bg-black/40 border border-white/10 rounded-2xl p-4">
+            <option>Duration</option>
+            <option>3-5 Days</option>
+            <option>5-7 Days</option>
+            <option>7+ Days</option>
+          </select>
+
+          <select className="bg-black/40 border border-white/10 rounded-2xl p-4">
+            <option>Budget</option>
+            <option>₹0 - ₹10k</option>
+            <option>₹10k - ₹20k</option>
+            <option>₹20k - ₹40k</option>
+            <option>₹40k+</option>
+          </select>
+
+          <button
+            onClick={handleSearch}
+            className="bg-amber-500 hover:bg-amber-600 text-black rounded-2xl font-bold"
+          >
+            Search Packages
+          </button>
+
         </div>
-      </section>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* PACKAGES */}
-      <section className="py-20 px-6">
-
-        <div className="max-w-7xl mx-auto">
-
-          <div className="flex justify-between items-center mb-8">
-
-            <h2 className="text-4xl font-bold">
-              Popular Travel Packages
-            </h2>
-
-            <div className="hidden md:flex gap-3">
-
-              <button
-                onClick={scrollPackagesLeft}
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-orange-500"
-              >
-                ←
-              </button>
-
-              <button
-                onClick={scrollPackagesRight}
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-orange-500"
-              >
-                →
-              </button>
-
-            </div>
-          </div>
-
-          <div
-            ref={packageSliderRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
-          >
-
-            {packages.map((pkg) => (
-              <div
-                key={pkg.name}
-                className="min-w-[280px] md:min-w-[calc(25%-18px)] bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:scale-105 transition-all duration-500"
-              >
-                <img
-                  src={pkg.image}
-                  alt={pkg.name}
-                  className="h-56 w-full object-cover"
-                />
-
-                <div className="p-5">
-
-                  <h3 className="text-xl font-bold">
-                    {pkg.name}
-                  </h3>
-
-                  <p className="text-gray-400 mt-2">
-                    {pkg.duration}
-                  </p>
-
-                  <p className="text-orange-500 text-2xl font-bold mt-3">
-                    {pkg.price}
-                  </p>
-
-                  
-                <Link
-  href={`/packages/${pkg.slug}`}
-  className="block mt-5 w-full bg-orange-500 py-3 rounded-xl font-semibold hover:bg-orange-600 text-center"
->
-  View Details
-</Link>
-                  
-
-                </div>
-              </div>
-            ))}
-
-          </div>
-
-        </div>
-      </section>
-      
-      {/* TOP DESTINATIONS */}
-<section className="py-20 px-6 bg-zinc-950">
+<section className="py-24 px-6">
 
   <div className="max-w-7xl mx-auto">
 
-    <div className="flex justify-between items-center mb-8">
+    <div className="flex justify-between items-center mb-12">
 
-      <h2 className="text-4xl font-bold">
-        Top Destinations Across India
-      </h2>
+      <div>
+        <p className="text-amber-400 uppercase tracking-widest text-sm">
+          Popular Packages
+        </p>
 
-     <div className="hidden md:flex gap-3"> 
+        <h2 className="text-5xl font-black mt-3">
+          Handpicked Experiences
+        </h2>
+      </div>
+
+      <div className="hidden md:flex gap-3">
+
+        <button
+          onClick={scrollPackagesLeft}
+          className="w-12 h-12 rounded-full bg-white/10 hover:bg-amber-500 transition"
+        >
+          ←
+        </button>
+
+        <button
+          onClick={scrollPackagesRight}
+          className="w-12 h-12 rounded-full bg-white/10 hover:bg-amber-500 transition"
+        >
+          →
+        </button>
+
+      </div>
+    </div>
+
+    <div
+      ref={packageSliderRef}
+      className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
+    >
+
+      {packages.map((pkg) => (
+
+        <div
+          key={pkg.name}
+          className="
+          min-w-[300px]
+          md:min-w-[calc(25%-18px)]
+          rounded-[32px]
+          overflow-hidden
+          bg-gradient-to-b
+          from-white/10
+          to-white/5
+          border
+          border-white/10
+          hover:border-amber-500
+          hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]
+          transition-all
+          duration-500
+          "
+        >
+
+          <div className="relative overflow-hidden">
+
+            <img
+              src={pkg.image}
+              alt={pkg.name}
+              className="h-60 w-full object-cover transition duration-700 hover:scale-110"
+            />
+
+            <div className="absolute top-4 left-4 bg-black/70 px-3 py-1 rounded-full text-sm">
+              {pkg.duration}
+            </div>
+
+          </div>
+
+          <div className="p-6">
+
+            <h3 className="text-2xl font-bold">
+              {pkg.name}
+            </h3>
+
+            <div className="flex items-center gap-2 mt-3">
+              ⭐⭐⭐⭐⭐
+              <span className="text-gray-400 text-sm">
+                (4.9 Rating)
+              </span>
+            </div>
+
+            <p className="text-amber-400 text-3xl font-black mt-4">
+              {pkg.price}
+            </p>
+
+            <Link
+              href={`/packages/${pkg.slug}`}
+              className="
+              block
+              mt-6
+              text-center
+              bg-amber-500
+              hover:bg-amber-600
+              text-black
+              py-3
+              rounded-2xl
+              font-bold
+              "
+            >
+              Explore Package
+            </Link>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+
+</section>
+      
+      {/* TOP DESTINATIONS */}
+<section className="py-24 px-6 bg-zinc-950">
+
+  <div className="max-w-7xl mx-auto">
+
+    <div className="flex justify-between items-center mb-12">
+
+      <div>
+        <p className="text-amber-400 uppercase tracking-widest text-sm">
+          Explore India
+        </p>
+
+        <h2 className="text-5xl font-black mt-3">
+          Top Destinations
+        </h2>
+      </div>
+
+      <div className="hidden md:flex gap-3">
 
         <button
           onClick={scrollDestinationsLeft}
-          className="w-12 h-12 rounded-full bg-white/10 hover:bg-orange-500"
+          className="w-12 h-12 rounded-full bg-white/10 hover:bg-amber-500"
         >
           ←
         </button>
 
         <button
           onClick={scrollDestinationsRight}
-          className="w-12 h-12 rounded-full bg-white/10 hover:bg-orange-500"
+          className="w-12 h-12 rounded-full bg-white/10 hover:bg-amber-500"
         >
           →
+
         </button>
 
       </div>
+
     </div>
 
     <div
@@ -538,27 +615,42 @@ const scrollCategoriesRight = () => {
         },
       ].map((item) => (
         <div
-          key={item.destination}
-          className="min-w-[280px] md:min-w-[calc(25%-18px)] rounded-3xl overflow-hidden bg-white/5 border border-white/10 hover:scale-105 transition-all duration-500"
-        >
-          <img
-            src={item.image}
-            alt={item.destination}
-            className="h-60 w-full object-cover"
-          />
+  key={item.destination}
+  className="
+  relative
+  min-w-[300px]
+  md:min-w-[calc(25%-18px)]
+  rounded-[32px]
+  overflow-hidden
+  group
+  "
+>
 
-          <div className="p-5">
+  <img
+    src={item.image}
+    alt={item.destination}
+    className="h-72 w-full object-cover group-hover:scale-110 transition duration-700"
+  />
 
-            <p className="text-orange-400 text-sm">
-              {item.state}
-            </p>
+  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-            <h3 className="text-2xl font-bold mt-1">
-              {item.destination}
-            </h3>
+  <div className="absolute bottom-6 left-6">
 
-          </div>
-        </div>
+    <p className="text-amber-400 text-sm">
+      {item.state}
+    </p>
+
+    <h3 className="text-3xl font-black mt-2">
+      {item.destination}
+    </h3>
+
+    <p className="text-gray-300 mt-2">
+      Luxury stays & curated experiences
+    </p>
+
+  </div>
+
+</div>
       ))}
 
     </div>
@@ -573,22 +665,30 @@ const scrollCategoriesRight = () => {
 
     <div className="flex justify-between items-center mb-8">
 
-      <h2 className="text-4xl font-bold">
-        Explore Top Categories
-      </h2>
+     <div className="mb-12">
+
+  <p className="text-amber-400 uppercase tracking-widest text-sm">
+    Travel Styles
+  </p>
+
+  <h2 className="text-5xl font-black mt-3">
+    Explore By Category
+  </h2>
+
+</div>
 
       <div className="hidden md:flex gap-3">
 
         <button
           onClick={scrollCategoriesLeft}
-          className="w-12 h-12 rounded-full bg-white/10 hover:bg-orange-500"
+          className="w-12 h-12 rounded-full bg-white/10 hover:bg-amber-500"
         >
           ←
         </button>
 
         <button
           onClick={scrollCategoriesRight}
-          className="w-12 h-12 rounded-full bg-white/10 hover:bg-orange-500"
+          className="w-12 h-12 rounded-full bg-white/10 hover:bg-amber-500"
         >
           →
         </button>
@@ -604,27 +704,48 @@ const scrollCategoriesRight = () => {
 
       {categories.map((category) => (
         <div
-          key={category.name}
-          className="min-w-[280px] md:w-[calc(25%-18px)] flex-shrink-0 snap-start rounded-3xl overflow-hidden relative group cursor-pointer"
-        >
+  key={category.name}
+  className="
+  min-w-[300px]
+  md:w-[calc(25%-18px)]
+  flex-shrink-0
+  snap-start
+  rounded-[32px]
+  overflow-hidden
+  relative
+  group
+  cursor-pointer
+  "
+>
 
-          <img
-            src={category.image}
-            alt={category.name}
-            className="h-72 w-full object-cover transition duration-500 group-hover:scale-110"
-          />
+  <img
+    src={category.image}
+    alt={category.name}
+    className="
+    h-80
+    w-full
+    object-cover
+    transition
+    duration-700
+    group-hover:scale-110
+    "
+  />
 
-          <div className="absolute inset-0 bg-black/40" />
+  <div className="absolute inset-0 bg-black/40" />
 
-          <div className="absolute bottom-5 left-5">
+  <div className="absolute bottom-6 left-6">
 
-            <h3 className="text-2xl font-bold text-white">
-              {category.name}
-            </h3>
+    <h3 className="text-3xl font-black">
+      {category.name}
+    </h3>
 
-          </div>
+    <p className="text-gray-300 mt-2">
+      Discover experiences
+    </p>
 
-        </div>
+  </div>
+
+</div>
       ))}
 
     </div>
@@ -635,105 +756,163 @@ const scrollCategoriesRight = () => {
 {/* WHY CHOOSE YORRA */}
 
 <section className="py-24 px-6 bg-zinc-950">
+
   <div className="max-w-7xl mx-auto">
 
+    <div className="text-center mb-16">
 
-<h2 className="text-5xl font-bold text-center mb-16">
-  Why Choose Yorra?
-</h2>
+      <p className="text-amber-400 uppercase tracking-widest text-sm">
+        Why Travelers Love Us
+      </p>
 
-<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <h2 className="text-5xl md:text-6xl font-black mt-4">
+        Why Choose Yorra?
+      </h2>
 
-  <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
-    <h3 className="text-4xl font-black text-orange-500">500+</h3>
-    <p className="mt-2 text-gray-300">Happy Travelers</p>
+    </div>
+
+    <div className="grid md:grid-cols-4 gap-8">
+
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 text-center hover:border-amber-500 transition">
+
+        <h3 className="text-5xl font-black text-amber-400">
+          10K+
+        </h3>
+
+        <p className="mt-3 text-gray-300">
+          Happy Travelers
+        </p>
+
+      </div>
+
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 text-center hover:border-amber-500 transition">
+
+        <h3 className="text-5xl font-black text-amber-400">
+          50+
+        </h3>
+
+        <p className="mt-3 text-gray-300">
+          Destinations
+        </p>
+
+      </div>
+
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 text-center hover:border-amber-500 transition">
+
+        <h3 className="text-5xl font-black text-amber-400">
+          24/7
+        </h3>
+
+        <p className="mt-3 text-gray-300">
+          Customer Support
+        </p>
+
+      </div>
+
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 text-center hover:border-amber-500 transition">
+
+        <h3 className="text-5xl font-black text-amber-400">
+          4.9★
+        </h3>
+
+        <p className="mt-3 text-gray-300">
+          Average Rating
+        </p>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
-    <h3 className="text-4xl font-black text-orange-500">50+</h3>
-    <p className="mt-2 text-gray-300">Destinations</p>
-  </div>
-
-  <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
-    <h3 className="text-4xl font-black text-orange-500">24/7</h3>
-    <p className="mt-2 text-gray-300">Customer Support</p>
-  </div>
-
-  <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
-    <h3 className="text-4xl font-black text-orange-500">4.9★</h3>
-    <p className="mt-2 text-gray-300">Customer Rating</p>
-  </div>
-
-</div>
-
-
-  </div>
 </section>
 
 {/* TESTIMONIALS */}
 
 <section className="py-24 px-6">
+
   <div className="max-w-7xl mx-auto">
 
+    <div className="text-center mb-16">
 
-<h2 className="text-5xl font-bold text-center mb-16">
-  What Our Travelers Say
-</h2>
+      <p className="text-amber-400 uppercase tracking-widest text-sm">
+        Testimonials
+      </p>
 
-<div className="grid md:grid-cols-3 gap-8">
+      <h2 className="text-5xl md:text-6xl font-black mt-4">
+        What Our Travelers Say
+      </h2>
 
-  <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
-    <p className="text-gray-300">
-      “Amazing Kedarnath experience. Hotels, transport and support were excellent.”
-    </p>
-    <h4 className="mt-6 font-bold text-orange-400">
-      Rahul Sharma
-    </h4>
+    </div>
+
+    <div className="grid md:grid-cols-3 gap-8">
+
+      <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 backdrop-blur-xl">
+
+        <div className="text-amber-400 text-xl">
+          ⭐⭐⭐⭐⭐
+        </div>
+
+        <p className="text-gray-300 mt-5 leading-8">
+          Amazing Kedarnath experience. Hotels, transport and support
+          were perfectly managed.
+        </p>
+
+        <h4 className="mt-6 font-bold text-amber-400">
+          Rahul Sharma
+        </h4>
+
+      </div>
+
+      <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 backdrop-blur-xl">
+
+        <div className="text-amber-400 text-xl">
+          ⭐⭐⭐⭐⭐
+        </div>
+
+        <p className="text-gray-300 mt-5 leading-8">
+          The Char Dham package exceeded our expectations.
+          Highly recommended.
+        </p>
+
+        <h4 className="mt-6 font-bold text-amber-400">
+          Priya Verma
+        </h4>
+
+      </div>
+
+      <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 backdrop-blur-xl">
+
+        <div className="text-amber-400 text-xl">
+          ⭐⭐⭐⭐⭐
+        </div>
+
+        <p className="text-gray-300 mt-5 leading-8">
+          Excellent planning, premium hotels and best pricing.
+        </p>
+
+        <h4 className="mt-6 font-bold text-amber-400">
+          Amit Singh
+        </h4>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
-    <p className="text-gray-300">
-      “The Char Dham package was perfectly managed. Highly recommended.”
-    </p>
-    <h4 className="mt-6 font-bold text-orange-400">
-      Priya Verma
-    </h4>
-  </div>
-
-  <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
-    <p className="text-gray-300">
-      “Professional team and best pricing. Will definitely travel again.”
-    </p>
-    <h4 className="mt-6 font-bold text-orange-400">
-      Amit Singh
-    </h4>
-  </div>
-
-</div>
-
-
-  </div>
 </section>
 
 {/* INQUIRY FORM */}
 
-<section className="relative h-[550px] px-6 overflow-hidden">
+<section className="relative h-[650px] px-6 overflow-hidden">
 
-{/* VIDEO */}
-<video
-autoPlay
-muted
-loop
-playsInline
-className="absolute inset-0 w-full h-full object-cover"
-
->
-
-```
-<source src="/travel-video.mp4" type="video/mp4" />
-```
-
-  </video>
+{/* HERO IMAGE */}
+<img
+  src="/travel-banner.jpg"
+  alt="Best India Tour Packages - Govind Travel"
+  className="absolute inset-0 w-full h-full object-cover"
+/>
 
 {/* DARK OVERLAY */}
 
@@ -758,13 +937,14 @@ className="absolute inset-0 w-full h-full object-cover"
   "
 >
 
-  <h2 className="text-5xl font-bold text-center">
-    Plan Your Trip
-  </h2>
+  <h2 className="text-5xl font-black text-center">
+  Design Your Perfect Journey
+</h2>
 
-  <p className="text-center text-gray-400 mt-4 mb-8">
-    Fill the form and our travel expert will contact you.
-  </p>
+<p className="text-center text-gray-400 mt-4 mb-8">
+  Tell us your travel plans and our experts will create a
+  personalized itinerary just for you.
+</p>
 
   <form onSubmit={handleSubmit} className="space-y-5">
 
@@ -803,12 +983,21 @@ className="absolute inset-0 w-full h-full object-cover"
         ✅ Form Submitted! Our team will contact you shortly.
       </div>
     ) : (
-      <button
-        type="submit"
-        className="w-full bg-orange-500 hover:bg-orange-600 py-4 rounded-2xl font-bold text-lg"
-      >
-        Reserve Seat →
-      </button>
+     <button
+  type="submit"
+  className="
+  w-full
+  bg-amber-500
+  hover:bg-amber-600
+  py-4
+  rounded-2xl
+  font-bold
+  text-lg
+  text-black
+  "
+>
+  Get Free Consultation →
+</button>
     )}
 
   </form>
@@ -823,35 +1012,72 @@ className="absolute inset-0 w-full h-full object-cover"
   </div>
 
 </section>
+{/* SEO CONTENT */}
+
+<section className="py-24 px-6 bg-zinc-950">
+
+  <div className="max-w-5xl mx-auto">
+
+    <h2 className="text-5xl font-black mb-8">
+      India Tour Packages With Yorra Travels
+    </h2>
+
+    <p className="text-gray-300 leading-9 text-lg">
+      Yorra Travels offers carefully curated India tour packages
+      covering Kedarnath, Char Dham, Ladakh, Kashmir, Kerala,
+      Goa, Rajasthan, Meghalaya, Andaman and many other
+      destinations. Whether you are looking for spiritual
+      journeys, luxury vacations, family holidays, honeymoon
+      packages or adventure expeditions, our travel experts
+      ensure a seamless and memorable experience from start
+      to finish.
+    </p>
+
+  </div>
+
+</section>
 
 
 {/* CTA */}
 
 <section className="py-24 px-6 text-center">
-  <div className="max-w-4xl mx-auto">
 
+  <div className="max-w-5xl mx-auto">
 
-<h2 className="text-5xl font-bold">
-  Ready For Your Next Adventure?
-</h2>
+    <h2 className="text-5xl md:text-7xl font-black leading-tight">
+      Ready For Your Next
+      <span className="block text-amber-400">
+        Adventure?
+      </span>
+    </h2>
 
-<p className="text-gray-400 mt-6 text-lg">
-  Explore India with Yorra Travels and create unforgettable memories.
-</p>
+    <p className="text-gray-400 mt-8 text-xl">
+      Explore India with Yorra Travels and create unforgettable memories.
+    </p>
 
-<a
-  href="https://wa.me/919717367006?text=Hi%20Yorra%20Travels,%20I%20want%20to%20know%20more%20about%20your%20travel%20packages."
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-block mt-10 bg-orange-500 hover:bg-orange-600 px-10 py-4 rounded-2xl font-bold transition-all duration-300"
->
-   Contact Us Now
-</a>
-
+    <a
+      href="https://wa.me/919717367006?text=Hi%20Yorra%20Travels,%20I%20want%20to%20know%20more%20about%20your%20travel%20packages."
+      target="_blank"
+      rel="noopener noreferrer"
+      className="
+      inline-block
+      mt-10
+      bg-amber-500
+      hover:bg-amber-600
+      text-black
+      px-12
+      py-5
+      rounded-2xl
+      font-black
+      transition
+      "
+    >
+      Contact Us Now
+    </a>
 
   </div>
-</section>
 
+</section>
 
     </main>
   );

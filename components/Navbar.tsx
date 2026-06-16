@@ -15,7 +15,7 @@ return ( <header className="fixed top-0 left-0 w-full z-50 bg-[#07111F]/80 backd
       href="/"
       className="text-white text-3xl font-black tracking-wider"
     >
-      <span className="text-orange-500">Yorra</span> Travels
+      <span className="text-amber-400">Yorra</span> Travels
     </Link>
 
     {/* Desktop Menu */}
@@ -23,21 +23,21 @@ return ( <header className="fixed top-0 left-0 w-full z-50 bg-[#07111F]/80 backd
 
       <Link
         href="/"
-        className="hover:text-orange-500 transition"
+        className="hover:text-amber-400 transition"
       >
         Home
       </Link>
 
       <Link
         href="/packages"
-        className="hover:text-orange-500 transition"
+        className="hover:text-amber-400 transition"
       >
         Packages
       </Link>
 
       <Link
         href="/contact"
-        className="hover:text-orange-500 transition"
+        className="hover:text-amber-400 transition"
       >
         Contact
       </Link>
@@ -106,7 +106,7 @@ return ( <header className="fixed top-0 left-0 w-full z-50 bg-[#07111F]/80 backd
         <a
           href="https://wa.me/919717367006"
           target="_blank"
-          className="bg-orange-500 text-center py-3 rounded-xl font-bold"
+          className="bg-amber-500 text-center py-3 rounded-xl font-bold"
         >
           Book Now
         </a>
