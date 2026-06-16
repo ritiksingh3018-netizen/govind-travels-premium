@@ -1,338 +1,358 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+
+export const metadata: Metadata = {
+title: "India Tour Packages | yorra Travel",
+description:
+"Explore the best India tour packages including Goa, Kerala, Ladakh, Rajasthan, Kedarnath, Sikkim, Meghalaya and more.",
+alternates: {
+canonical: "https://yourdomain.com/packages",
+},
+};
+
+const packages = [
+{
+title: "Andaman Tour Package",
+slug: "andaman-tour-package",
+image: "/andaman.jpg",
+duration: "5 Nights / 6 Days",
+price: "₹24,999",
+},
+{
+title: "Ayodhya Varanasi Tour Package",
+slug: "ayodhya-varanasi-tour-package",
+image: "/ayodhya.jpg",
+duration: "4 Nights / 5 Days",
+price: "₹14,999",
+},
+{
+title: "Char Dham Yatra",
+slug: "char-dham-yatra",
+image: "/chardham.jpg",
+duration: "10 Nights / 11 Days",
+price: "₹32,999",
+},
+{
+title: "Coorg Mysore Tour Package",
+slug: "coorg-mysore-tour-package",
+image: "/coorg-mysore.jpg",
+duration: "5 Nights / 6 Days",
+price: "₹18,999",
+},
+{
+title: "Darjeeling Gangtok Tour Package",
+slug: "darjeeling-gangtok-tour-package",
+image: "/darjeeling-gangtok.jpg",
+duration: "6 Nights / 7 Days",
+price: "₹22,999",
+},
+{
+title: "Goa Tour Package",
+slug: "goa-tour-package",
+image: "/goa.jpg",
+duration: "4 Nights / 5 Days",
+price: "₹12,999",
+},
+{
+title: "Gokarna Tour Package",
+slug: "gokarna-tour-package",
+image: "/gokarna.jpg",
+duration: "3 Nights / 4 Days",
+price: "₹11,999",
+},
+{
+title: "Jim Corbett Nainital Tour Package",
+slug: "jim-corbett-nainital-tour-package",
+image: "/jimcorbett.jpg",
+duration: "5 Nights / 6 Days",
+price: "₹17,999",
+},
+{
+title: "Kedarnath Tour Package",
+slug: "kedarnath-tour-package",
+image: "/kedarnath.jpg",
+duration: "5 Nights / 6 Days",
+price: "₹16,999",
+},
+{
+title: "Kerala Tour Package",
+slug: "kerala-tour-package",
+image: "/kerala.jpg",
+duration: "6 Nights / 7 Days",
+price: "₹23,999",
+},
+{
+title: "Ladakh Tour Package",
+slug: "ladakh-tour-package",
+image: "/ladakh.jpg",
+duration: "6 Nights / 7 Days",
+price: "₹28,999",
+},
+{
+title: "Lakshadweep Tour Package",
+slug: "lakshadweep-tour-package",
+image: "/lakshadweep.jpg",
+duration: "5 Nights / 6 Days",
+price: "₹29,999",
+},
+{
+title: "Manali Tour Package",
+slug: "manali-tour-package",
+image: "/manali.jpg",
+duration: "4 Nights / 5 Days",
+price: "₹13,999",
+},
+{
+title: "Mathura Vrindavan Tour Package",
+slug: "mathura-vrindavan-tour-package",
+image: "/mathura-vrindavan.jpg",
+duration: "3 Nights / 4 Days",
+price: "₹9,999",
+},
+{
+title: "Meghalaya Tour Package",
+slug: "meghalaya-tour-package",
+image: "/meghalaya.jpg",
+duration: "6 Nights / 7 Days",
+price: "₹25,999",
+},
+{
+title: "Ooty Kodaikanal Tour Package",
+slug: "ooty-kodaikanal-tour-package",
+image: "/ooty.jpg",
+duration: "5 Nights / 6 Days",
+price: "₹18,999",
+},
+{
+title: "Pondicherry Tour Package",
+slug: "pondicherry-tour-package",
+image: "/pondicherry.jpg",
+duration: "4 Nights / 5 Days",
+price: "₹14,999",
+},
+{
+title: "Rajasthan Tour Package",
+slug: "rajasthan-tour-package",
+image: "/rajasthan.jpg",
+duration: "7 Nights / 8 Days",
+price: "₹24,999",
+},
+{
+title: "Sikkim Tour Package",
+slug: "sikkim-tour-package",
+image: "/sikkim.jpg",
+duration: "6 Nights / 7 Days",
+price: "₹21,999",
+},
+{
+title: "Spiti Valley Tour Package",
+slug: "spiti-tour-package",
+image: "/spiti.jpg",
+duration: "7 Nights / 8 Days",
+price: "₹27,999",
+},
+{
+title: "Tawang Tour Package",
+slug: "tawang-tour-package",
+image: "/tawang.jpg",
+duration: "6 Nights / 7 Days",
+price: "₹26,999",
+},
+];
+
 
 export default function PackagesPage() {
-  const [search, setSearch] = useState("");
-  const packageCategories = [
-    {
-      title: "🏔️ Mountain Packages",
-      packages: [
-        {
-          name: "Kedarnath Yatra",
-          duration: "3N / 4D",
-          description: "Haridwar to Haridwar • Hotel + Transport",
-          price: "₹8,999",
-          image: "/kedarnath.jpg",
-        },
-        {
-          name: "Char Dham Yatra",
-          duration: "9N / 10D",
-          description: "Hotel + Meals Included",
-          price: "₹24,999",
-          image: "/chardham.jpg",
-        },
-        {
-          name: "Manali Tour",
-          duration: "4N / 5D",
-          description: "Solang Valley + Atal Tunnel",
-          price: "₹9,999",
-          image: "/manali.jpg",
-        },
-        {
-          name: "Spiti Valley",
-          duration: "6N / 7D",
-          description: "Adventure Tour",
-          price: "₹18,999",
-          image: "/spiti.jpg",
-        },
-        {
-          name: "Leh Ladakh",
-          duration: "6N / 7D",
-          description: "Nubra Valley + Pangong Lake",
-          price: "₹21,999",
-          image: "/ladakh.jpg",
-        },
-      ],
-    },
+return ( <main className="min-h-screen bg-[#0B1120] text-white">
 
-    {
-      title: "🏖️ Beach Packages",
-      packages: [
-        {
-          name: "Goa",
-          duration: "3N / 4D",
-          description: "Beach Resort Stay",
-          price: "₹7,999",
-          image: "/goa.jpg",
-        },
-        {
-          name: "Andaman",
-          duration: "5N / 6D",
-          description: "Island Hopping",
-          price: "₹24,999",
-          image: "/andaman.jpg",
-        },
-        {
-          name: "Lakshadweep",
-          duration: "4N / 5D",
-          description: "Water Activities",
-          price: "₹29,999",
-          image: "/lakshadweep.jpg",
-        },
-      ],
-    },
 
-    {
-      title: "🕌 Spiritual Packages",
-      packages: [
-        {
-          name: "Varanasi",
-          duration: "2N / 3D",
-          description: "Ganga Aarti",
-          price: "₹5,999",
-          image: "/varanasi.jpg",
-        },
-        {
-          name: "Ayodhya",
-          duration: "2N / 3D",
-          description: "Ram Mandir Darshan",
-          price: "₹4,999",
-          image: "/ayodhya.jpg",
-        },
-        {
-          name: "Vaishno Devi",
-          duration: "3N / 4D",
-          description: "Complete Pilgrimage Tour",
-          price: "₹7,999",
-          image: "/vaishnodevi.jpg",
-        },
-        {
-          name: "Tirupati Balaji",
-          duration: "2N / 3D",
-          description: "Temple Darshan",
-          price: "₹8,999",
-          image: "/tirupati.jpg",
-        },
-        {
-          name: "Rameswaram",
-          duration: "3N / 4D",
-          description: "Sacred Temple Tour",
-          price: "₹9,999",
-          image: "/rameswaram.jpg",
-        },
-      ],
-    },
+  <section className="relative overflow-hidden py-24">
+    <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-black" />
 
-    {
-      title: "🏰 Heritage Packages",
-      packages: [
-        {
-          name: "Rajasthan Tour",
-          duration: "5N / 6D",
-          description: "Jaipur + Jodhpur + Udaipur",
-          price: "₹16,999",
-          image: "/rajasthan.jpg",
-        },
-        {
-          name: "Golden Triangle",
-          duration: "4N / 5D",
-          description: "Delhi + Agra + Jaipur",
-          price: "₹14,999",
-          image: "/goldentriangle.jpg",
-        },
-      ],
-    },
+    <div className="relative max-w-7xl mx-auto px-6 text-center">
+      <span className="inline-block mb-4 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-2 text-yellow-400">
+        Explore India
+      </span>
 
-    {
-      title: "🐅 Wildlife Packages",
-      packages: [
-        {
-          name: "Jim Corbett",
-          duration: "2N / 3D",
-          description: "Safari Included",
-          price: "₹6,999",
-          image: "/jimcorbett.jpg",
-        },
-        {
-          name: "Ranthambore",
-          duration: "3N / 4D",
-          description: "Tiger Safari",
-          price: "₹8,999",
-          image: "/ranthambore.jpg",
-        },
-        {
-          name: "Kaziranga",
-          duration: "3N / 4D",
-          description: "National Park Experience",
-          price: "₹11,999",
-          image: "/kaziranga.jpg",
-        },
-      ],
-    },
+      <h1 className="text-5xl md:text-7xl font-extrabold">
+        Best India
+        <span className="block text-yellow-400">
+          Tour Packages
+        </span>
+      </h1>
 
-    {
-      title: "🌴 Honeymoon Packages",
-      packages: [
-        {
-          name: "Kashmir",
-          duration: "5N / 6D",
-          description: "Srinagar + Gulmarg",
-          price: "₹19,999",
-          image: "/kashmir.jpg",
-        },
-        {
-          name: "Kerala",
-          duration: "5N / 6D",
-          description: "Munnar + Alleppey",
-          price: "₹18,999",
-          image: "/kerala.jpg",
-        },
-        {
-          name: "Ooty & Coorg",
-          duration: "4N / 5D",
-          description: "Romantic Hill Escape",
-          price: "₹14,999",
-          image: "/ooty.jpg",
-        },
-      ],
-    },
-  ];
+      <p className="mt-6 max-w-3xl mx-auto text-lg text-slate-300">
+        Discover handpicked holiday packages across India.
+      </p>
+    </div>
+  </section>
 
-  return (
-    <main className="bg-[#0B1220] min-h-screen pt-36 pb-20">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
-         
-          <p className="uppercase tracking-[4px] text-orange-500 font-semibold mb-4">
-            Explore India
-          </p>
+  <section className="max-w-7xl mx-auto px-6 py-20">
+    <div className="text-center mb-12">
+      <h2 className="text-4xl font-bold">
+        Popular Tour Packages
+      </h2>
+    </div>
 
-          <h1 className="text-5xl md:text-6xl font-black text-white">
-            Tour Packages
-          </h1>
+    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 
-          <p className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto">
-            Discover handpicked travel experiences across India with comfort,
-            adventure and unforgettable memories.
-          </p>
-          <div className="max-w-xl mx-auto mt-8 mb-8">
-  <input
-    type="text"
-    placeholder="Search packages..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    className="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500"
-  />
-</div>
-          <div className="sticky top-24 z-20 flex flex-wrap justify-center gap-3 mt-10 mb-16 bg-[#0B1220]/90 backdrop-blur-md py-4 rounded-2xl">
-  {packageCategories.map((category) => (
-    <a
-      key={category.title}
-      href={`#${category.title.replace(/[^a-zA-Z0-9]/g, "")}`}
-      className="px-4 py-2 rounded-full bg-white/10 text-white hover:bg-orange-500 transition text-sm"
-    >
-      {category.title}
-    </a>
-  ))}
-</div>
-        </div>
+      {packages.map((pkg) => (
+        <div
+          key={pkg.slug}
+          className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5"
+        >
+          <div className="relative h-64">
+            <Image
+              src={pkg.image}
+              alt={pkg.title}
+              fill
+              className="object-cover"
+            />
+          </div>
 
-        {packageCategories.map((category) => (
-          <section
-  id={category.title.replace(/[^a-zA-Z0-9]/g, "")}
-  key={category.title}
-  className="mb-16 scroll-mt-36"
->
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-10 border-l-4 border-orange-500 pl-4">
-              {category.title}
-            </h2>
+          <div className="p-6">
+            <h3 className="text-xl font-bold">
+              {pkg.title}
+            </h3>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {category.packages
-  .filter(
-    (pkg) =>
-      pkg.name.toLowerCase().includes(search.toLowerCase()) ||
-      pkg.description.toLowerCase().includes(search.toLowerCase())
-  )
-  .map((pkg) => (
-  <Link
-    key={pkg.name}
-    href={
-  pkg.name === "Kedarnath Yatra"
-    ? "/packages/kedarnath"
-    : pkg.name === "Char Dham Yatra"
-    ? "/packages/chardham"
-    : pkg.name === "Manali Tour"
-    ? "/packages/manali"
-    : pkg.name === "Spiti Valley"
-    ? "/packages/spiti"
-    : pkg.name === "Leh Ladakh"
-    ? "/packages/ladakh"
-    : "#"
-}
+            <p className="mt-2 text-slate-400">
+              {pkg.duration}
+            </p>
 
-  >
-    <div
-      className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden hover:border-orange-500 hover:-translate-y-2 transition-all duration-300 cursor-pointer"
-    >
-                  <div className="overflow-hidden">
-                    <img
-                      src={pkg.image}
-                      alt={pkg.name}
-                      className="h-48 w-full object-cover group-hover:scale-110 transition duration-700"
-                    />
-                  </div>
+            <div className="mt-4 flex items-center justify-between">
+              <span className="text-yellow-400 font-bold">
+                {pkg.price}
+              </span>
 
-                  <div className="p-4">
-                   <h3 className="text-lg font-bold text-white"> 
-                      {pkg.name}
-                    </h3>
-
-                    <p className="text-gray-400 mt-3">
-                      {pkg.description}
-                    </p>
-
-                    <p className="text-gray-500 mt-3">
-                      📅 {pkg.duration}
-                    </p>
-
-                    <div className="mt-6 flex justify-between items-center">
-                      <div>
-                        <p className="text-gray-500 text-sm">
-                          Starting From
-                        </p>
-
-                        <span className="text-orange-500 text-xl font-bold">
-                          {pkg.price}
-                        </span>
-                      </div>
-
-                      <span
-  className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-lg font-semibold text-sm transition"
->
-  View Details
-</span>
-                    </div>
-                  </div>
-                </div>
-                </Link>
-              ))}
+              <Link
+                href={`/packages/${pkg.slug}`}
+                className="rounded-lg bg-yellow-500 px-4 py-2 text-black font-semibold"
+              >
+                View
+              </Link>
             </div>
-          </section>
-        ))}
-
-        <div className="mt-20 text-center bg-white/5 border border-white/10 rounded-3xl p-10">
-          <h2 className="text-3xl font-bold text-white">
-            Can't Find Your Dream Destination?
-          </h2>
-
-          <p className="text-gray-400 mt-3">
-            Contact us and we'll create a customized travel package just for
-            you.
-          </p>
-
-          <a
-            href="https://wa.me/919717367006?text=Hi,%20I%20am%20looking%20for%20a%20customized%20travel%20package.%20Please%20share%20details."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-6 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold transition"
-          >
-            Get Custom Package
-          </a>
+          </div>
         </div>
+      ))}
+    </div>
+  </section>
+  
+  <section className="max-w-6xl mx-auto px-6 py-20">
+
+    <h2 className="text-4xl font-bold text-center mb-10">
+      Best India Tour Packages
+    </h2>
+
+    <div className="space-y-6 text-slate-300 leading-8 text-lg">
+
+      <p>
+        Yorra Travel offers carefully crafted India tour packages
+        covering Goa, Kerala, Rajasthan, Ladakh, Kedarnath,
+        Meghalaya, Sikkim, Andaman, Lakshadweep and many more
+        destinations.
+      </p>
+
+      <p>
+        Whether you are planning a honeymoon, family vacation,
+        pilgrimage tour, adventure trip or group holiday,
+        our travel experts help you plan the perfect itinerary.
+      </p>
+
+      <p>
+        We provide hotel bookings, transportation,
+        sightseeing, travel assistance and customized itineraries
+        at competitive prices.
+      </p>
+
+    </div>
+
+  </section>
+
+  <section className="max-w-5xl mx-auto px-6 py-20">
+
+    <h2 className="text-4xl font-bold text-center mb-12">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-6">
+
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+        <h3 className="text-xl font-semibold">
+          Can I customize my tour package?
+        </h3>
+
+        <p className="mt-3 text-slate-400">
+          Yes, all tour packages can be customized according to
+          your budget, travel dates and preferences.
+        </p>
       </div>
-    </main>
-  );
+
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+        <h3 className="text-xl font-semibold">
+          Are flights included?
+        </h3>
+
+        <p className="mt-3 text-slate-400">
+          Flights can be included on request depending on the
+          selected package.
+        </p>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+        <h3 className="text-xl font-semibold">
+          How do I book a package?
+        </h3>
+
+        <p className="mt-3 text-slate-400">
+          Contact our travel experts on WhatsApp and we will
+          assist you with the complete booking process.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section className="px-6 pb-24">
+
+    <div className="max-w-6xl mx-auto rounded-3xl bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-300 p-[1px]">
+
+      <div className="rounded-3xl bg-[#0B1120] px-8 py-16 text-center">
+
+        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          Plan Your Dream Trip Today
+        </h2>
+
+        <p className="max-w-2xl mx-auto text-slate-300 mb-8">
+          Get instant assistance and customized tour packages
+          from our travel experts.
+        </p>
+
+        <a
+          href="https://wa.me/919717367006"
+          target="_blank"
+          className="inline-flex items-center rounded-xl bg-green-500 px-8 py-4 text-white font-bold hover:scale-105 transition"
+        >
+          WhatsApp Us
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "India Tour Packages",
+      }),
+    }}
+  />
+
+</main>
+);
 }
