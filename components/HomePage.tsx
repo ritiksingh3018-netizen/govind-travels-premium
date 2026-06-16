@@ -9,6 +9,7 @@ const [phone, setPhone] = useState("");
 const [destination, setDestination] = useState("");
 const [submitted, setSubmitted] = useState(false);
 const [searchDestination, setSearchDestination] = useState("");
+const [showSuggestions, setShowSuggestions] = useState(false);
 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -39,15 +40,33 @@ const handleSubmit = async (e: React.FormEvent) => {
   
 }
 };
+
 const handleSearch = () => {
-  if (searchDestination) {
-    const destination = searchDestination;
+  if (!searchDestination.trim()) return;
 
-    setSearchDestination("");
+  const search = searchDestination.toLowerCase();
 
-    window.location.href = `/packages/${destination}`;
+  const foundPackage = packages.find(
+    (pkg) =>
+      pkg.name.toLowerCase().includes(search) ||
+      pkg.slug.toLowerCase().includes(search)
+  );
+
+  if (foundPackage) {
+    window.location.href = `/packages/${foundPackage.slug}`;
+    return;
   }
+
+  const whatsappMessage = encodeURIComponent(
+    `Hi Yorra Travels, I am looking for a travel package for ${searchDestination}.`
+  );
+
+  window.open(
+    `https://wa.me/919717367006?text=${whatsappMessage}`,
+    "_blank"
+  );
 };
+
 
 
   const packageSliderRef = useRef<HTMLDivElement>(null);
@@ -202,6 +221,16 @@ const categorySliderRef = useRef<HTMLDivElement>(null);
       slug: "rajasthan-tour-package",
     },
   ];
+  const findPackage = (search: string) => {
+  const term = search.toLowerCase().trim();
+
+  return packages.find((pkg) => {
+    return (
+      pkg.name.toLowerCase().includes(term) ||
+      pkg.slug.toLowerCase().includes(term)
+    );
+  });
+};
 
 const scrollPackagesLeft = () => {
   packageSliderRef.current?.scrollBy({
@@ -297,51 +326,102 @@ const scrollCategoriesRight = () => {
 
       </div>
 
-      {/* PREMIUM SEARCH BOX */}
+     
+{/* PREMIUM SEARCH BOX */}
 
-      <div className="mt-14 bg-white/10 backdrop-blur-2xl border border-white/10 rounded-[32px] p-6 max-w-6xl">
+<div className="mt-14 bg-white/10 backdrop-blur-2xl border border-white/10 rounded-[32px] p-6 max-w-6xl overflow-visible">
 
-        <div className="grid md:grid-cols-4 gap-4">
+  <div className="grid md:grid-cols-4 gap-4">
 
-          <select
-            value={searchDestination}
-            onChange={(e) => setSearchDestination(e.target.value)}
-            className="bg-black/40 border border-white/10 rounded-2xl p-4"
-          >
-            <option value="">Destination</option>
-            <option value="kedarnath-tour-package">Kedarnath</option>
-            <option value="chardham-tour-package">Char Dham</option>
-            <option value="ladakh-tour-package">Ladakh</option>
-            <option value="manali-tour-package">Manali</option>
-            <option value="kerala-tour-package">Kerala</option>
-            <option value="goa-tour-package">Goa</option>
-            <option value="rajasthan-tour-package">Rajasthan</option>
-          </select>
+    {/* DESTINATION SEARCH */}
 
-          <select className="bg-black/40 border border-white/10 rounded-2xl p-4">
-            <option>Duration</option>
-            <option>3-5 Days</option>
-            <option>5-7 Days</option>
-            <option>7+ Days</option>
-          </select>
+    <div className="relative z-50">
 
-          <select className="bg-black/40 border border-white/10 rounded-2xl p-4">
-            <option>Budget</option>
-            <option>₹0 - ₹10k</option>
-            <option>₹10k - ₹20k</option>
-            <option>₹20k - ₹40k</option>
-            <option>₹40k+</option>
-          </select>
+  <div className="relative">
 
-          <button
-            onClick={handleSearch}
-            className="bg-amber-500 hover:bg-amber-600 text-black rounded-2xl font-bold"
-          >
-            Search Packages
-          </button>
+  <input
+    type="text"
+    
+    value={searchDestination}
+    onChange={(e) => setSearchDestination(e.target.value)}
+    onKeyDown={(e) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    }}
+    placeholder="Search destination..."
+    className="w-full bg-black/40 border border-white/10 rounded-2xl p-4"
+  />
 
-        </div>
-      </div>
+  
+
+</div>
+
+   {showSuggestions && searchDestination && (
+
+  <div className="absolute left-0 right-0 top-full mt-2 bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden z-[9999]">
+{packages
+  .filter((pkg) => {
+    const search = searchDestination.toLowerCase().trim();
+
+    return (
+      pkg.name.toLowerCase().includes(search) ||
+      pkg.slug.toLowerCase().includes(search)
+    );
+  })
+      .slice(0, 5)
+      .map((pkg) => (
+
+        <button
+          key={pkg.slug}
+          type="button"
+          onClick={() => {
+  window.location.href = `/packages/${pkg.slug}`;
+}}
+          className="block w-full text-left px-4 py-3 hover:bg-white/10"
+        >
+          {pkg.name}
+        </button>
+
+      ))}
+
+  </div>
+
+)}
+
+    </div>
+
+    {/* DURATION */}
+
+    <select className="bg-black/40 border border-white/10 rounded-2xl p-4">
+      <option>Duration</option>
+      <option>3-5 Days</option>
+      <option>5-7 Days</option>
+      <option>7+ Days</option>
+    </select>
+
+    {/* BUDGET */}
+
+    <select className="bg-black/40 border border-white/10 rounded-2xl p-4">
+      <option>Budget</option>
+      <option>₹0 - ₹10k</option>
+      <option>₹10k - ₹20k</option>
+      <option>₹20k - ₹40k</option>
+      <option>₹40k+</option>
+    </select>
+
+    {/* SEARCH BUTTON */}
+
+    <button
+      onClick={handleSearch}
+      className="bg-amber-500 hover:bg-amber-600 text-black rounded-2xl font-bold"
+    >
+      Search Packages
+    </button>
+
+  </div>
+
+</div>
 
     </div>
   </div>
