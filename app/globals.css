@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-/* =========================================
-   GLOBAL VARIABLES
-========================================= */
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -16,10 +12,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* =========================================
-   DARK MODE
-========================================= */
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -27,25 +19,18 @@
   }
 }
 
-/* =========================================
-   BODY
-========================================= */
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden;
 }
-
-/* =========================================
-   HIDE SCROLLBAR
-========================================= */
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -56,26 +41,28 @@ body {
 }
 
 /* =========================================
-   YORRA TECH SERVICES
-   CARD ANIMATIONS
+   SERVICES CARD ANIMATION
+   IMPORTANT:
+   Do NOT animate translateX/Y.
+   Card positioning is handled by Tailwind.
 ========================================= */
 
 @keyframes servicesCardNext {
   0% {
     opacity: 0;
-    transform: translateY(45px) scale(0.96);
-    filter: blur(7px);
+    scale: 0.96;
+    filter: blur(6px);
   }
 
   60% {
     opacity: 1;
-    transform: translateY(-3px) scale(1.005);
+    scale: 1.01;
     filter: blur(0);
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    scale: 1;
     filter: blur(0);
   }
 }
@@ -83,31 +70,35 @@ body {
 @keyframes servicesCardPrev {
   0% {
     opacity: 0;
-    transform: translateY(-45px) scale(0.96);
-    filter: blur(7px);
+    scale: 0.96;
+    filter: blur(6px);
   }
 
   60% {
     opacity: 1;
-    transform: translateY(3px) scale(1.005);
+    scale: 1.01;
     filter: blur(0);
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    scale: 1;
     filter: blur(0);
   }
 }
 
 .services-card-next {
-  animation: servicesCardNext 650ms
-    cubic-bezier(0.22, 1, 0.36, 1);
+  animation: servicesCardNext 550ms cubic-bezier(0.22, 1, 0.36, 1)
+    both;
 }
 
 .services-card-prev {
-  animation: servicesCardPrev 650ms
-    cubic-bezier(0.22, 1, 0.36, 1);
+  animation: servicesCardPrev 550ms cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.services-card {
+  will-change: opacity, scale;
 }
 
 /* =========================================
@@ -130,7 +121,26 @@ body {
 ========================================= */
 
 @media (max-width: 768px) {
+  html,
   body {
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
+  }
+
+  .services-card-next,
+  .services-card-prev {
+    animation-duration: 450ms;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .services-card-next,
+  .services-card-prev {
+    animation-duration: 400ms;
   }
 }
