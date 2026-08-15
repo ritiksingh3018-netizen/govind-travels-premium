@@ -7,7 +7,7 @@ import CTA from "@/components/CTA";
 
 export default function Home() {
   return (
-    <main className="overflow-hidden bg-[#05070b]">
+    <main className="bg-[#05070b]">
       <Hero />
       <Services />
       <WhyYorra />

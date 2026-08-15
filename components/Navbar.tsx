@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const navLinks = [
+const navItems = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/work" },
@@ -13,78 +13,335 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full border-b border-white/10 bg-[#05070b]/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="group flex items-center text-2xl font-black tracking-tight text-white"
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        scrolled ? "px-3 pt-3 sm:px-5" : "px-0 pt-0"
+      }`}
+    >
+      <div
+        className={`mx-auto transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          scrolled ? "max-w-6xl" : "max-w-7xl"
+        }`}
+      >
+        {/* Main Navbar */}
+        <div
+          className={`
+            relative flex items-center justify-between
+            transition-all duration-700
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+            ${
+              scrolled
+                ? `
+                  h-16
+                  overflow-hidden
+                  rounded-full
+                  border border-white/20
+                  bg-white/[0.10]
+                  px-5
+                  shadow-[0_15px_50px_rgba(0,0,0,0.45)]
+                  backdrop-blur-3xl
+                  backdrop-saturate-150
+                  sm:px-6
+                `
+                : `
+                  h-20
+                  border-b border-white/10
+                  bg-[#05070b]/90
+                  px-3
+                  sm:px-6
+                `
+            }
+          `}
         >
-          <span className="transition-colors group-hover:text-cyan-400">
-            Yorra
-          </span>
-          <span className="ml-1 text-cyan-400">Tech</span>
-        </Link>
+          {/* Glass Shine */}
+          {scrolled && (
+            <div
+              className="
+                pointer-events-none
+                absolute inset-0
+                rounded-full
+                bg-gradient-to-b
+                from-white/[0.12]
+                via-white/[0.02]
+                to-transparent
+              "
+            />
+          )}
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-gray-300 transition-colors hover:text-white"
-            >
-              {link.name}
-            </Link>
-          ))}
+          {/* Bottom Glass Highlight */}
+          {scrolled && (
+            <div
+              className="
+                pointer-events-none
+                absolute inset-x-8 bottom-0
+                h-px
+                bg-gradient-to-r
+                from-transparent
+                via-cyan-300/30
+                to-transparent
+              "
+            />
+          )}
 
+          {/* Logo */}
+          <Link
+            href="/"
+            className="
+              relative z-10
+              shrink-0
+              text-xl
+              font-black
+              tracking-tight
+              sm:text-2xl
+            "
+          >
+            <span className="text-white">Yorra</span>
+            <span className="text-cyan-400"> Tech</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav
+            className="
+              absolute
+              left-1/2
+              z-10
+              hidden
+              -translate-x-1/2
+              items-center
+              gap-6
+              md:flex
+              lg:gap-8
+            "
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="
+                  group
+                  relative
+                  whitespace-nowrap
+                  py-1
+                  text-sm
+                  font-medium
+                  text-gray-200
+                  transition-colors
+                  duration-300
+                  hover:text-cyan-400
+                "
+              >
+                {item.name}
+
+                {/* Animated Underline */}
+                <span
+                  className="
+                    absolute
+                    -bottom-1
+                    left-1/2
+                    h-[1.5px]
+                    w-0
+                    -translate-x-1/2
+                    rounded-full
+                    bg-cyan-400
+                    shadow-[0_0_8px_rgba(34,211,238,0.7)]
+                    transition-all
+                    duration-300
+                    ease-out
+                    group-hover:w-full
+                  "
+                />
+              </Link>
+            ))}
+          </nav>
+
+          {/* Desktop CTA */}
           <Link
             href="/contact"
-            className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-black transition-all hover:scale-105 hover:bg-cyan-400"
+            className="
+              relative
+              z-10
+              hidden
+              rounded-full
+              bg-white
+              px-5
+              py-2.5
+              text-sm
+              font-bold
+              text-black
+              shadow-lg
+              shadow-black/10
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+              hover:bg-cyan-300
+              hover:shadow-cyan-400/20
+              md:block
+            "
           >
             Start a Project
           </Link>
-        </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-2xl text-white transition hover:bg-white/10 md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? "×" : "☰"}
-        </button>
-      </div>
-
-      {/* Mobile Navigation */}
-      {menuOpen && (
-        <div className="border-t border-white/10 bg-[#05070b] md:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col px-6 py-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="border-b border-white/5 py-4 text-base font-medium text-gray-300 transition-colors hover:text-white"
-              >
-                {link.name}
-              </Link>
-            ))}
-
-            <Link
-              href="/contact"
-              onClick={() => setMenuOpen(false)}
-              className="mt-5 rounded-xl bg-white py-3 text-center font-bold text-black transition hover:bg-cyan-400"
+          {/* Mobile Button */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="
+              relative
+              z-10
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-white/10
+              bg-white/[0.05]
+              text-white
+              transition-all
+              duration-300
+              active:scale-95
+              md:hidden
+            "
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            <span
+              className="
+                text-xl
+                leading-none
+                transition-transform
+                duration-300
+              "
             >
-              Start a Project
-            </Link>
-          </nav>
+              {menuOpen ? "×" : "☰"}
+            </span>
+          </button>
         </div>
-      )}
+
+        {/* Mobile Menu */}
+        <div
+          className={`
+            grid
+            transition-all
+            duration-500
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+            md:hidden
+            ${
+              menuOpen
+                ? "mt-2 grid-rows-[1fr] opacity-100"
+                : "grid-rows-[0fr] opacity-0"
+            }
+          `}
+        >
+          <div className="overflow-hidden">
+            <nav
+              className="
+                rounded-3xl
+                border
+                border-white/15
+                bg-white/[0.08]
+                p-4
+                shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+                backdrop-blur-3xl
+                backdrop-saturate-150
+              "
+            >
+              <div className="flex flex-col gap-1">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="
+                      group
+                      relative
+                      rounded-xl
+                      px-4
+                      py-3
+                      text-sm
+                      font-medium
+                      text-gray-300
+                      transition-all
+                      duration-300
+                      hover:bg-white/[0.07]
+                      hover:text-cyan-400
+                    "
+                  >
+                    {item.name}
+
+                    {/* Mobile Underline */}
+                    <span
+                      className="
+                        absolute
+                        bottom-2
+                        left-4
+                        h-px
+                        w-0
+                        rounded-full
+                        bg-cyan-400
+                        transition-all
+                        duration-300
+                        group-hover:w-12
+                      "
+                    />
+                  </Link>
+                ))}
+
+                {/* Mobile CTA */}
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="
+                    mt-2
+                    rounded-xl
+                    bg-white
+                    px-4
+                    py-3
+                    text-center
+                    text-sm
+                    font-bold
+                    text-black
+                    transition-all
+                    duration-300
+                    hover:bg-cyan-300
+                  "
+                >
+                  Start a Project →
+                </Link>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
