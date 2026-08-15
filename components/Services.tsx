@@ -35,6 +35,7 @@ const services = [
       },
     ],
   },
+
   {
     title: "Digital Growth",
     short: "GROW",
@@ -67,6 +68,7 @@ const services = [
       },
     ],
   },
+
   {
     title: "Business Automation",
     short: "AUTOMATE",
@@ -101,12 +103,17 @@ const services = [
   },
 ];
 
-const cards = services.flatMap((service, serviceIndex) =>
-  service.items.map((item, itemIndex) => ({
-    ...item,
-    serviceIndex,
-    itemIndex,
-  }))
+/* =========================================
+   FLATTEN ALL SERVICES
+========================================= */
+
+const cards = services.flatMap(
+  (service, serviceIndex) =>
+    service.items.map((item, itemIndex) => ({
+      ...item,
+      serviceIndex,
+      itemIndex,
+    }))
 );
 
 export default function Services() {
@@ -114,7 +121,8 @@ export default function Services() {
      DESKTOP SECTION
   ========================================= */
 
-  const desktopSectionRef = useRef<HTMLElement>(null);
+  const desktopSectionRef =
+    useRef<HTMLElement>(null);
 
   /* =========================================
      ACTIVE CARD
@@ -122,353 +130,173 @@ export default function Services() {
 
   const activeRef = useRef(0);
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] =
+    useState(0);
 
   const [direction, setDirection] =
     useState<"next" | "prev">("next");
 
   /* =========================================
-     DESKTOP WHEEL GESTURE CONTROL
-  ========================================= */
+     DESKTOP SCROLL LINKED CARD SYSTEM
 
-  const wheelLockedRef = useRef(false);
-
-  const wheelEndTimerRef =
-    useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const wheelUnlockTimerRef =
-    useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  /* =========================================
-     MOBILE
-     NO JS TOUCH HANDLING
-  ========================================= */
-
-  /* =========================================
-     CHECK DESKTOP SERVICES
-  ========================================= */
-
-  const isDesktopServicesActive = () => {
-    if (window.innerWidth < 769) {
-      return false;
-    }
-
-    const section =
-      desktopSectionRef.current;
-
-    if (!section) {
-      return false;
-    }
-
-    const rect =
-      section.getBoundingClientRect();
-
-    return (
-      rect.top <= 5 &&
-      rect.bottom >=
-        window.innerHeight - 5
-    );
-  };
-
-  /* =========================================
-     GET DESKTOP CARD POSITION
-  ========================================= */
-
-  const getDesktopCardPosition = (
-    index: number
-  ) => {
-    const section =
-      desktopSectionRef.current;
-
-    if (!section) {
-      return 0;
-    }
-
-    const rect =
-      section.getBoundingClientRect();
-
-    const sectionTop =
-      window.scrollY + rect.top;
-
-    const totalScroll =
-      section.offsetHeight -
-      window.innerHeight;
-
-    const maxIndex =
-      cards.length - 1;
-
-    if (maxIndex <= 0) {
-      return sectionTop;
-    }
-
-    const step =
-      totalScroll / maxIndex;
-
-    return sectionTop + step * index;
-  };
-
-  /* =========================================
-     CHANGE DESKTOP CARD
-  ========================================= */
-
-  const changeDesktopCard = (
-    nextIndex: number
-  ) => {
-    const current =
-      activeRef.current;
-
-    const safeIndex = Math.max(
-      0,
-      Math.min(
-        cards.length - 1,
-        nextIndex
-      )
-    );
-
-    if (safeIndex === current) {
-      return;
-    }
-
-    setDirection(
-      safeIndex > current
-        ? "next"
-        : "prev"
-    );
-
-    activeRef.current =
-      safeIndex;
-
-    setActiveIndex(safeIndex);
-
-    const target =
-      getDesktopCardPosition(
-        safeIndex
-      );
-
-    window.scrollTo({
-      top: target,
-      behavior: "auto",
-    });
-  };
-
-  /* =========================================
-     DESKTOP WHEEL GESTURE
-     
      IMPORTANT:
-     One physical gesture = one card.
+     No wheel interception.
+     No preventDefault.
+     No window.scrollTo.
+
+     Browser handles scrolling naturally.
   ========================================= */
 
   useEffect(() => {
-    const handleWheel = (
-      event: WheelEvent
-    ) => {
-      /* -------------------------------------
+    let ticking = false;
+
+    const updateDesktopCard = () => {
+      /* ---------------------------------------
          MOBILE
-         Do absolutely nothing.
-      ------------------------------------- */
+         Desktop system does nothing.
+      --------------------------------------- */
 
-      if (window.innerWidth < 769) {
+      if (window.innerWidth < 1024) {
+        ticking = false;
         return;
       }
 
-      /* -------------------------------------
-         Services not active
-      ------------------------------------- */
+      const section =
+        desktopSectionRef.current;
 
-      if (
-        !isDesktopServicesActive()
-      ) {
+      if (!section) {
+        ticking = false;
         return;
       }
 
-      const delta =
-        event.deltaY;
+      const rect =
+        section.getBoundingClientRect();
 
       /*
-       * Ignore tiny trackpad noise.
+       * Total amount of scroll available
+       * inside the Services section.
        */
 
-      if (
-        Math.abs(delta) < 12
-      ) {
-        return;
-      }
+      const totalScroll =
+        section.offsetHeight -
+        window.innerHeight;
 
-      /* -------------------------------------
-         EXISTING GESTURE
-         
-         If this physical wheel movement
-         already changed a card, consume all
-         remaining wheel events.
-      ------------------------------------- */
-
-      if (wheelLockedRef.current) {
-        event.preventDefault();
-
-        /*
-         * Keep extending the end-of-gesture
-         * timer while wheel events continue.
-         */
-
-        if (
-          wheelEndTimerRef.current
-        ) {
-          clearTimeout(
-            wheelEndTimerRef.current
-          );
-        }
-
-        wheelEndTimerRef.current =
-          setTimeout(() => {
-            /*
-             * The physical gesture has
-             * stopped sending events.
-             *
-             * We DON'T immediately unlock.
-             * Keep a small cooldown so the
-             * tail of the gesture cannot
-             * trigger another card.
-             */
-
-            wheelUnlockTimerRef.current =
-              setTimeout(() => {
-                wheelLockedRef.current =
-                  false;
-              }, 350);
-          }, 250);
-
-        return;
-      }
-
-      const current =
-        activeRef.current;
-
-      const goingDown =
-        delta > 0;
-
-      const goingUp =
-        delta < 0;
-
-      /* -------------------------------------
-         FIRST CARD
-         
-         Allow user to leave Services upward.
-      ------------------------------------- */
-
-      if (
-        current === 0 &&
-        goingUp
-      ) {
-        return;
-      }
-
-      /* -------------------------------------
-         LAST CARD
-         
-         Allow user to continue down page.
-      ------------------------------------- */
-
-      if (
-        current ===
-          cards.length - 1 &&
-        goingDown
-      ) {
+      if (totalScroll <= 0) {
+        ticking = false;
         return;
       }
 
       /*
-       * From this point Services owns
-       * the wheel gesture.
-       */
-
-      event.preventDefault();
-
-      /*
-       * LOCK IMMEDIATELY.
+       * How far the section has travelled.
        *
-       * This happens BEFORE changing
-       * the card.
+       * At start:
+       * rect.top = 0
+       *
+       * At end:
+       * rect.top = -totalScroll
        */
 
-      wheelLockedRef.current =
-        true;
+      const travelled =
+        Math.min(
+          totalScroll,
+          Math.max(
+            0,
+            -rect.top
+          )
+        );
 
       /*
-       * Clear any previous timers.
+       * 0 → 1
        */
 
-      if (
-        wheelEndTimerRef.current
-      ) {
-        clearTimeout(
-          wheelEndTimerRef.current
-        );
-      }
+      const progress =
+        travelled / totalScroll;
 
-      if (
-        wheelUnlockTimerRef.current
-      ) {
-        clearTimeout(
-          wheelUnlockTimerRef.current
-        );
-      }
+      /*
+       * Convert scroll position
+       * to card number.
+       */
 
-      /* -------------------------------------
-         ONE GESTURE = ONE CARD
-      ------------------------------------- */
+      const rawIndex =
+        progress *
+        (cards.length - 1);
 
       const nextIndex =
-        goingDown
-          ? current + 1
-          : current - 1;
+        Math.round(rawIndex);
 
-      changeDesktopCard(
-        nextIndex
-      );
+      const currentIndex =
+        activeRef.current;
 
-      /*
-       * Start gesture-end detection.
-       */
+      if (
+        nextIndex !== currentIndex
+      ) {
+        setDirection(
+          nextIndex > currentIndex
+            ? "next"
+            : "prev"
+        );
 
-      wheelEndTimerRef.current =
-        setTimeout(() => {
-          wheelUnlockTimerRef.current =
-            setTimeout(() => {
-              wheelLockedRef.current =
-                false;
-            }, 350);
-        }, 250);
+        activeRef.current =
+          nextIndex;
+
+        setActiveIndex(
+          nextIndex
+        );
+      }
+
+      ticking = false;
     };
 
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(
+          updateDesktopCard
+        );
+
+        ticking = true;
+      }
+    };
+
+    const handleResize = () => {
+      updateDesktopCard();
+    };
+
+    /*
+     * Initial position.
+     */
+
+    updateDesktopCard();
+
+    /*
+     * Normal browser scroll.
+     */
+
     window.addEventListener(
-      "wheel",
-      handleWheel,
+      "scroll",
+      handleScroll,
       {
-        passive: false,
+        passive: true,
+      }
+    );
+
+    window.addEventListener(
+      "resize",
+      handleResize,
+      {
+        passive: true,
       }
     );
 
     return () => {
       window.removeEventListener(
-        "wheel",
-        handleWheel
+        "scroll",
+        handleScroll
       );
 
-      if (
-        wheelEndTimerRef.current
-      ) {
-        clearTimeout(
-          wheelEndTimerRef.current
-        );
-      }
-
-      if (
-        wheelUnlockTimerRef.current
-      ) {
-        clearTimeout(
-          wheelUnlockTimerRef.current
-        );
-      }
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
     };
   }, []);
 
@@ -491,9 +319,9 @@ export default function Services() {
 
   return (
     <>
-      {/* =================================================
-          DESKTOP
-      ================================================= */}
+      {/* =====================================================
+          DESKTOP SERVICES
+      ===================================================== */}
 
       <section
         ref={desktopSectionRef}
@@ -506,9 +334,17 @@ export default function Services() {
           lg:block
         "
         style={{
-          height: "660vh",
+          /*
+           * More vertical space =
+           * smoother card transitions.
+           */
+          height: "700vh",
         }}
       >
+        {/* =========================================
+            STICKY VIEWPORT
+        ========================================= */}
+
         <div
           className="
             sticky
@@ -518,7 +354,7 @@ export default function Services() {
             overflow-hidden
           "
         >
-          {/* Glow */}
+          {/* Background glow */}
 
           <div
             className="
@@ -612,6 +448,8 @@ export default function Services() {
                   and operate smarter.
                 </p>
 
+                {/* Current service */}
+
                 <div className="mt-10">
                   <p
                     className="
@@ -688,6 +526,7 @@ export default function Services() {
                         bg-cyan-400
                         transition-[width]
                         duration-500
+                        ease-out
                       "
                       style={{
                         width: `${progress}%`,
@@ -722,7 +561,7 @@ export default function Services() {
               </div>
 
               {/* =====================================
-                  DESKTOP CARD
+                  DESKTOP CARD AREA
               ====================================== */}
 
               <div
@@ -829,6 +668,8 @@ export default function Services() {
                     }
                   `}
                 >
+                  {/* Card header */}
+
                   <div
                     className="
                       flex
@@ -838,7 +679,12 @@ export default function Services() {
                       pt-8
                     "
                   >
-                    <span className="text-sm text-gray-600">
+                    <span
+                      className="
+                        text-sm
+                        text-gray-600
+                      "
+                    >
                       {String(
                         activeIndex + 1
                       ).padStart(
@@ -865,6 +711,8 @@ export default function Services() {
                     </div>
                   </div>
 
+                  {/* Card content */}
+
                   <div
                     className="
                       grid
@@ -875,6 +723,8 @@ export default function Services() {
                       pt-7
                     "
                   >
+                    {/* Icon */}
+
                     <div>
                       <div
                         className="
@@ -896,6 +746,8 @@ export default function Services() {
                         }
                       </div>
                     </div>
+
+                    {/* Text */}
 
                     <div className="min-w-0">
                       <h3
@@ -943,11 +795,21 @@ export default function Services() {
                           Service Details
                         </span>
 
-                        <span className="text-sm text-gray-700">
+                        <span
+                          className="
+                            text-sm
+                            text-gray-700
+                          "
+                        >
                           /
                         </span>
 
-                        <span className="text-sm text-gray-500">
+                        <span
+                          className="
+                            text-sm
+                            text-gray-500
+                          "
+                        >
                           {
                             activeService.title
                           }
@@ -955,6 +817,8 @@ export default function Services() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Bottom line */}
 
                   <div
                     className="
@@ -972,11 +836,10 @@ export default function Services() {
         </div>
       </section>
 
-      {/* =================================================
-          MOBILE
-          NATIVE SCROLL SNAP
-          NO JS TOUCH CONTROL
-      ================================================= */}
+      {/* =====================================================
+          MOBILE SERVICES
+          NORMAL PAGE SCROLL
+      ===================================================== */}
 
       <section
         id="services-mobile"
@@ -987,87 +850,81 @@ export default function Services() {
           lg:hidden
         "
       >
+        {/* Mobile heading */}
+
         <div
           className="
-            scrollbar-hide
-            h-screen
-            snap-y
-            snap-mandatory
-            overflow-y-auto
-            overscroll-y-contain
+            px-5
+            pb-10
+            pt-24
           "
         >
-          {/* Mobile intro */}
+          <p
+            className="
+              text-xs
+              font-semibold
+              uppercase
+              tracking-[0.25em]
+              text-cyan-400
+            "
+          >
+            What We Do
+          </p>
+
+          <h2
+            className="
+              mt-5
+              text-5xl
+              font-black
+              leading-[0.92]
+              tracking-[-0.05em]
+            "
+          >
+            Build.
+            <br />
+            Grow.
+            <br />
+
+            <span className="text-gray-600">
+              Automate.
+            </span>
+          </h2>
+
+          <p
+            className="
+              mt-6
+              max-w-sm
+              text-sm
+              leading-6
+              text-gray-500
+            "
+          >
+            Three ways we help businesses build
+            a stronger digital presence and operate
+            smarter.
+          </p>
 
           <div
             className="
-              flex
-              h-screen
-              snap-start
-              snap-always
-              items-center
-              px-5
+              mt-8
+              h-[2px]
+              w-24
+              bg-cyan-400
             "
-          >
-            <div className="w-full">
-              <p
-                className="
-                  text-xs
-                  font-semibold
-                  uppercase
-                  tracking-[0.25em]
-                  text-cyan-400
-                "
-              >
-                What We Do
-              </p>
+          />
+        </div>
 
-              <h2
-                className="
-                  mt-5
-                  text-5xl
-                  font-black
-                  leading-[0.92]
-                  tracking-[-0.05em]
-                "
-              >
-                Build.
-                <br />
-                Grow.
-                <br />
+        {/* =========================================
+            MOBILE CARDS
+        ========================================= */}
 
-                <span className="text-gray-600">
-                  Automate.
-                </span>
-              </h2>
-
-              <p
-                className="
-                  mt-6
-                  max-w-sm
-                  text-sm
-                  leading-6
-                  text-gray-500
-                "
-              >
-                Three ways we help businesses
-                build a stronger digital presence
-                and operate smarter.
-              </p>
-
-              <div
-                className="
-                  mt-8
-                  h-[2px]
-                  w-24
-                  bg-cyan-400
-                "
-              />
-            </div>
-          </div>
-
-          {/* Mobile cards */}
-
+        <div
+          className="
+            space-y-5
+            px-4
+            pb-20
+          "
+        >
           {cards.map(
             (card, index) => {
               const service =
@@ -1076,177 +933,189 @@ export default function Services() {
                 ];
 
               return (
-                <div
+                <article
                   key={index}
                   className="
-                    flex
-                    h-screen
-                    snap-start
-                    snap-always
-                    items-center
-                    justify-center
-                    px-4
+                    w-full
+                    overflow-hidden
+                    rounded-[1.75rem]
+                    border
+                    border-white/10
+                    bg-[#0a0f17]
+                    shadow-[0_20px_60px_rgba(0,0,0,0.35)]
                   "
                 >
-                  <article
+                  {/* Header */}
+
+                  <div
                     className="
-                      w-full
-                      max-w-[520px]
-                      overflow-hidden
-                      rounded-[1.75rem]
-                      border
-                      border-white/10
-                      bg-[#0a0f17]
-                      shadow-[0_30px_90px_rgba(0,0,0,0.5)]
+                      flex
+                      items-center
+                      justify-between
+                      px-5
+                      pt-5
                     "
                   >
+                    <span
+                      className="
+                        rounded-full
+                        border
+                        border-cyan-400/20
+                        bg-cyan-400/[0.06]
+                        px-3
+                        py-1.5
+                        text-[9px]
+                        font-bold
+                        uppercase
+                        tracking-[0.2em]
+                        text-cyan-400
+                      "
+                    >
+                      {
+                        service.short
+                      }
+                    </span>
+
+                    <span
+                      className="
+                        text-xs
+                        text-gray-600
+                      "
+                    >
+                      {String(
+                        index + 1
+                      ).padStart(
+                        2,
+                        "0"
+                      )}{" "}
+                      /{" "}
+                      {String(
+                        cards.length
+                      ).padStart(
+                        2,
+                        "0"
+                      )}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+
+                  <div
+                    className="
+                      px-5
+                      pb-7
+                      pt-5
+                    "
+                  >
+                    {/* Icon */}
+
                     <div
                       className="
                         flex
+                        h-14
+                        w-14
                         items-center
-                        justify-between
-                        px-5
-                        pt-5
+                        justify-center
+                        rounded-2xl
+                        border
+                        border-cyan-400/20
+                        bg-cyan-400/[0.05]
+                        text-xl
+                        text-cyan-400
+                      "
+                    >
+                      {
+                        card.icon
+                      }
+                    </div>
+
+                    {/* Title */}
+
+                    <h3
+                      className="
+                        mt-5
+                        break-words
+                        text-3xl
+                        font-black
+                        leading-tight
+                        tracking-tight
+                      "
+                    >
+                      {
+                        card.title
+                      }
+                    </h3>
+
+                    {/* Description */}
+
+                    <p
+                      className="
+                        mt-3
+                        text-sm
+                        leading-6
+                        text-gray-500
+                      "
+                    >
+                      {
+                        card.description
+                      }
+                    </p>
+
+                    {/* Links */}
+
+                    <div
+                      className="
+                        mt-6
+                        flex
+                        flex-wrap
+                        items-center
+                        gap-4
                       "
                     >
                       <span
                         className="
-                          rounded-full
-                          border
-                          border-cyan-400/20
-                          bg-cyan-400/[0.06]
-                          px-3
-                          py-1.5
-                          text-[9px]
-                          font-bold
-                          uppercase
-                          tracking-[0.2em]
+                          text-xs
+                          font-semibold
                           text-cyan-400
                         "
                       >
-                        {
-                          service.short
-                        }
+                        Service Details
                       </span>
 
                       <span
                         className="
                           text-xs
-                          text-gray-600
+                          text-gray-700
                         "
                       >
-                        {String(
-                          index + 1
-                        ).padStart(
-                          2,
-                          "0"
-                        )}{" "}
-                        /{" "}
-                        {String(
-                          cards.length
-                        ).padStart(
-                          2,
-                          "0"
-                        )}
+                        /
                       </span>
-                    </div>
 
-                    <div
-                      className="
-                        px-5
-                        pb-7
-                        pt-6
-                      "
-                    >
-                      <div
+                      <span
                         className="
-                          flex
-                          h-14
-                          w-14
-                          items-center
-                          justify-center
-                          rounded-2xl
-                          border
-                          border-cyan-400/20
-                          bg-cyan-400/[0.05]
-                          text-xl
-                          text-cyan-400
-                        "
-                      >
-                        {
-                          card.icon
-                        }
-                      </div>
-
-                      <h3
-                        className="
-                          mt-6
-                          break-words
-                          text-3xl
-                          font-black
-                          leading-tight
-                          tracking-tight
-                        "
-                      >
-                        {
-                          card.title
-                        }
-                      </h3>
-
-                      <p
-                        className="
-                          mt-4
-                          text-sm
-                          leading-6
+                          text-xs
                           text-gray-500
                         "
                       >
                         {
-                          card.description
+                          service.title
                         }
-                      </p>
-
-                      <div
-                        className="
-                          mt-7
-                          flex
-                          items-center
-                          gap-2
-                        "
-                      >
-                        <span
-                          className="
-                            text-xs
-                            font-semibold
-                            text-cyan-400
-                          "
-                        >
-                          Service Details
-                        </span>
-
-                        <span className="text-xs text-gray-700">
-                          /
-                        </span>
-
-                        <span className="text-xs text-gray-500">
-                          {
-                            service.title
-                          }
-                        </span>
-                      </div>
+                      </span>
                     </div>
+                  </div>
 
-                    <div
-                      className="
-                        h-px
-                        bg-gradient-to-r
-                        from-transparent
-                        via-cyan-400/30
-                        to-transparent
-                      "
-                    />
-                  </article>
-                </div>
+                  {/* Bottom line */}
+
+                  <div
+                    className="
+                      h-px
+                      bg-gradient-to-r
+                      from-transparent
+                      via-cyan-400/30
+                      to-transparent
+                    "
+                  />
+                </article>
               );
             }
           )}

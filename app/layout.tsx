@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import WhatsappButton from "@/components/WhatsappButton";
 import MouseGlow from "@/components/MouseGlow";
 import ScrollProgress from "@/components/ScrollProgress";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export const metadata = {
   title: {
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
      <body>
+       <LoadingScreen />
       <ScrollProgress />
   <MouseGlow />
   <Navbar />
