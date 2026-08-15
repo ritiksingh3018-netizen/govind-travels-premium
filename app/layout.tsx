@@ -2,10 +2,25 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsappButton from "@/components/WhatsappButton";
+import MouseGlow from "@/components/MouseGlow";
+import ScrollProgress from "@/components/ScrollProgress";
 
 export const metadata = {
-  title: "Yorra Travels",
-  description: "Premium Travel Experiences",
+  title: {
+    default: "Yorra Tech | Build. Grow. Automate.",
+    template: "%s | Yorra Tech",
+  },
+  description:
+    "Yorra Tech helps businesses build powerful websites, grow their digital presence, and automate business processes.",
+  keywords: [
+    "Yorra Tech",
+    "website development",
+    "digital growth",
+    "business automation",
+    "web development company",
+    "SEO services",
+    "business automation services",
+  ],
 };
 
 export default function RootLayout({
@@ -15,12 +30,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
-        <WhatsappButton />
-      </body>
+     <body>
+      <ScrollProgress />
+  <MouseGlow />
+  <Navbar />
+  {children}
+  <Footer />
+  <WhatsappButton />
+</body>
     </html>
   );
 }
