@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const services = [
   {
@@ -58,23 +58,25 @@ const services = [
    ANIMATION VARIANTS
 ========================================================= */
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: {
     opacity: 0,
     y: 35,
   },
+
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: {},
+
   visible: {
     transition: {
       staggerChildren: 0.12,
@@ -82,8 +84,9 @@ const staggerContainer = {
   },
 };
 
-const featureContainer = {
+const featureContainer: Variants = {
   hidden: {},
+
   visible: {
     transition: {
       staggerChildren: 0.06,
@@ -91,17 +94,18 @@ const featureContainer = {
   },
 };
 
-const featureItem = {
+const featureItem: Variants = {
   hidden: {
     opacity: 0,
     x: -12,
   },
+
   visible: {
     opacity: 1,
     x: 0,
     transition: {
       duration: 0.45,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
@@ -180,7 +184,10 @@ export default function ServicesPage() {
             <motion.span
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: 32, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.2,
+              }}
               className="h-px bg-cyan-400"
             />
 
@@ -267,10 +274,7 @@ export default function ServicesPage() {
                 }}
                 className="group relative overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-white/[0.025] p-7 transition-colors duration-500 hover:border-cyan-400/25 hover:bg-white/[0.035] sm:p-9 lg:p-12"
               >
-                {/* =================================================
-                    CARD GLOW
-                ================================================== */}
-
+                {/* Card glow */}
                 <motion.div
                   className="pointer-events-none absolute -right-32 -top-32 h-[280px] w-[280px] rounded-full bg-cyan-400/[0.06] blur-[100px]"
                   initial={{
@@ -419,7 +423,7 @@ export default function ServicesPage() {
             }}
             transition={{
               duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [0.22, 1, 0.36, 1] as const,
             }}
             className="group relative overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-cyan-400/[0.025] px-6 py-16 text-center shadow-[0_30px_100px_rgba(0,0,0,0.3)] sm:px-10 lg:px-16 lg:py-20"
           >
