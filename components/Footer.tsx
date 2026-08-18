@@ -200,24 +200,91 @@ export default function Footer() {
 
             </div>
 
-            {/* Phone Number */}
-            <a
-              href="tel:+919717367006"
-              className="mt-4 inline-flex items-center gap-2 text-xs text-gray-600 transition-colors hover:text-cyan-400"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                className="h-3.5 w-3.5"
-                aria-hidden="true"
-              >
-                <path d="M6.6 3.8 4.8 5.1c-.7.5-.9 1.4-.6 2.2 1.7 4.7 5 8 9.7 9.7.8.3 1.7.1 2.2-.6l1.3-1.8c.4-.6.3-1.4-.2-1.8l-2.1-1.7c-.5-.4-1.2-.4-1.7 0l-1.1.9a12.5 12.5 0 0 1-4.3-4.3l.9-1.1c.4-.5.4-1.2 0-1.7L8.4 4c-.4-.5-1.2-.6-1.8-.2Z" />
-              </svg>
+            {/* =================================================
+                CONTACT INFORMATION
+            ================================================== */}
 
-              +91 97173 67006
-            </a>
+            <div className="mt-5 space-y-3">
+
+              {/* Phone */}
+              <a
+                href="tel:+919717367006"
+                className="flex items-center gap-2 text-xs text-gray-600 transition-colors hover:text-cyan-400"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  className="h-3.5 w-3.5 shrink-0"
+                  aria-hidden="true"
+                >
+                  <path d="M6.6 3.8 4.8 5.1c-.7.5-.9 1.4-.6 2.2 1.7 4.7 5 8 9.7 9.7.8.3 1.7.1 2.2-.6l1.3-1.8c.4-.6.3-1.4-.2-1.8l-2.1-1.7c-.5-.4-1.2-.4-1.7 0l-1.1.9a12.5 12.5 0 0 1-4.3-4.3l.9-1.1c.4-.5.4-1.2 0-1.7L8.4 4c-.4-.5-1.2-.6-1.8-.2Z" />
+                </svg>
+
+                +91 97173 67006
+              </a>
+
+              {/* Email 1 */}
+              <a
+                href="mailto:contact@yorra.in"
+                className="flex items-center gap-2 text-xs text-gray-600 transition-colors hover:text-cyan-400"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  className="h-3.5 w-3.5 shrink-0"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" />
+                </svg>
+
+                contact@yorra.in
+              </a>
+
+              {/* Email 2 */}
+              <a
+                href="mailto:techyorra@gmail.com"
+                className="flex items-center gap-2 text-xs text-gray-600 transition-colors hover:text-cyan-400"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  className="h-3.5 w-3.5 shrink-0"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" />
+                </svg>
+
+                techyorra@gmail.com
+              </a>
+
+              {/* Address */}
+              <div className="flex items-start gap-2 text-xs leading-5 text-gray-600">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  className="mt-0.5 h-3.5 w-3.5 shrink-0"
+                  aria-hidden="true"
+                >
+                  <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+
+                <span>
+                  Jharoda Majra, Burari, Delhi
+                </span>
+              </div>
+
+            </div>
           </div>
 
           {/* =====================================================
