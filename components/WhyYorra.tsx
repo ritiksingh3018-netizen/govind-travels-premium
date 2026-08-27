@@ -1,9 +1,8 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import { useState } from "react";
 
 import {
-  ArrowUpRight,
   Target,
   BarChart3,
   Users,
@@ -14,225 +13,572 @@ import {
    WHY YORRA CARDS
 ========================================================= */
 
-const reasons = [
+const whyYorraCards = [
   {
     number: "01",
+    icon: Target,
     title: "Business First",
     description:
       "We don't build technology just for the sake of it. Every solution starts with your business goal, audience, and desired outcome.",
-    icon: Target,
   },
   {
     number: "02",
+    icon: BarChart3,
     title: "Built to Scale",
     description:
       "Our digital solutions are designed with growth in mind, so your website and systems can evolve as your business grows.",
-    icon: BarChart3,
   },
   {
     number: "03",
+    icon: Users,
     title: "One Digital Partner",
     description:
       "Website development, digital growth, and automation under one roof means less complexity and better coordination.",
-    icon: Users,
   },
   {
     number: "04",
+    icon: Code2,
     title: "Modern Technology",
     description:
       "We use modern tools and development practices to create fast, reliable, responsive, and maintainable digital experiences.",
-    icon: Code2,
   },
 ];
 
 /* =========================================================
-   TECHNOLOGIES
+   TECHNOLOGY STACK
 ========================================================= */
 
-const technologies = [
+const technologyCategories = [
   {
-    name: "Next.js",
-    mark: "N",
-    color: "#ffffff",
-    glow: "rgba(255,255,255,.25)",
+    title: "MOBILE",
+    items: [
+      "Flutter",
+      "React Native",
+      "Swift",
+      "Kotlin",
+      "Expo",
+    ],
   },
   {
-    name: "React",
-    mark: "⚛",
-    color: "#61dafb",
-    glow: "rgba(97,218,251,.38)",
+    title: "FRONTEND",
+    items: [
+      "React",
+      "Next.js",
+      "Astro",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
   },
   {
-    name: "TypeScript",
-    mark: "TS",
-    color: "#3178c6",
-    glow: "rgba(49,120,198,.38)",
+    title: "BACKEND",
+    items: [
+      "Node.js",
+      "Python",
+      "FastAPI",
+      "Go",
+      "GraphQL",
+    ],
   },
   {
-    name: "Tailwind CSS",
-    mark: "≋",
-    color: "#38bdf8",
-    glow: "rgba(56,189,248,.38)",
+    title: "DATABASE",
+    items: [
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Supabase",
+      "Prisma",
+    ],
   },
   {
-    name: "Node.js",
-    mark: "JS",
-    color: "#68a063",
-    glow: "rgba(104,160,99,.38)",
+    title: "CLOUD & DEVOPS",
+    items: [
+      "AWS",
+      "GCP",
+      "Firebase",
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+    ],
   },
   {
-    name: "PostgreSQL",
-    mark: "PG",
-    color: "#6699cc",
-    glow: "rgba(102,153,204,.38)",
-  },
-  {
-    name: "AWS",
-    mark: "AWS",
-    color: "#ff9900",
-    glow: "rgba(255,153,0,.38)",
-  },
-  {
-    name: "GitHub",
-    mark: "GH",
-    color: "#ffffff",
-    glow: "rgba(255,255,255,.25)",
-  },
-  {
-    name: "Python",
-    mark: "Py",
-    color: "#ffd43b",
-    glow: "rgba(255,212,59,.38)",
-  },
-  {
-    name: "Docker",
-    mark: "◆",
-    color: "#2496ed",
-    glow: "rgba(36,150,237,.38)",
-  },
-  {
-    name: "OpenAI",
-    mark: "✦",
-    color: "#10a37f",
-    glow: "rgba(16,163,127,.38)",
-  },
-  {
-    name: "Figma",
-    mark: "F",
-    color: "#f24e1e",
-    glow: "rgba(242,78,30,.38)",
+    title: "TOOLS",
+    items: [
+      "Figma",
+      "GitHub",
+      "Stripe",
+      "Twilio",
+      "SendGrid",
+    ],
   },
 ];
 
 /* =========================================================
-   TECHNOLOGY WHEEL
+   3D DIGITAL MODEL
 ========================================================= */
 
-function TechnologyWheel() {
+function Digital3DModel() {
+  const [mouse, setMouse] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const handleMouseMove = (
+    event: React.MouseEvent<HTMLDivElement>
+  ) => {
+    const rect =
+      event.currentTarget.getBoundingClientRect();
+
+    const x =
+      ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+
+    const y =
+      ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+
+    setMouse({
+      x: Math.max(-1, Math.min(1, x)),
+      y: Math.max(-1, Math.min(1, y)),
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setMouse({
+      x: 0,
+      y: 0,
+    });
+  };
+
+  const rotateX = mouse.y * -12;
+  const rotateY = mouse.x * 16;
+
   return (
-    <div className="technology-wheel">
-
+    <div
+      className="digital-3d-scene"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* =====================================================
-         STATIC CENTER
+         AMBIENT GLOW
       ===================================================== */}
 
-      <div className="technology-center">
-        <span className="technology-title">
-          TECHNOLOGIES
-        </span>
-
-        <span className="technology-subtitle">
-          WE BUILD WITH
-        </span>
-      </div>
+      <div className="digital-3d-glow" />
 
       {/* =====================================================
-         ROTATING RING
+         FLOATING PARTICLES
       ===================================================== */}
 
-      <div className="technology-ring">
+      <span className="particle particle-1" />
+      <span className="particle particle-2" />
+      <span className="particle particle-3" />
+      <span className="particle particle-4" />
+      <span className="particle particle-5" />
+      <span className="particle particle-6" />
 
-        {technologies.map((technology, index) => (
-          <div
-            key={technology.name}
-            className={`technology-item tech-${String(
-              index + 1
-            ).padStart(2, "0")}`}
-          >
+      {/* =====================================================
+         FLOATING OBJECT
+      ===================================================== */}
 
-            {/* =================================================
-               COUNTER ROTATION
+      <div className="digital-3d-float">
+        <div
+          className="digital-3d-object"
+          style={{
+            transform: `
+              rotateX(${rotateX - 16}deg)
+              rotateY(${rotateY - 26}deg)
+            `,
+          }}
+        >
+          {/* =================================================
+             OUTER CUBE
+          ================================================= */}
 
-               Parent ring:
-               +360deg
+          <div className="cube cube-outer">
+            <div className="cube-face cube-front" />
+            <div className="cube-face cube-back" />
+            <div className="cube-face cube-left" />
+            <div className="cube-face cube-right" />
+            <div className="cube-face cube-top" />
+            <div className="cube-face cube-bottom" />
+          </div>
 
-               This wrapper:
-               -360deg
+          {/* =================================================
+             INNER CUBE
+          ================================================= */}
 
-               Result:
-               PILL ALWAYS HORIZONTAL
-            ================================================= */}
+          <div className="cube cube-inner">
+            <div className="cube-face cube-front" />
+            <div className="cube-face cube-back" />
+            <div className="cube-face cube-left" />
+            <div className="cube-face cube-right" />
+            <div className="cube-face cube-top" />
+            <div className="cube-face cube-bottom" />
+          </div>
 
-            <div className="technology-counter">
+          {/* =================================================
+             DIGITAL CORE
+          ================================================= */}
 
-              <div
-                className="technology-pill"
-                style={
-                  {
-                    "--tech-color": technology.color,
-                    "--tech-glow": technology.glow,
-                  } as CSSProperties
-                }
-              >
+          <div className="digital-core">
+            <div className="core-grid" />
 
-                <span className="technology-icon">
-                  {technology.mark}
-                </span>
-
-                <span className="technology-name">
-                  {technology.name}
-                </span>
-
-              </div>
-
+            <div className="core-symbol">
+              <span />
+              <span />
+              <span />
             </div>
 
+            <div className="core-label">
+              DIGITAL
+            </div>
           </div>
-        ))}
 
+          {/* =================================================
+             SCAN BARS
+          ================================================= */}
+
+          <div className="core-bar core-bar-1" />
+          <div className="core-bar core-bar-2" />
+          <div className="core-bar core-bar-3" />
+        </div>
       </div>
 
-      <style jsx>{`
+      {/* =====================================================
+         LABELS
+      ===================================================== */}
+
+      <div className="model-label model-label-top">
+        <span className="model-label-dot" />
+        SYSTEM
+      </div>
+
+      <div className="model-label model-label-bottom">
+        DIGITAL CORE
+      </div>
+
+      <style>{`
 
         /* =====================================================
-           MAIN WHEEL
+           3D SCENE
         ===================================================== */
 
-        .technology-wheel {
+        .digital-3d-scene {
           position: relative;
 
-          width: 500px;
-          height: 500px;
+          width: 580px;
+          height: 580px;
 
-          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          perspective: 1300px;
 
           isolation: isolate;
+
+          cursor: default;
         }
 
         /* =====================================================
-           STATIC CENTER
+           AMBIENT GLOW
         ===================================================== */
 
-        .technology-center {
+        .digital-3d-glow {
+          position: absolute;
+
+          width: 390px;
+          height: 390px;
+
+          border-radius: 50%;
+
+          background:
+            radial-gradient(
+              circle,
+              rgba(125, 48, 20, 0.20) 0%,
+              rgba(125, 48, 20, 0.08) 35%,
+              transparent 70%
+            );
+
+          filter: blur(28px);
+
+          animation:
+            core-glow 4s ease-in-out infinite;
+
+          pointer-events: none;
+        }
+
+        @keyframes core-glow {
+          0%,
+          100% {
+            transform: scale(0.92);
+            opacity: 0.65;
+          }
+
+          50% {
+            transform: scale(1.08);
+            opacity: 1;
+          }
+        }
+
+        /* =====================================================
+           FLOAT WRAPPER
+        ===================================================== */
+
+        .digital-3d-float {
+          position: relative;
+
+          width: 330px;
+          height: 330px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          transform-style: preserve-3d;
+
+          animation:
+            digital-object-float 6s ease-in-out infinite;
+        }
+
+        @keyframes digital-object-float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+
+          50% {
+            transform: translateY(-16px);
+          }
+        }
+
+        /* =====================================================
+           MAIN 3D OBJECT
+        ===================================================== */
+
+        .digital-3d-object {
+          position: relative;
+
+          width: 300px;
+          height: 300px;
+
+          transform-style: preserve-3d;
+
+          transition:
+            transform 0.16s
+            cubic-bezier(
+              0.22,
+              1,
+              0.36,
+              1
+            );
+
+          will-change: transform;
+        }
+
+        /* =====================================================
+           CUBE
+        ===================================================== */
+
+        .cube {
           position: absolute;
 
           left: 50%;
           top: 50%;
 
-          width: 145px;
-          height: 145px;
+          width: 225px;
+          height: 225px;
 
-          transform: translate(-50%, -50%);
+          transform-style: preserve-3d;
+
+          transform:
+            translate(-50%, -50%);
+        }
+
+        .cube-outer {
+          animation:
+            cube-breathe 5s ease-in-out infinite;
+        }
+
+        .cube-inner {
+          width: 155px;
+          height: 155px;
+
+          animation:
+            inner-cube-float 5s ease-in-out infinite;
+        }
+
+        @keyframes cube-breathe {
+          0%,
+          100% {
+            transform:
+              translate(-50%, -50%)
+              scale(1);
+          }
+
+          50% {
+            transform:
+              translate(-50%, -50%)
+              scale(1.035);
+          }
+        }
+
+        @keyframes inner-cube-float {
+          0%,
+          100% {
+            transform:
+              translate(-50%, -50%)
+              scale(1);
+          }
+
+          50% {
+            transform:
+              translate(-50%, -50%)
+              scale(1.07);
+          }
+        }
+
+        /* =====================================================
+           CUBE FACES
+        ===================================================== */
+
+        .cube-face {
+          position: absolute;
+
+          width: 100%;
+          height: 100%;
+
+          border:
+            1px solid
+            rgba(125, 48, 20, 0.48);
+
+          background:
+            linear-gradient(
+              135deg,
+              rgba(255, 255, 255, 0.16),
+              rgba(255, 255, 255, 0.035)
+            );
+
+          backdrop-filter: blur(5px);
+
+          box-shadow:
+            inset 0 0 40px
+            rgba(
+              125,
+              48,
+              20,
+              0.035
+            );
+        }
+
+        .cube-outer .cube-face {
+          border-color:
+            rgba(125, 48, 20, 0.34);
+        }
+
+        .cube-inner .cube-face {
+          border-color:
+            rgba(125, 48, 20, 0.55);
+
+          background:
+            linear-gradient(
+              135deg,
+              rgba(125, 48, 20, 0.08),
+              rgba(255, 255, 255, 0.025)
+            );
+        }
+
+        /* =====================================================
+           OUTER CUBE DEPTH
+        ===================================================== */
+
+        .cube-outer .cube-front {
+          transform: translateZ(112px);
+        }
+
+        .cube-outer .cube-back {
+          transform:
+            rotateY(180deg)
+            translateZ(112px);
+        }
+
+        .cube-outer .cube-right {
+          transform:
+            rotateY(90deg)
+            translateZ(112px);
+        }
+
+        .cube-outer .cube-left {
+          transform:
+            rotateY(-90deg)
+            translateZ(112px);
+        }
+
+        .cube-outer .cube-top {
+          transform:
+            rotateX(90deg)
+            translateZ(112px);
+        }
+
+        .cube-outer .cube-bottom {
+          transform:
+            rotateX(-90deg)
+            translateZ(112px);
+        }
+
+        /* =====================================================
+           INNER CUBE DEPTH
+        ===================================================== */
+
+        .cube-inner .cube-front {
+          transform: translateZ(77px);
+        }
+
+        .cube-inner .cube-back {
+          transform:
+            rotateY(180deg)
+            translateZ(77px);
+        }
+
+        .cube-inner .cube-right {
+          transform:
+            rotateY(90deg)
+            translateZ(77px);
+        }
+
+        .cube-inner .cube-left {
+          transform:
+            rotateY(-90deg)
+            translateZ(77px);
+        }
+
+        .cube-inner .cube-top {
+          transform:
+            rotateX(90deg)
+            translateZ(77px);
+        }
+
+        .cube-inner .cube-bottom {
+          transform:
+            rotateX(-90deg)
+            translateZ(77px);
+        }
+
+        /* =====================================================
+           DIGITAL CORE
+        ===================================================== */
+
+        .digital-core {
+          position: absolute;
+
+          left: 50%;
+          top: 50%;
+
+          width: 135px;
+          height: 135px;
+
+          transform:
+            translate(-50%, -50%)
+            translateZ(56px);
+
+          overflow: hidden;
 
           display: flex;
           flex-direction: column;
@@ -240,310 +586,368 @@ function TechnologyWheel() {
           align-items: center;
           justify-content: center;
 
-          border-radius: 50%;
+          border:
+            1px solid
+            rgba(125, 48, 20, 0.78);
 
           background:
             radial-gradient(
               circle at center,
-              rgba(18, 39, 51, 0.55),
-              rgba(5, 9, 15, 0.98) 72%
+              rgba(125, 48, 20, 0.27),
+              rgba(18, 13, 10, 0.95) 68%
             );
 
           box-shadow:
-            0 0 45px rgba(34, 211, 238, 0.07);
+            0 0 42px
+            rgba(125, 48, 20, 0.18),
+            inset 0 0 35px
+            rgba(125, 48, 20, 0.08);
 
-          z-index: 100;
+          transform-style: preserve-3d;
 
-          pointer-events: none;
-
-          text-align: center;
+          animation:
+            core-pulse 3.5s
+            ease-in-out infinite;
         }
 
-        .technology-title {
-          color: #22d3ee;
+        @keyframes core-pulse {
+          0%,
+          100% {
+            box-shadow:
+              0 0 28px
+              rgba(125, 48, 20, 0.12),
+              inset 0 0 28px
+              rgba(125, 48, 20, 0.06);
+          }
 
-          font-size: 11px;
-          font-weight: 800;
-
-          letter-spacing: 0.17em;
-
-          white-space: nowrap;
-        }
-
-        .technology-subtitle {
-          margin-top: 7px;
-
-          color: #7c8797;
-
-          font-size: 8px;
-          font-weight: 600;
-
-          letter-spacing: 0.15em;
-
-          white-space: nowrap;
+          50% {
+            box-shadow:
+              0 0 65px
+              rgba(125, 48, 20, 0.28),
+              inset 0 0 45px
+              rgba(125, 48, 20, 0.12);
+          }
         }
 
         /* =====================================================
-           ROTATING RING
+           CORE GRID
         ===================================================== */
 
-        .technology-ring {
+        .core-grid {
           position: absolute;
 
           inset: 0;
 
-          width: 100%;
-          height: 100%;
+          opacity: 0.25;
 
-          transform-origin: center center;
+          background-image:
+            linear-gradient(
+              rgba(125, 48, 20, 0.45) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(125, 48, 20, 0.45) 1px,
+              transparent 1px
+            );
 
-          animation:
-            technology-ring-rotate 32s linear infinite;
+          background-size: 14px 14px;
 
-          will-change: transform;
-        }
-
-        @keyframes technology-ring-rotate {
-
-          from {
-            transform: rotate(0deg);
-          }
-
-          to {
-            transform: rotate(360deg);
-          }
-
-        }
-
-        /* =====================================================
-           TECHNOLOGY ITEM
-
-           These positions create the circular layout.
-        ===================================================== */
-
-        .technology-item {
-          position: absolute;
-
-          width: max-content;
-
-          z-index: 10;
+          mask-image:
+            radial-gradient(
+              circle,
+              black 20%,
+              transparent 78%
+            );
         }
 
         /* =====================================================
-           COUNTER ROTATION
-
-           EXACT opposite animation.
-
-           Ring:
-           0 -> 360
-
-           Counter:
-           0 -> -360
-
-           So pill itself stays straight.
+           CORE SYMBOL
         ===================================================== */
 
-        .technology-counter {
-          animation:
-            technology-counter-rotate 32s linear infinite;
+        .core-symbol {
+          position: relative;
 
-          transform-origin: center center;
+          width: 48px;
+          height: 48px;
 
-          will-change: transform;
-        }
-
-        @keyframes technology-counter-rotate {
-
-          from {
-            transform: rotate(0deg);
-          }
-
-          to {
-            transform: rotate(-360deg);
-          }
-
-        }
-
-        /* =====================================================
-           CIRCULAR POSITIONS
-        ===================================================== */
-
-        .tech-01 {
-          left: 50%;
-          top: 4%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-02 {
-          left: 71%;
-          top: 9%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-03 {
-          left: 89%;
-          top: 25%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-04 {
-          left: 96%;
-          top: 50%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-05 {
-          left: 89%;
-          top: 75%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-06 {
-          left: 71%;
-          top: 91%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-07 {
-          left: 50%;
-          top: 96%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-08 {
-          left: 29%;
-          top: 91%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-09 {
-          left: 11%;
-          top: 75%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-10 {
-          left: 4%;
-          top: 50%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-11 {
-          left: 11%;
-          top: 25%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        .tech-12 {
-          left: 29%;
-          top: 9%;
-
-          transform: translate(-50%, -50%);
-        }
-
-        /* =====================================================
-           PILL
-        ===================================================== */
-
-        .technology-pill {
           display: flex;
 
           align-items: center;
           justify-content: center;
 
-          gap: 8px;
+          gap: 6px;
 
-          min-width: 108px;
-          height: 43px;
+          z-index: 5;
+        }
 
-          padding: 0 14px;
+        .core-symbol span {
+          display: block;
+
+          width: 6px;
 
           border-radius: 999px;
 
           background:
             linear-gradient(
-              135deg,
-              rgba(255, 255, 255, 0.06),
-              rgba(7, 12, 20, 0.96)
+              to top,
+              #7d3014,
+              #c27650
             );
 
-          border: 1px solid var(--tech-color);
-
-          color: #e5e7eb;
-
-          white-space: nowrap;
-
           box-shadow:
-            0 0 15px var(--tech-glow),
-            0 7px 25px rgba(0, 0, 0, 0.35);
+            0 0 14px
+            rgba(125, 48, 20, 0.55);
+        }
+
+        .core-symbol span:nth-child(1) {
+          height: 20px;
+        }
+
+        .core-symbol span:nth-child(2) {
+          height: 38px;
+        }
+
+        .core-symbol span:nth-child(3) {
+          height: 28px;
         }
 
         /* =====================================================
-           ICON
+           CORE LABEL
         ===================================================== */
 
-        .technology-icon {
-          width: 23px;
-          height: 23px;
+        .core-label {
+          position: relative;
+
+          z-index: 5;
+
+          margin-top: 7px;
+
+          color: #c58b6d;
+
+          font-size: 8px;
+
+          font-weight: 800;
+
+          letter-spacing: 0.2em;
+        }
+
+        /* =====================================================
+           SCAN BARS
+        ===================================================== */
+
+        .core-bar {
+          position: absolute;
+
+          height: 1px;
+
+          background:
+            linear-gradient(
+              90deg,
+              transparent,
+              rgba(125, 48, 20, 0.75),
+              transparent
+            );
+
+          z-index: 20;
+        }
+
+        .core-bar-1 {
+          width: 210px;
+
+          left: 50%;
+          top: 42px;
+
+          transform:
+            translateX(-50%)
+            translateZ(122px);
+
+          animation:
+            bar-scan 3s
+            ease-in-out infinite;
+        }
+
+        .core-bar-2 {
+          width: 160px;
+
+          left: 50%;
+          bottom: 44px;
+
+          transform:
+            translateX(-50%)
+            translateZ(122px);
+
+          opacity: 0.5;
+        }
+
+        .core-bar-3 {
+          width: 1px;
+          height: 190px;
+
+          left: 50%;
+          top: 50%;
+
+          transform:
+            translate(-50%, -50%)
+            translateZ(122px);
+
+          background:
+            linear-gradient(
+              to bottom,
+              transparent,
+              rgba(125, 48, 20, 0.45),
+              transparent
+            );
+
+          opacity: 0.4;
+        }
+
+        @keyframes bar-scan {
+          0%,
+          100% {
+            opacity: 0.25;
+          }
+
+          50% {
+            opacity: 1;
+          }
+        }
+
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        .particle {
+          position: absolute;
+
+          display: block;
+
+          width: 4px;
+          height: 4px;
+
+          border-radius: 50%;
+
+          background: #7d3014;
+
+          box-shadow:
+            0 0 12px
+            rgba(125, 48, 20, 0.55);
+
+          animation:
+            particle-float 5s
+            ease-in-out infinite;
+
+          z-index: 3;
+        }
+
+        .particle-1 {
+          left: 15%;
+          top: 29%;
+          animation-delay: -1s;
+        }
+
+        .particle-2 {
+          right: 16%;
+          top: 23%;
+          animation-delay: -2s;
+        }
+
+        .particle-3 {
+          right: 11%;
+          bottom: 28%;
+          animation-delay: -3s;
+        }
+
+        .particle-4 {
+          left: 17%;
+          bottom: 21%;
+          animation-delay: -4s;
+        }
+
+        .particle-5 {
+          left: 10%;
+          top: 52%;
+
+          width: 3px;
+          height: 3px;
+        }
+
+        .particle-6 {
+          right: 9%;
+          top: 57%;
+
+          width: 3px;
+          height: 3px;
+
+          animation-delay: -2.5s;
+        }
+
+        @keyframes particle-float {
+          0%,
+          100% {
+            transform:
+              translate3d(0, 0, 0)
+              scale(1);
+
+            opacity: 0.35;
+          }
+
+          50% {
+            transform:
+              translate3d(0, -16px, 12px)
+              scale(1.35);
+
+            opacity: 1;
+          }
+        }
+
+        /* =====================================================
+           LABELS
+        ===================================================== */
+
+        .model-label {
+          position: absolute;
+
+          color: #7d3014;
+
+          font-size: 9px;
+
+          font-weight: 800;
+
+          letter-spacing: 0.18em;
+
+          white-space: nowrap;
+        }
+
+        .model-label-top {
+          top: 105px;
+          right: 48px;
 
           display: flex;
 
           align-items: center;
-          justify-content: center;
 
-          flex-shrink: 0;
-
-          border-radius: 7px;
-
-          color: var(--tech-color);
-
-          background: rgba(255, 255, 255, 0.035);
-
-          border: 1px solid var(--tech-color);
-
-          font-size: 9px;
-          font-weight: 800;
-
-          line-height: 1;
-
-          box-shadow:
-            0 0 8px var(--tech-glow);
+          gap: 7px;
         }
 
-        /* =====================================================
-           TECHNOLOGY NAME
-        ===================================================== */
+        .model-label-dot {
+          width: 5px;
+          height: 5px;
 
-        .technology-name {
-          color: #e5e7eb;
+          border-radius: 50%;
 
-          font-size: 11px;
-          font-weight: 700;
+          background: #7d3014;
 
-          letter-spacing: -0.01em;
-
-          white-space: nowrap;
+          box-shadow:
+            0 0 10px
+            rgba(125, 48, 20, 0.55);
         }
 
-        /* =====================================================
-           HOVER
-        ===================================================== */
+        .model-label-bottom {
+          bottom: 103px;
+          left: 50px;
 
-        .technology-pill:hover {
-          box-shadow:
-            0 0 25px var(--tech-glow),
-            0 10px 30px rgba(0, 0, 0, 0.45);
+          opacity: 0.55;
         }
 
         /* =====================================================
@@ -552,32 +956,21 @@ function TechnologyWheel() {
 
         @media (max-width: 1100px) {
 
-          .technology-wheel {
-            width: 440px;
-            height: 440px;
+          .digital-3d-scene {
+            width: 500px;
+            height: 500px;
           }
 
-          .technology-center {
-            width: 130px;
-            height: 130px;
+          .digital-3d-float {
+            transform: scale(0.88);
           }
 
-          .technology-pill {
-            min-width: 96px;
-            height: 39px;
-
-            padding: 0 11px;
-
-            gap: 6px;
+          .model-label-top {
+            right: 28px;
           }
 
-          .technology-icon {
-            width: 21px;
-            height: 21px;
-          }
-
-          .technology-name {
-            font-size: 10px;
+          .model-label-bottom {
+            left: 28px;
           }
 
         }
@@ -588,56 +981,27 @@ function TechnologyWheel() {
 
         @media (max-width: 767px) {
 
-          .technology-wheel {
+          .digital-3d-scene {
             width: 350px;
-            height: 350px;
+            height: 390px;
           }
 
-          .technology-center {
-            width: 105px;
-            height: 105px;
+          .digital-3d-float {
+            transform: scale(0.70);
           }
 
-          .technology-title {
-            font-size: 8px;
-          }
-
-          .technology-subtitle {
-            font-size: 6px;
-          }
-
-          .technology-pill {
-            min-width: 78px;
-            height: 32px;
-
-            padding: 0 8px;
-
-            gap: 5px;
-          }
-
-          .technology-icon {
-            width: 18px;
-            height: 18px;
+          .model-label-top {
+            top: 55px;
+            right: 10px;
 
             font-size: 7px;
           }
 
-          .technology-name {
-            font-size: 8px;
-          }
+          .model-label-bottom {
+            bottom: 55px;
+            left: 10px;
 
-          /*
-            IMPORTANT:
-            Both animations MUST have the exact
-            same duration.
-          */
-
-          .technology-ring {
-            animation-duration: 36s;
-          }
-
-          .technology-counter {
-            animation-duration: 36s;
+            font-size: 7px;
           }
 
         }
@@ -648,50 +1012,27 @@ function TechnologyWheel() {
 
         @media (max-width: 420px) {
 
-          .technology-wheel {
+          .digital-3d-scene {
             width: 315px;
-            height: 315px;
+            height: 350px;
           }
 
-          .technology-center {
-            width: 94px;
-            height: 94px;
+          .digital-3d-float {
+            transform: scale(0.62);
           }
 
-          .technology-title {
-            font-size: 7px;
-          }
-
-          .technology-subtitle {
-            font-size: 5px;
-          }
-
-          .technology-pill {
-            min-width: 68px;
-            height: 29px;
-
-            padding: 0 6px;
-
-            gap: 4px;
-          }
-
-          .technology-icon {
-            width: 16px;
-            height: 16px;
-
+          .model-label {
             font-size: 6px;
           }
 
-          .technology-name {
-            font-size: 7px;
+          .model-label-top {
+            top: 48px;
+            right: 2px;
           }
 
-          .technology-ring {
-            animation-duration: 40s;
-          }
-
-          .technology-counter {
-            animation-duration: 40s;
+          .model-label-bottom {
+            bottom: 48px;
+            left: 2px;
           }
 
         }
@@ -702,10 +1043,335 @@ function TechnologyWheel() {
 
         @media (prefers-reduced-motion: reduce) {
 
-          .technology-ring,
-          .technology-counter {
+          .digital-3d-float,
+          .digital-3d-glow,
+          .digital-core,
+          .core-bar-1,
+          .particle {
             animation: none;
-            transform: none;
+          }
+
+        }
+
+      `}</style>
+    </div>
+  );
+}
+
+/* =========================================================
+   TECHNOLOGY STACK MARQUEE
+========================================================= */
+
+function TechnologyStackMarquee() {
+  return (
+    <div
+      className="technology-marquee-full"
+      aria-label="Yorra Tech technology stack"
+    >
+
+      <div className="technology-marquee">
+
+        <div className="technology-marquee-track">
+
+          {/* =================================================
+             FIRST SET
+          ================================================= */}
+
+          <div className="technology-marquee-content">
+
+            {technologyCategories.map((category) => (
+
+              <div
+                key={category.title}
+                className="technology-marquee-group"
+              >
+
+                <span className="technology-marquee-title">
+                  {category.title}
+                </span>
+
+                {category.items.map((item) => (
+
+                  <span
+                    key={`${category.title}-${item}`}
+                    className="technology-marquee-pill"
+                  >
+                    {item}
+                  </span>
+
+                ))}
+
+              </div>
+
+            ))}
+
+          </div>
+
+          {/* =================================================
+             DUPLICATE SET
+          ================================================= */}
+
+          <div
+            className="technology-marquee-content"
+            aria-hidden="true"
+          >
+
+            {technologyCategories.map((category) => (
+
+              <div
+                key={`duplicate-${category.title}`}
+                className="technology-marquee-group"
+              >
+
+                <span className="technology-marquee-title">
+                  {category.title}
+                </span>
+
+                {category.items.map((item) => (
+
+                  <span
+                    key={`duplicate-${category.title}-${item}`}
+                    className="technology-marquee-pill"
+                  >
+                    {item}
+                  </span>
+
+                ))}
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <style>{`
+
+        /* =====================================================
+           FULL WIDTH MARQUEE
+        ===================================================== */
+
+        .technology-marquee-full {
+          position: relative;
+
+          left: 50%;
+
+          width: 100vw;
+
+          transform: translateX(-50%);
+
+          margin-top: 14px;
+
+          overflow: hidden;
+
+          border-top:
+            1px solid
+            rgba(100, 116, 139, 0.22);
+
+          border-bottom:
+            1px solid
+            rgba(100, 116, 139, 0.22);
+
+          padding-top: 18px;
+          padding-bottom: 18px;
+        }
+
+        .technology-marquee {
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .technology-marquee-track {
+          display: flex;
+
+          align-items: center;
+
+          width: max-content;
+
+          animation:
+            technology-marquee-scroll
+            55s
+            linear
+            infinite;
+
+          will-change: transform;
+        }
+
+        .technology-marquee-content {
+          display: flex;
+
+          align-items: center;
+
+          gap: 42px;
+
+          flex-shrink: 0;
+
+          padding-right: 42px;
+        }
+
+        .technology-marquee-group {
+          display: flex;
+
+          align-items: center;
+
+          gap: 12px;
+
+          flex-shrink: 0;
+        }
+
+        .technology-marquee-title {
+          flex-shrink: 0;
+
+          margin-right: 6px;
+
+          color: #000000;
+
+          font-size: 10px;
+
+          font-weight: 800;
+
+          letter-spacing: 0.18em;
+
+          white-space: nowrap;
+        }
+
+        .technology-marquee-pill {
+          display: inline-flex;
+
+          align-items: center;
+          justify-content: center;
+
+          height: 38px;
+
+          padding: 0 16px;
+
+          border-radius: 999px;
+
+          border:
+            1px solid
+            rgba(125, 48, 20, 0.18);
+
+          background:
+            rgba(255, 255, 255, 0.28);
+
+          color: #5f5149;
+
+          font-size: 12px;
+
+          font-weight: 600;
+
+          white-space: nowrap;
+
+          transition:
+            border-color 0.2s ease,
+            background 0.2s ease,
+            color 0.2s ease;
+        }
+
+        .technology-marquee-pill:hover {
+          border-color:
+            rgba(125, 48, 20, 0.4);
+
+          background:
+            rgba(255, 255, 255, 0.55);
+
+          color: #7d3014;
+        }
+
+        @keyframes technology-marquee-scroll {
+
+          from {
+            transform: translateX(0);
+          }
+
+          to {
+            transform: translateX(-50%);
+          }
+
+        }
+
+        /* =====================================================
+           MOBILE MARQUEE
+        ===================================================== */
+
+        @media (max-width: 767px) {
+
+          .technology-marquee-full {
+            margin-top: 8px;
+
+            padding-top: 14px;
+            padding-bottom: 14px;
+          }
+
+          .technology-marquee-content {
+            gap: 28px;
+
+            padding-right: 28px;
+          }
+
+          .technology-marquee-group {
+            gap: 8px;
+          }
+
+          .technology-marquee-title {
+            font-size: 8px;
+          }
+
+          .technology-marquee-pill {
+            height: 32px;
+
+            padding: 0 12px;
+
+            font-size: 10px;
+          }
+
+          .technology-marquee-track {
+            animation-duration: 42s;
+          }
+
+        }
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 420px) {
+
+          .technology-marquee-content {
+            gap: 22px;
+
+            padding-right: 22px;
+          }
+
+          .technology-marquee-group {
+            gap: 7px;
+          }
+
+          .technology-marquee-pill {
+            height: 30px;
+
+            padding: 0 10px;
+
+            font-size: 9px;
+          }
+
+          .technology-marquee-title {
+            font-size: 7px;
+          }
+
+        }
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+          .technology-marquee-track {
+            animation: none;
           }
 
         }
@@ -721,13 +1387,57 @@ function TechnologyWheel() {
 
 export default function WhyYorra() {
   return (
-    <section className="relative overflow-hidden bg-[#070a10] px-6 py-24 text-white sm:px-8 lg:px-10 lg:py-28">
+    <section
+      aria-labelledby="why-yorra-heading"
+      className="
+        relative
+        overflow-hidden
+        bg-[#F8F3E8]
+        px-6
+        py-20
+        text-slate-700
+        sm:px-8
+        lg:px-10
+        lg:py-24
+      "
+    >
+
+      {/* =====================================================
+         GRID BACKGROUND
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          opacity-[0.13]
+        "
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(15,23,42,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.35) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
       {/* =====================================================
          BACKGROUND GLOW
       ===================================================== */}
 
-      <div className="pointer-events-none absolute right-[-180px] top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-cyan-500/[0.035] blur-[140px]" />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          right-[-180px]
+          top-1/2
+          h-[420px]
+          w-[420px]
+          -translate-y-1/2
+          rounded-full
+          bg-purple-500/[0.035]
+          blur-[140px]
+        "
+      />
 
       <div className="relative mx-auto max-w-7xl">
 
@@ -735,134 +1445,291 @@ export default function WhyYorra() {
            HEADER
         =================================================== */}
 
-        <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+        <div
+          className="
+            grid
+            gap-8
+            lg:grid-cols-[0.82fr_1.18fr]
+            lg:items-end
+          "
+        >
 
           <div>
 
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400 sm:text-sm">
+            {/* WHY YORRA TECH */}
+
+            <p
+              className="
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.25em]
+                text-black
+                sm:text-sm
+              "
+            >
               Why Yorra Tech
             </p>
 
-            <h2 className="mt-4 max-w-xl text-4xl font-black leading-[0.98] tracking-tight sm:text-5xl lg:text-[58px]">
+            {/* MAIN HEADING */}
+
+            <h2
+              id="why-yorra-heading"
+              className="
+                mt-4
+                max-w-xl
+                text-4xl
+                font-black
+                leading-[0.98]
+                tracking-tight
+                text-[#7D3014]
+                sm:text-5xl
+                lg:text-[58px]
+              "
+            >
               Technology that works for your{" "}
-              <span className="text-gray-500">
+
+              <span className="text-[#7D3014]">
                 business.
               </span>
             </h2>
 
           </div>
 
-          <p className="max-w-2xl text-sm leading-6 text-gray-400 sm:text-base sm:leading-7 lg:ml-auto lg:pb-1">
-            We combine strategy, design, development, growth, and automation
-            to create digital solutions that are useful today and ready for
-            tomorrow.
+          {/* DESCRIPTION */}
+
+          <p
+            className="
+              max-w-2xl
+              text-sm
+              leading-6
+              text-slate-500
+              sm:text-base
+              sm:leading-7
+              lg:ml-auto
+              lg:pb-1
+            "
+          >
+            Yorra Tech combines strategy, design, website development, digital
+            growth, and business automation to create practical digital solutions
+            that are built for today and ready to scale with your business.
           </p>
 
         </div>
 
         {/* ===================================================
-           MAIN GRID
+           CARDS + 3D MODEL
         =================================================== */}
 
-        <div className="mt-14 grid items-center gap-12 lg:mt-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-10">
+        <div
+          className="
+            mt-12
+            grid
+            items-center
+            gap-10
+            lg:mt-14
+            lg:grid-cols-[1.05fr_0.95fr]
+            lg:gap-12
+          "
+        >
 
           {/* =================================================
-             LEFT CARDS
+             LEFT — CARDS
           ================================================= */}
 
-          <div className="mx-auto grid w-full max-w-[650px] grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10">
+          <div className="w-full">
 
-            {reasons.map((reason) => {
+            <div
+              className="
+                grid
+                w-full
+                max-w-[640px]
+                grid-cols-2
+                overflow-hidden
+                rounded-[20px]
+                border
+                border-slate-400/25
+              "
+            >
 
-              const Icon = reason.icon;
+              {whyYorraCards.map((card, index) => {
 
-              return (
-                <article
-                  key={reason.number}
-                  className="group relative min-h-[245px] bg-[#070a10] p-6 transition-all duration-500 hover:bg-[#0b1019] sm:min-h-[255px] sm:p-7"
-                >
+                const Icon = card.icon;
 
-                  {/* CARD TOP */}
+                return (
 
-                  <div className="flex items-start justify-between">
+                  <div
+                    key={card.number}
+                    className={`
+                      group
+                      relative
+                      min-h-[270px]
+                      bg-transparent
+                      px-6
+                      py-6
+                      sm:px-7
+                      sm:py-7
 
-                    <span className="text-[11px] font-bold tracking-[0.2em] text-cyan-400">
-                      {reason.number}
-                    </span>
+                      ${
+                        index % 2 === 0
+                          ? "border-r border-slate-400/25"
+                          : ""
+                      }
 
-                    <ArrowUpRight
-                      size={16}
-                      className="text-gray-700 transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-cyan-400"
+                      ${
+                        index < 2
+                          ? "border-b border-slate-400/25"
+                          : ""
+                      }
+                    `}
+                  >
+
+                    {/* NUMBER + ARROW */}
+
+                    <div
+                      className="
+                        flex
+                        items-start
+                        justify-between
+                      "
+                    >
+
+                      <span
+                        className="
+                          text-[10px]
+                          font-bold
+                          tracking-[0.22em]
+                          text-purple-600
+                        "
+                      >
+                        {card.number}
+                      </span>
+
+                      <span
+                        className="
+                          text-sm
+                          leading-none
+                          text-slate-500
+                        "
+                      >
+                        ↗
+                      </span>
+
+                    </div>
+
+                    {/* ICON */}
+
+                    <div
+                      className="
+                        mt-5
+                        flex
+                        h-10
+                        w-10
+                        items-center
+                        justify-center
+                        rounded-xl
+                        border
+                        border-purple-400/60
+                        bg-transparent
+                      "
+                    >
+
+                      <Icon
+                        size={18}
+                        strokeWidth={1.8}
+                        className="text-purple-600"
+                      />
+
+                    </div>
+
+                    {/* TITLE */}
+
+                    <h3
+                      className="
+                        mt-5
+                        max-w-[200px]
+                        text-[20px]
+                        font-black
+                        leading-[1.08]
+                        tracking-tight
+                        text-slate-700
+                        sm:text-[21px]
+                      "
+                    >
+                      {card.title}
+                    </h3>
+
+                    {/* DESCRIPTION */}
+
+                    <p
+                      className="
+                        mt-4
+                        max-w-[245px]
+                        text-[12px]
+                        leading-[1.7]
+                        text-slate-500
+                        sm:text-[13px]
+                      "
+                    >
+                      {card.description}
+                    </p>
+
+                    {/* BOTTOM LINE */}
+
+                    <div
+                      className="
+                        absolute
+                        bottom-6
+                        left-6
+                        h-px
+                        w-7
+                        bg-slate-400/60
+                        sm:left-7
+                      "
                     />
 
                   </div>
 
-                  {/* CARD ICON */}
+                );
 
-                  <div className="mt-5 flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/[0.04] text-cyan-400 transition-all duration-500 group-hover:border-cyan-400/50 group-hover:bg-cyan-400/[0.08]">
+              })}
 
-                    <Icon
-                      size={20}
-                      strokeWidth={1.8}
-                    />
-
-                  </div>
-
-                  {/* TITLE */}
-
-                  <h3 className="mt-5 text-xl font-bold tracking-tight sm:text-[22px]">
-                    {reason.title}
-                  </h3>
-
-                  {/* DESCRIPTION */}
-
-                  <p className="mt-3 max-w-[270px] text-[13px] leading-6 text-gray-500 sm:text-sm">
-                    {reason.description}
-                  </p>
-
-                  {/* BOTTOM LINE */}
-
-                  <div className="mt-5 h-px w-8 bg-white/10 transition-all duration-500 group-hover:w-14 group-hover:bg-cyan-400/50" />
-
-                </article>
-              );
-            })}
+            </div>
 
           </div>
 
           {/* =================================================
-             TECHNOLOGY WHEEL
+             RIGHT — 3D MODEL
           ================================================= */}
 
-          <div className="flex min-h-[500px] items-center justify-center lg:min-h-[500px]">
+          <div
+            className="
+              flex
+              min-h-[580px]
+              items-center
+              justify-center
+              lg:min-h-[580px]
+            "
+          >
 
-            <TechnologyWheel />
+            <Digital3DModel />
 
           </div>
-
-        </div>
-
-        {/* ===================================================
-           BOTTOM STATEMENT
-        =================================================== */}
-
-        <div className="mt-14 border-t border-white/10 pt-8">
-
-          <p className="max-w-5xl text-2xl font-semibold leading-tight tracking-tight text-gray-300 sm:text-3xl lg:text-4xl">
-
-            <span className="text-white">
-              Build something useful.
-            </span>{" "}
-
-            <span className="text-gray-500">
-              Grow it with confidence. Automate what slows you down.
-            </span>
-
-          </p>
 
         </div>
 
       </div>
+
+      {/* =====================================================
+         FULL WIDTH TECHNOLOGY MARQUEE
+      ===================================================== */}
+
+      <div className="mt-14">
+
+        <TechnologyStackMarquee />
+
+      </div>
+
     </section>
   );
 }

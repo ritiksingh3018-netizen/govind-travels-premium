@@ -2,21 +2,17 @@
 
 import { useEffect, useRef } from "react";
 
-type Particle = {
+type Node = {
   x: number;
   y: number;
-  z: number;
-
   baseX: number;
   baseY: number;
-  baseZ: number;
-
   vx: number;
   vy: number;
-  vz: number;
-
-  size: number;
+  radius: number;
   alpha: number;
+  color: number;
+  phase: number;
 };
 
 export default function ParticleFootball() {
@@ -24,99 +20,127 @@ export default function ParticleFootball() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
-
     if (!ctx) return;
 
     let width = 0;
     let height = 0;
     let animationFrame = 0;
+    let time = 0;
 
     const mouse = {
-      x: -2000,
-      y: -2000,
+      x: -10000,
+      y: -10000,
     };
 
-    const sphere = {
-      x: 0,
-      y: 0,
-      radius: 300,
-    };
+    const nodes: Node[] = [];
 
-    const particles: Particle[] = [];
-
-    // Dense particle field
-    const PARTICLE_COUNT = 3200;
-
-    let rotation = 0;
+    const NODE_COUNT = 170;
+    const CONNECTION_DISTANCE = 175;
+    const MOUSE_RADIUS = 280;
 
     /*
     =========================================
-    CREATE PARTICLES
+    YORRA COLORS
     =========================================
     */
 
-    const createParticles = () => {
-      particles.length = 0;
+    const colors = [
+      { r: 67, g: 58, b: 143 }, // Purple
+      { r: 7, g: 92, b: 77 },   // Green
+      { r: 125, g: 48, b: 20 }, // Orange
+    ];
 
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        const offset = 2 / PARTICLE_COUNT;
+    /*
+    =========================================
+    CREATE NETWORK
+    =========================================
+    */
 
-        const y =
-          i * offset -
-          1 +
-          offset / 2;
+    const createNodes = () => {
+      nodes.length = 0;
 
-        const radius =
-          Math.sqrt(1 - y * y);
+      const isMobile = width < 768;
 
-        const goldenAngle =
-          Math.PI * (3 - Math.sqrt(5));
+      /*
+      Desktop:
+      Right side large network
 
-        const theta =
-          goldenAngle * i;
+      Mobile:
+      Network starts around the
+      Build / Grow / Automate area
+      */
+
+      const centerX = isMobile
+        ? width * 0.52
+        : width * 0.68;
+
+      const centerY = isMobile
+        ? height * 0.64
+        : height * 0.52;
+
+      const networkWidth = isMobile
+        ? width * 0.95
+        : Math.min(width * 0.58, 700);
+
+      const networkHeight = isMobile
+        ? Math.min(height * 0.42, 340)
+        : Math.min(height * 0.78, 620);
+
+      for (let i = 0; i < NODE_COUNT; i++) {
+        const angle =
+          Math.random() * Math.PI * 2;
+
+        const distance =
+          Math.sqrt(Math.random());
 
         const x =
-          Math.cos(theta) * radius;
+          centerX +
+          Math.cos(angle) *
+            distance *
+            (networkWidth / 2);
 
-        const z =
-          Math.sin(theta) * radius;
+        const y =
+          centerY +
+          Math.sin(angle) *
+            distance *
+            (networkHeight / 2);
 
-        const px =
-          x * sphere.radius;
+        nodes.push({
+          x,
+          y,
 
-        const py =
-          y * sphere.radius;
+          baseX: x,
+          baseY: y,
 
-        const pz =
-          z * sphere.radius;
+          vx:
+            (Math.random() - 0.5) *
+            0.35,
 
-        particles.push({
-          x: px,
-          y: py,
-          z: pz,
+          vy:
+            (Math.random() - 0.5) *
+            0.35,
 
-          baseX: px,
-          baseY: py,
-          baseZ: pz,
-
-          vx: 0,
-          vy: 0,
-          vz: 0,
-
-          /*
-          Bigger dots
-          */
-          size:
-            0.8 +
-            Math.random() * 1.8,
+          radius:
+            isMobile
+              ? 1.4 + Math.random() * 2.4
+              : 1.5 + Math.random() * 2.8,
 
           alpha:
             0.4 +
-            Math.random() * 0.6,
+            Math.random() * 0.55,
+
+          color:
+            Math.floor(
+              Math.random() * colors.length
+            ),
+
+          phase:
+            Math.random() *
+            Math.PI *
+            2,
         });
       }
     };
@@ -134,11 +158,10 @@ export default function ParticleFootball() {
       width = rect.width;
       height = rect.height;
 
-      const dpr =
-        Math.min(
-          window.devicePixelRatio || 1,
-          2
-        );
+      const dpr = Math.min(
+        window.devicePixelRatio || 1,
+        2
+      );
 
       canvas.width =
         width * dpr;
@@ -155,66 +178,59 @@ export default function ParticleFootball() {
         0
       );
 
-      sphere.x =
-        width * 0.68;
-
-      sphere.y =
-        height * 0.52;
-
-      /*
-      Slightly smaller football
-      */
-
-      if (width >= 1200) {
-        sphere.radius = 315;
-      } else if (width >= 768) {
-        sphere.radius = 275;
-      } else {
-        sphere.radius = 180;
-      }
-
-      createParticles();
+      createNodes();
     };
 
     /*
     =========================================
-    GLOBAL MOUSE
+    ONLY REAL MOUSE
     =========================================
     */
 
-    const handleMouseMove = (
-      event: MouseEvent
+    const handlePointerMove = (
+      event: PointerEvent
     ) => {
+      /*
+      Touch and pen are completely ignored.
+      Only physical mouse can interact.
+      */
+
+      if (
+        event.pointerType !== "mouse"
+      ) {
+        mouse.x = -10000;
+        mouse.y = -10000;
+        return;
+      }
+
       const rect =
         canvas.getBoundingClientRect();
 
       mouse.x =
-        event.clientX -
-        rect.left;
+        event.clientX - rect.left;
 
       mouse.y =
-        event.clientY -
-        rect.top;
+        event.clientY - rect.top;
     };
 
-    const handleMouseLeave = () => {
-      mouse.x = -2000;
-      mouse.y = -2000;
+    const handlePointerLeave = () => {
+      mouse.x = -10000;
+      mouse.y = -10000;
     };
+
+    window.addEventListener(
+      "pointermove",
+      handlePointerMove
+    );
+
+    window.addEventListener(
+      "pointerleave",
+      handlePointerLeave
+    );
 
     window.addEventListener(
       "resize",
       resize
-    );
-
-    window.addEventListener(
-      "mousemove",
-      handleMouseMove
-    );
-
-    window.addEventListener(
-      "blur",
-      handleMouseLeave
     );
 
     resize();
@@ -233,292 +249,405 @@ export default function ParticleFootball() {
         height
       );
 
-      rotation += 0.0017;
+      time += 0.012;
 
-      const cos =
-        Math.cos(rotation);
-
-      const sin =
-        Math.sin(rotation);
-
-      const renderedParticles: Array<{
-        x: number;
-        y: number;
-        z: number;
-        size: number;
-        alpha: number;
-      }> = [];
+      const isMobile =
+        width < 768;
 
       /*
       =======================================
-      PARTICLE PHYSICS
+      MOVE NODES
       =======================================
       */
 
-      for (
-        const particle of particles
-      ) {
+      for (const node of nodes) {
         /*
-        3D rotation
+        Noticeable continuous movement
         */
 
-        const rotatedX =
-          particle.baseX * cos -
-          particle.baseZ * sin;
+        const movementAmount =
+          isMobile ? 4.2 : 2.2;
 
-        const rotatedZ =
-          particle.baseX * sin +
-          particle.baseZ * cos;
+        const floatX =
+          Math.sin(
+            time * 0.65 +
+              node.phase
+          ) *
+          movementAmount;
 
-        /*
-        Target sphere position
-        */
-
-        const targetX =
-          sphere.x +
-          rotatedX;
-
-        const targetY =
-          sphere.y +
-          particle.baseY;
+        const floatY =
+          Math.cos(
+            time * 0.55 +
+              node.phase
+          ) *
+          movementAmount;
 
         /*
-        Current position
+        Slowly follow floating position
         */
 
-        const currentX =
-          sphere.x +
-          particle.x;
+        node.vx +=
+          (
+            node.baseX +
+            floatX -
+            node.x
+          ) * 0.003;
 
-        const currentY =
-          sphere.y +
-          particle.y;
+        node.vy +=
+          (
+            node.baseY +
+            floatY -
+            node.y
+          ) * 0.003;
 
         /*
         =====================================
-        CURSOR REPULSION
+        DESKTOP MOUSE REPULSION ONLY
         =====================================
         */
 
-        const dx =
-          currentX -
-          mouse.x;
+        if (!isMobile) {
+          const dx =
+            node.x -
+            mouse.x;
 
-        const dy =
-          currentY -
-          mouse.y;
+          const dy =
+            node.y -
+            mouse.y;
 
-        const distance =
-          Math.sqrt(
-            dx * dx +
-            dy * dy
-          );
-
-        /*
-        Larger interaction zone
-        */
-
-        const interactionRadius =
-          360;
-
-        if (
-          distance <
-          interactionRadius
-        ) {
-          const normalized =
-            (interactionRadius -
-              distance) /
-            interactionRadius;
-
-          const force =
-            Math.pow(
-              normalized,
-              1.55
+          const distance =
+            Math.sqrt(
+              dx * dx +
+                dy * dy
             );
 
-          const angle =
-            Math.atan2(
-              dy,
-              dx
-            );
+          if (
+            distance <
+            MOUSE_RADIUS
+          ) {
+            const force =
+              (MOUSE_RADIUS -
+                distance) /
+              MOUSE_RADIUS;
 
-          /*
-          Stronger escape
-          */
+            const angle =
+              Math.atan2(
+                dy,
+                dx
+              );
 
-          const push =
-            force * 48;
+            node.vx +=
+              Math.cos(angle) *
+              force *
+              0.85;
 
-          particle.vx +=
-            Math.cos(angle) *
-            push;
-
-          particle.vy +=
-            Math.sin(angle) *
-            push;
-
-          /*
-          Depth explosion
-          */
-
-          particle.vz +=
-            force * 13;
+            node.vy +=
+              Math.sin(angle) *
+              force *
+              0.85;
+          }
         }
 
         /*
-        =====================================
-        RETURN TO SPHERE
-        =====================================
+        Smooth physics
         */
 
-        const returnX =
-          targetX -
-          currentX;
+        node.vx *= 0.985;
+        node.vy *= 0.985;
 
-        const returnY =
-          targetY -
-          currentY;
-
-        particle.vx +=
-          returnX * 0.005;
-
-        particle.vy +=
-          returnY * 0.005;
-
-        /*
-        Friction
-        */
-
-        particle.vx *= 0.90;
-
-        particle.vy *= 0.90;
-
-        particle.vz *= 0.90;
-
-        /*
-        Move
-        */
-
-        particle.x +=
-          particle.vx;
-
-        particle.y +=
-          particle.vy;
-
-        particle.z +=
-          particle.vz;
-
-        /*
-        Recover depth
-        */
-
-        particle.z *=
-          0.985;
-
-        renderedParticles.push({
-          x:
-            sphere.x +
-            particle.x,
-
-          y:
-            sphere.y +
-            particle.y,
-
-          z:
-            particle.z,
-
-          size:
-            particle.size,
-
-          alpha:
-            particle.alpha,
-        });
+        node.x += node.vx;
+        node.y += node.vy;
       }
 
       /*
-      =========================================
-      DEPTH SORT
-      =========================================
+      =======================================
+      CONNECTIONS
+      =======================================
       */
 
-      renderedParticles.sort(
-        (a, b) =>
-          a.z - b.z
-      );
-
-      /*
-      =========================================
-      DRAW PARTICLES
-      =========================================
-      */
+      const connectionDistance =
+        isMobile
+          ? 135
+          : CONNECTION_DISTANCE;
 
       for (
-        const particle of
-        renderedParticles
+        let i = 0;
+        i < nodes.length;
+        i++
       ) {
-        const depth =
-          (particle.z +
-            sphere.radius) /
-          (sphere.radius * 2);
+        const nodeA = nodes[i];
 
-        const size =
-          particle.size *
-          (0.45 +
-            depth * 1.1);
+        for (
+          let j = i + 1;
+          j < nodes.length;
+          j++
+        ) {
+          const nodeB = nodes[j];
 
-        const alpha =
-          particle.alpha *
-          (0.18 +
-            depth * 0.95);
+          const dx =
+            nodeA.x -
+            nodeB.x;
+
+          const dy =
+            nodeA.y -
+            nodeB.y;
+
+          const distance =
+            Math.sqrt(
+              dx * dx +
+                dy * dy
+            );
+
+          if (
+            distance <
+            connectionDistance
+          ) {
+            const strength =
+              1 -
+              distance /
+                connectionDistance;
+
+            const colorA =
+              colors[nodeA.color];
+
+            const colorB =
+              colors[nodeB.color];
+
+            const r =
+              (colorA.r +
+                colorB.r) /
+              2;
+
+            const g =
+              (colorA.g +
+                colorB.g) /
+              2;
+
+            const b =
+              (colorA.b +
+                colorB.b) /
+              2;
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+              nodeA.x,
+              nodeA.y
+            );
+
+            ctx.lineTo(
+              nodeB.x,
+              nodeB.y
+            );
+
+            ctx.strokeStyle =
+              `rgba(
+                ${r},
+                ${g},
+                ${b},
+                ${strength * 0.30}
+              )`;
+
+            ctx.lineWidth =
+              isMobile
+                ? 0.65 +
+                  strength * 0.5
+                : 0.8 +
+                  strength * 0.7;
+
+            ctx.stroke();
+          }
+        }
+      }
+
+      /*
+      =======================================
+      MOUSE CONNECTIONS
+      DESKTOP ONLY
+      =======================================
+      */
+
+      if (!isMobile) {
+        for (const node of nodes) {
+          const dx =
+            node.x -
+            mouse.x;
+
+          const dy =
+            node.y -
+            mouse.y;
+
+          const distance =
+            Math.sqrt(
+              dx * dx +
+                dy * dy
+            );
+
+          if (
+            distance <
+            MOUSE_RADIUS
+          ) {
+            const strength =
+              1 -
+              distance /
+                MOUSE_RADIUS;
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+              node.x,
+              node.y
+            );
+
+            ctx.lineTo(
+              mouse.x,
+              mouse.y
+            );
+
+            ctx.strokeStyle =
+              `rgba(
+                67,
+                58,
+                143,
+                ${strength * 0.55}
+              )`;
+
+            ctx.lineWidth = 1;
+
+            ctx.stroke();
+          }
+        }
+      }
+
+      /*
+      =======================================
+      DRAW NODES
+      =======================================
+      */
+
+      for (const node of nodes) {
+        const color =
+          colors[node.color];
+
+        /*
+        Node glow
+        */
+
+        const glow =
+          ctx.createRadialGradient(
+            node.x,
+            node.y,
+            0,
+
+            node.x,
+            node.y,
+            node.radius * 7
+          );
+
+        glow.addColorStop(
+          0,
+          `rgba(
+            ${color.r},
+            ${color.g},
+            ${color.b},
+            ${node.alpha * 0.4}
+          )`
+        );
+
+        glow.addColorStop(
+          1,
+          `rgba(
+            ${color.r},
+            ${color.g},
+            ${color.b},
+            0
+          )`
+        );
 
         ctx.beginPath();
 
         ctx.arc(
-          particle.x,
-          particle.y,
-          size,
+          node.x,
+          node.y,
+          node.radius * 7,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fillStyle = glow;
+        ctx.fill();
+
+        /*
+        Main node
+        */
+
+        ctx.beginPath();
+
+        ctx.arc(
+          node.x,
+          node.y,
+          node.radius,
           0,
           Math.PI * 2
         );
 
         ctx.fillStyle =
           `rgba(
-            103,
-            232,
-            249,
-            ${alpha}
+            ${color.r},
+            ${color.g},
+            ${color.b},
+            ${node.alpha}
           )`;
 
         ctx.fill();
       }
 
       /*
-      =========================================
-      GLOW
-      =========================================
+      =======================================
+      AMBIENT GLOW
+      =======================================
       */
+
+      const centerX =
+        isMobile
+          ? width * 0.52
+          : width * 0.68;
+
+      const centerY =
+        isMobile
+          ? height * 0.64
+          : height * 0.52;
 
       const glow =
         ctx.createRadialGradient(
-          sphere.x,
-          sphere.y,
-          sphere.radius *
-            0.1,
+          centerX,
+          centerY,
+          20,
 
-          sphere.x,
-          sphere.y,
-          sphere.radius *
-            1.35
+          centerX,
+          centerY,
+          Math.min(
+            width,
+            height
+          ) *
+            (isMobile
+              ? 0.45
+              : 0.55)
         );
 
       glow.addColorStop(
         0,
-        "rgba(34,211,238,0.08)"
+        "rgba(67,58,143,0.055)"
       );
 
       glow.addColorStop(
-        0.45,
-        "rgba(59,130,246,0.035)"
+        0.35,
+        "rgba(7,92,77,0.035)"
+      );
+
+      glow.addColorStop(
+        0.65,
+        "rgba(125,48,20,0.025)"
       );
 
       glow.addColorStop(
@@ -529,17 +658,20 @@ export default function ParticleFootball() {
       ctx.beginPath();
 
       ctx.arc(
-        sphere.x,
-        sphere.y,
-        sphere.radius *
-          1.35,
+        centerX,
+        centerY,
+        Math.min(
+          width,
+          height
+        ) *
+          (isMobile
+            ? 0.45
+            : 0.55),
         0,
         Math.PI * 2
       );
 
-      ctx.fillStyle =
-        glow;
-
+      ctx.fillStyle = glow;
       ctx.fill();
 
       animationFrame =
@@ -562,18 +694,18 @@ export default function ParticleFootball() {
       );
 
       window.removeEventListener(
+        "pointermove",
+        handlePointerMove
+      );
+
+      window.removeEventListener(
+        "pointerleave",
+        handlePointerLeave
+      );
+
+      window.removeEventListener(
         "resize",
         resize
-      );
-
-      window.removeEventListener(
-        "mousemove",
-        handleMouseMove
-      );
-
-      window.removeEventListener(
-        "blur",
-        handleMouseLeave
       );
     };
   }, []);
@@ -583,18 +715,14 @@ export default function ParticleFootball() {
 
       {/* Ambient glow */}
 
-      <div className="pointer-events-none absolute left-[68%] top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.035] blur-[140px]" />
+      <div className="pointer-events-none absolute left-[68%] top-1/2 hidden h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/[0.025] blur-[150px] md:block" />
 
-      {/* Particle field */}
+      {/* Neural Network */}
 
       <canvas
         ref={canvasRef}
         className="absolute inset-0 h-full w-full"
       />
-
-      {/* Center glow */}
-
-      <div className="absolute left-[68%] top-[52%] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-200 shadow-[0_0_35px_12px_rgba(34,211,238,0.28)]" />
 
     </div>
   );

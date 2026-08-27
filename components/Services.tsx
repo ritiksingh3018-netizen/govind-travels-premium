@@ -114,8 +114,6 @@ const cards = services.flatMap((service, serviceIndex) =>
 
 const TOTAL_SERVICES = cards.length;
 
-const CHANGE_INTERVAL = 4200;
-const CARD_ANIMATION_TIME = 1100;
 
 /* =========================================================
    ROBOT
@@ -1095,43 +1093,9 @@ export default function Services() {
   const [activeIndex, setActiveIndex] =
     useState(0);
 
-  const [previousIndex, setPreviousIndex] =
-    useState<number | null>(null);
 
   const activeRef = useRef(0);
 
-  /* =======================================================
-     AUTO CHANGE
-  ======================================================= */
-
-  useEffect(() => {
-    const interval =
-      window.setInterval(() => {
-        const current =
-          activeRef.current;
-
-        const next =
-          (current + 1) %
-          TOTAL_SERVICES;
-
-        setPreviousIndex(current);
-
-        activeRef.current =
-          next;
-
-        setActiveIndex(next);
-
-        window.setTimeout(() => {
-          setPreviousIndex(null);
-        }, CARD_ANIMATION_TIME + 100);
-      }, CHANGE_INTERVAL);
-
-    return () => {
-      window.clearInterval(
-        interval
-      );
-    };
-  }, []);
 
   /* =======================================================
      DATA
@@ -1145,17 +1109,6 @@ export default function Services() {
       activeCard.serviceIndex
     ];
 
-  const previousCard =
-    previousIndex !== null
-      ? cards[previousIndex]
-      : null;
-
-  const previousService =
-    previousCard !== null
-      ? services[
-          previousCard.serviceIndex
-        ]
-      : null;
 
   const progress =
     ((activeIndex + 1) /
@@ -1165,7 +1118,8 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden bg-[#05070b] text-white"
+      aria-labelledby="services-heading"
+      className="relative overflow-hidden bg-[#F8F3E8] text-[#0F172A]"
     >
 
       {/* =================================================
@@ -1179,12 +1133,12 @@ export default function Services() {
         <div className="absolute right-[-180px] top-1/3 h-[400px] w-[400px] rounded-full bg-blue-500/[0.025] blur-[130px]" />
 
         <div
-          className="absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0 opacity-[0.13]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+              "linear-gradient(rgba(15,23,42,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.35) 1px, transparent 1px)",
             backgroundSize:
-              "60px 60px",
+              "28px 28px",
           }}
         />
 
@@ -1196,207 +1150,119 @@ export default function Services() {
 
       <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-28 sm:px-8 lg:min-h-[820px] lg:px-10 lg:pb-28 lg:pt-36">
 
-        <div className="grid w-full items-center gap-14 lg:grid-cols-[390px_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[430px_minmax(0,1fr)] xl:gap-20">
+        <div className="grid w-full items-center gap-10 lg:grid-cols-[330px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[360px_minmax(0,1fr)] xl:gap-14">
 
           {/* =================================================
-              ROBOT
+              AUTOMATION VISUAL
           ================================================= */}
 
-          <div className="relative z-40 flex min-h-[470px] items-center justify-center lg:min-h-[540px]">
+          <div className="relative z-20 flex min-h-[300px] -translate-y-10 items-center justify-center lg:min-h-[420px] lg:-translate-y-20">
+            <div className="relative flex h-80 w-80 scale-110 items-center justify-center lg:h-96 lg:w-96 lg:scale-110">
 
-            <YorraRobot
-              activeIndex={
-                activeIndex
-              }
-            />
+              {/* Soft glow */}
+              <div className="absolute h-40 w-40 rounded-full bg-purple-500/10 blur-3xl" />
 
-            <div
-              key={`robot-info-${activeIndex}`}
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 text-center animate-service-info"
-            >
+              {/* Connecting automation lines */}
+              <div className="absolute inset-0 animate-[spin_18s_linear_infinite]">
+                <span className="absolute left-1/2 top-2 h-12 w-px -translate-x-1/2 bg-gradient-to-b from-purple-400/70 to-transparent" />
+                <span className="absolute bottom-2 left-1/2 h-12 w-px -translate-x-1/2 rotate-180 bg-gradient-to-b from-purple-400/70 to-transparent" />
+                <span className="absolute left-2 top-1/2 h-px w-12 -translate-y-1/2 bg-gradient-to-r from-purple-400/70 to-transparent" />
+                <span className="absolute right-2 top-1/2 h-px w-12 -translate-y-1/2 rotate-180 bg-gradient-to-r from-purple-400/70 to-transparent" />
+              </div>
 
-              <p className="text-[9px] uppercase tracking-[0.28em] text-gray-700">
-                Digital System
-              </p>
+              {/* Outer automation nodes */}
+              <span className="absolute left-8 top-8 h-3 w-3 rounded-full bg-purple-500 shadow-[0_0_18px_rgba(168,85,247,0.65)] animate-pulse" />
+              <span className="absolute right-8 top-8 h-3 w-3 rounded-full bg-purple-500 shadow-[0_0_18px_rgba(168,85,247,0.65)] animate-pulse [animation-delay:300ms]" />
+              <span className="absolute bottom-8 left-8 h-3 w-3 rounded-full bg-purple-500 shadow-[0_0_18px_rgba(168,85,247,0.65)] animate-pulse [animation-delay:600ms]" />
+              <span className="absolute bottom-8 right-8 h-3 w-3 rounded-full bg-purple-500 shadow-[0_0_18px_rgba(168,85,247,0.65)] animate-pulse [animation-delay:900ms]" />
 
-              <p className="mt-2 text-sm font-semibold text-cyan-400">
-                {
-                  activeService.short
-                }
-              </p>
+              {/* Central automation core */}
+              <div className="relative flex h-32 w-32 items-center justify-center rounded-[2rem] border border-purple-500/30 bg-white/70 shadow-[0_20px_60px_rgba(124,58,237,0.16)] backdrop-blur-xl">
 
-              <p className="mt-1 text-[10px] text-gray-600">
-                {String(
-                  activeIndex + 1
-                ).padStart(
-                  2,
-                  "0"
-                )}{" "}
-                /{" "}
-                {String(
-                  TOTAL_SERVICES
-                ).padStart(
-                  2,
-                  "0"
-                )}
-              </p>
+                <div className="absolute inset-3 rounded-[1.5rem] border border-purple-500/10" />
+
+                {/* Automation symbol */}
+                <div className="relative flex items-center gap-2">
+                  <span className="h-10 w-3 rounded-full bg-purple-600 shadow-[0_0_18px_rgba(124,58,237,0.35)]" />
+                  <span className="h-3 w-10 rounded-full bg-purple-500 shadow-[0_0_18px_rgba(168,85,247,0.35)]" />
+                  <span className="h-10 w-3 rounded-full bg-purple-600 shadow-[0_0_18px_rgba(124,58,237,0.35)]" />
+                </div>
+
+              </div>
+
+              {/* Small orbit dots */}
+              <span className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 rounded-full bg-purple-400" />
+              <span className="absolute bottom-0 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-purple-400" />
+              <span className="absolute left-0 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-purple-400" />
+              <span className="absolute right-0 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-purple-400" />
 
             </div>
-
           </div>
 
           {/* =================================================
-              CARDS
+              12 SERVICE CAPSULES
           ================================================= */}
 
-          <div className="relative z-20 min-w-0 translate-y-28 sm:translate-y-36 lg:translate-y-52">
+          <div className="relative z-30 w-full min-w-0 -translate-y-8 lg:-translate-y-16">
 
-            <div className="relative mx-auto h-[470px] w-full max-w-[720px] sm:h-[500px] lg:h-[540px]">
+            <div className="mb-7">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#334155]">
+                What We Provide
+              </p>
 
-              {/* PREVIOUS */}
-
-              {previousCard && (
-                <article className="absolute inset-x-0 top-1/2 z-10 mx-auto w-full -translate-y-1/2 overflow-hidden rounded-[2rem] border border-white/[0.05] bg-[#080c13] opacity-25">
-
-                  <div className="px-6 pb-10 pt-8 sm:px-8">
-
-                    <div className="flex items-center justify-between">
-
-                      <span className="text-sm text-gray-700">
-                        {String(
-                          previousIndex! +
-                            1
-                        ).padStart(
-                          2,
-                          "0"
-                        )}
-                      </span>
-
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-gray-700">
-                        ↗
-                      </div>
-
-                    </div>
-
-                    <div className="mt-8 grid grid-cols-[58px_minmax(0,1fr)] gap-5 sm:grid-cols-[72px_minmax(0,1fr)]">
-
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 text-gray-700 sm:h-16 sm:w-16">
-                        {
-                          previousCard.icon
-                        }
-                      </div>
-
-                      <div className="min-w-0">
-
-                        <h3 className="break-words text-3xl font-black tracking-tight text-gray-700 sm:text-5xl">
-                          {
-                            previousCard.title
-                          }
-                        </h3>
-
-                        <p className="mt-4 text-sm leading-6 text-gray-700 sm:text-base sm:leading-8">
-                          {
-                            previousCard.description
-                          }
-                        </p>
-
-                        <p className="mt-7 text-xs text-gray-700 sm:text-sm">
-                          {
-                            previousService?.title
-                          }
-                        </p>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </article>
-              )}
-
-              {/* ACTIVE */}
-
-              <article
-                key={`active-${activeIndex}`}
-                className="services-card-enter absolute inset-x-0 top-1/2 z-30 mx-auto w-full -translate-y-1/2 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0f17] shadow-[0_30px_100px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
+              <h2
+                id="services-heading"
+                className="mt-3 text-3xl font-black tracking-[-0.03em] text-transparent bg-clip-text bg-gradient-to-r from-[#433A8F] via-purple-600 to-[#A855F7] sm:text-4xl lg:text-5xl"
               >
+                Digital Solutions &amp; Services We Provide
+              </h2>
 
-                <div className="flex items-center justify-between px-6 pt-6 sm:px-8 sm:pt-8">
+              <p className="mt-3 max-w-2xl text-base font-medium leading-7 text-[#475569] sm:text-lg sm:leading-8">
+                Professional digital solutions designed to help your business
+                build a stronger online presence, generate growth, and
+                streamline everyday operations.
+              </p>
+            </div>
 
-                  <div className="flex items-center gap-3">
+            <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
 
-                    <span className="text-sm text-gray-600">
-                      {String(
-                        activeIndex +
-                          1
-                      ).padStart(
-                        2,
-                        "0"
-                      )}
+              {cards.map((card, index) => {
+                const isActive = index === activeIndex;
+
+                return (
+                  <button
+                    key={`service-capsule-${index}`}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    aria-pressed={isActive}
+                    aria-label={`View ${card.title} service by Yorra Tech`}
+                    data-service-category={services[card.serviceIndex].title}
+                    className="group flex min-h-[58px] w-full items-center gap-3 rounded-full border border-[#0F172A]/10 bg-white/55 px-4 py-3 text-left transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/50 hover:bg-purple-500/[0.08] hover:shadow-[0_10px_30px_rgba(124,58,237,0.12)] focus-visible:border-purple-400/50 focus-visible:bg-purple-500/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/30"
+                  >
+
+                    <span
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0F172A]/[0.06] text-[9px] font-bold text-[#64748B] transition-all duration-300 group-hover:bg-purple-600 group-hover:text-white group-hover:shadow-[0_0_16px_rgba(124,58,237,0.35)]"
+                    >
+                      {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <span className="rounded-full border border-cyan-400/20 bg-cyan-400/[0.05] px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-400">
-                      {
-                        activeService.short
-                      }
+                    <span
+                      className={`min-w-0 flex-1 truncate text-xs font-bold transition-colors duration-300 sm:text-sm ${
+                        isActive
+                          ? "text-[#334155]"
+                          : "text-[#334155]"
+                      }`}
+                    >
+                      {card.title}
                     </span>
 
-                  </div>
+                    <span
+                      className="h-2 w-2 shrink-0 rounded-full bg-[#CBD5E1] transition-all duration-300 group-hover:bg-purple-500 group-hover:shadow-[0_0_10px_rgba(168,85,247,0.8)]"
+                    />
 
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-gray-500 sm:h-12 sm:w-12">
-                    ↗
-                  </div>
-
-                </div>
-
-                <div className="grid grid-cols-[58px_minmax(0,1fr)] gap-5 px-6 pb-9 pt-6 sm:grid-cols-[72px_minmax(0,1fr)] sm:gap-6 sm:px-8 sm:pb-10 sm:pt-7">
-
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/[0.05] text-xl text-cyan-400 sm:h-16 sm:w-16 sm:text-2xl">
-                    {
-                      activeCard.icon
-                    }
-                  </div>
-
-                  <div className="min-w-0">
-
-                    <h3 className="break-words text-3xl font-black tracking-tight sm:text-5xl">
-                      {
-                        activeCard.title
-                      }
-                    </h3>
-
-                    <p className="mt-4 max-w-xl text-sm leading-6 text-gray-500 sm:mt-5 sm:text-base sm:leading-8">
-                      {
-                        activeCard.description
-                      }
-                    </p>
-
-                    <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8 sm:gap-4">
-
-                      <span className="text-xs font-semibold text-cyan-400 sm:text-sm">
-                        Service Details
-                      </span>
-
-                      <span className="text-gray-700">
-                        /
-                      </span>
-
-                      <span className="text-xs text-gray-500 sm:text-sm">
-                        {
-                          activeService.title
-                        }
-                      </span>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-                <div className="h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
-
-              </article>
+                  </button>
+                );
+              })}
 
             </div>
 
@@ -1404,41 +1270,6 @@ export default function Services() {
 
         </div>
 
-        {/* =================================================
-            PROGRESS
-        ================================================= */}
-
-        <div className="mt-8 max-w-[430px] lg:-mt-1">
-
-          <div className="flex items-center justify-between text-[9px] uppercase tracking-[0.25em] text-gray-700">
-
-            <span>
-              Start
-            </span>
-
-            <span>
-              {TOTAL_SERVICES} Services
-            </span>
-
-            <span>
-              Finish
-            </span>
-
-          </div>
-
-          <div className="mt-3 h-px overflow-hidden bg-white/10">
-
-            <div
-              className="h-full bg-cyan-400 transition-all duration-700"
-              style={{
-                width:
-                  `${progress}%`,
-              }}
-            />
-
-          </div>
-
-        </div>
 
       </div>
 
@@ -1902,6 +1733,31 @@ export default function Services() {
             0.65s
             ease-out
             both;
+        }
+
+        /* =================================================
+           SERVICE CAPSULES
+        ================================================= */
+
+        @media (max-width: 1023px) {
+
+          .services-capsule-list {
+            flex-direction: row;
+            flex-wrap: wrap;
+            max-height: none;
+            overflow: visible;
+          }
+
+        }
+
+        .services-capsule-grid button {
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (max-width: 640px) {
+          .services-capsule-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         /* =================================================

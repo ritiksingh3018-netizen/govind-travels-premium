@@ -474,17 +474,17 @@ const sections = [
         </p>
 
         <div className="mt-6 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-5">
-          <p className="text-sm font-semibold text-white">
+          <p className="text-sm font-bold text-[#17131f]">
             Yorra Tech
           </p>
 
           <p className="mt-2 text-sm text-gray-500">
             Email:{" "}
             <a
-              href="mailto:techyorra@gmail.com"
-              className="text-cyan-400 transition-colors hover:text-cyan-300"
+              href="mailto:info@yorra.in"
+              className="text-[#6d35e8] transition-colors hover:text-[#5b21b6]"
             >
-              techyorra@gmail.com
+              info@yorra.in
             </a>
           </p>
 
@@ -492,7 +492,7 @@ const sections = [
             Website:{" "}
             <a
               href="https://yorra.in"
-              className="text-cyan-400 transition-colors hover:text-cyan-300"
+              className="text-[#6d35e8] transition-colors hover:text-[#5b21b6]"
             >
               yorra.in
             </a>
@@ -505,133 +505,152 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#05070b] text-white">
-      {/* =========================================================
-          HERO
-      ========================================================= */}
-      <section className="relative overflow-hidden px-6 pb-20 pt-36 sm:px-8 lg:px-10 lg:pb-24 lg:pt-44">
-        {/* Glow */}
-        <div className="pointer-events-none absolute left-1/2 top-[-160px] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/[0.06] blur-[140px]" />
+    <main className="min-h-screen overflow-hidden bg-[#f7f0e5] text-[#17131f]">
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="absolute left-[-12%] top-[5%] h-[520px] w-[520px] rounded-full bg-[#6d35e8]/[0.08] blur-[140px]" />
+        <div className="absolute right-[-12%] top-[32%] h-[520px] w-[520px] rounded-full bg-[#c9a7ff]/[0.14] blur-[150px]" />
+        <div className="absolute bottom-[-180px] left-[-10%] h-[420px] w-[420px] rounded-full bg-[#d8b4ff]/[0.10] blur-[150px]" />
+      </div>
 
-        {/* Grid */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-            backgroundSize: "70px 70px",
-            maskImage:
-              "linear-gradient(to bottom, black, transparent 90%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black, transparent 90%)",
-          }}
-        />
+      {/* HERO */}
+      <section className="relative px-5 pb-16 pt-28 sm:px-8 sm:pt-36 lg:px-10 lg:pb-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-end gap-12 lg:grid-cols-[1.15fr_.85fr]">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="h-px w-10 bg-[#6d35e8]" />
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#6d35e8] sm:text-sm">
+                  Terms &amp; Conditions
+                </p>
+              </div>
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-cyan-400" />
+              <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.94] tracking-[-0.055em] sm:text-7xl lg:text-[7.2rem]">
+                Clear terms.
+                <br />
+                <span className="text-[#6d35e8]">Better relationships.</span>
+              </h1>
 
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400 sm:text-sm">
-              Terms & Conditions
-            </p>
-          </div>
+              <p className="mt-8 max-w-2xl text-base leading-8 text-[#655b6d] sm:text-lg">
+                These Terms &amp; Conditions explain the rules for using the Yorra
+                Tech website and provide a general framework for working with our
+                digital services and project engagements.
+              </p>
 
-          <h1 className="mt-6 max-w-5xl text-5xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl lg:text-8xl">
-            Clear terms.
-            <br />
+              <div className="mt-8 flex flex-wrap gap-3">
+                {['Website Terms', 'Services', 'Projects', 'Yorra Tech'].map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-[#17131f]/10 bg-white/55 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#655b6d]"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-            <span className="bg-gradient-to-r from-cyan-300 via-white to-blue-400 bg-clip-text text-transparent">
-              Better relationships.
-            </span>
-          </h1>
+            <div>
+              <div className="rounded-[2rem] border border-[#17131f]/10 bg-white/65 p-6 shadow-[0_25px_80px_rgba(57,35,76,.08)] backdrop-blur-sm sm:p-8">
+                <div className="flex items-center justify-between border-b border-[#17131f]/10 pb-5">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#806f92]">
+                      Terms status
+                    </p>
+                    <p className="mt-2 text-xl font-black tracking-tight">
+                      Effective August 18, 2026
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#6d35e8] text-xl font-black text-white">
+                    ✓
+                  </div>
+                </div>
 
-          <p className="mt-7 max-w-3xl text-base leading-7 text-gray-400 sm:text-lg sm:leading-8">
-            These Terms & Conditions explain the rules for using the Yorra
-            Tech website and provide a general framework for working with our
-            digital services.
-          </p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl bg-[#f0e7d9]/70 p-4">
+                    <p className="text-2xl font-black">20</p>
+                    <p className="mt-1 text-xs leading-5 text-[#806f92]">
+                      terms topics covered
+                    </p>
+                  </div>
+                  <div className="rounded-2xl bg-[#f0e7d9]/70 p-4">
+                    <p className="text-2xl font-black">Clear</p>
+                    <p className="mt-1 text-xs leading-5 text-[#806f92]">
+                      plain-language framework
+                    </p>
+                  </div>
+                </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <span className="rounded-full border border-white/10 bg-white/[0.025] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500">
-              Website Terms
-            </span>
-
-            <span className="rounded-full border border-white/10 bg-white/[0.025] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500">
-              Services
-            </span>
-
-            <span className="rounded-full border border-white/10 bg-white/[0.025] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500">
-              Yorra Tech
-            </span>
+                <p className="mt-6 text-sm leading-7 text-[#655b6d]">
+                  Project-specific proposals, statements of work, invoices, or
+                  other written agreements may define additional commercial and
+                  delivery terms for a particular engagement.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* =========================================================
-          TERMS CONTENT
-      ========================================================= */}
-      <section className="relative px-6 pb-24 sm:px-8 lg:px-10 lg:pb-32">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[280px_1fr] lg:gap-20">
-          {/* Sidebar */}
+      {/* TERMS CONTENT */}
+      <section className="px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[250px_1fr] lg:gap-20">
           <aside className="hidden lg:block">
-            <div className="sticky top-28 rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-400">
+            <div className="sticky top-28 rounded-3xl border border-[#17131f]/10 bg-white/60 p-6 backdrop-blur-sm">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#6d35e8]">
                 On this page
               </p>
-
-              <nav className="mt-5 flex max-h-[70vh] flex-col gap-3 overflow-y-auto pr-2">
+              <nav className="mt-5 flex max-h-[68vh] flex-col gap-2 overflow-y-auto pr-2">
                 {sections.map((section) => (
                   <a
                     key={section.number}
                     href={`#terms-${section.number}`}
-                    className="text-xs text-gray-600 transition-colors hover:text-cyan-400"
+                    className="group flex gap-3 rounded-xl px-2 py-2 text-xs text-[#806f92] transition-colors hover:bg-[#6d35e8]/[0.06] hover:text-[#6d35e8]"
                   >
-                    {section.number} — {section.title}
+                    <span className="font-bold">{section.number}</span>
+                    <span>{section.title}</span>
                   </a>
                 ))}
               </nav>
             </div>
           </aside>
 
-          {/* Content */}
-          <div>
-            {/* Effective date */}
-            <div className="mb-6 rounded-3xl border border-cyan-400/10 bg-gradient-to-br from-cyan-400/[0.05] to-transparent p-7 sm:p-9">
-              <div className="flex items-center justify-between gap-5">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-                    Effective Date
-                  </p>
-
-                  <p className="mt-2 text-sm text-gray-400">
-                    August 18, 2026
-                  </p>
-                </div>
-
-                <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-cyan-400/20 bg-cyan-400/[0.05] text-cyan-400 sm:flex">
-                  ✓
-                </div>
-              </div>
+          <div className="min-w-0">
+            <div className="mb-8 rounded-[2rem] border border-[#6d35e8]/15 bg-[#6d35e8]/[0.055] p-7 sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#6d35e8]">
+                A note on these terms
+              </p>
+              <p className="mt-4 max-w-4xl text-base leading-8 text-[#51485a]">
+                These terms describe the general rules for using the Yorra Tech
+                website and the general framework for our digital services.
+                Individual projects may have additional written terms that take
+                priority for that specific engagement where applicable.
+              </p>
             </div>
 
-            <div className="space-y-5">
-              {sections.map((section) => (
+            <div className="space-y-6">
+              {sections.map((section, index) => (
                 <article
                   id={`terms-${section.number}`}
                   key={section.number}
-                  className="group scroll-mt-28 rounded-3xl border border-white/[0.08] bg-white/[0.02] p-7 transition-all duration-500 hover:border-cyan-400/15 hover:bg-white/[0.025] sm:p-9 lg:p-10"
+                  className={`scroll-mt-28 overflow-hidden rounded-[2rem] border border-[#17131f]/10 bg-white/65 shadow-[0_18px_60px_rgba(57,35,76,.045)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-[#6d35e8]/20 ${
+                    index % 3 === 1 ? 'lg:ml-8' : index % 3 === 2 ? 'lg:mr-8' : ''
+                  }`}
                 >
-                  <div className="flex items-start gap-5">
-                    <span className="shrink-0 text-xs font-bold tracking-[0.18em] text-cyan-400">
-                      {section.number}
-                    </span>
+                  <div className="grid lg:grid-cols-[120px_1fr]">
+                    <div className="border-b border-[#17131f]/10 bg-[#f0e7d9]/55 p-7 lg:border-b-0 lg:border-r lg:p-8">
+                      <span className="text-sm font-black tracking-[0.15em] text-[#6d35e8]">
+                        {section.number}
+                      </span>
+                      <span className="mt-4 block text-[10px] font-bold uppercase tracking-[0.14em] text-[#9a8da1]">
+                        Terms
+                      </span>
+                    </div>
 
-                    <div className="min-w-0 flex-1">
-                      <h2 className="text-2xl font-black tracking-tight sm:text-3xl">
+                    <div className="p-7 sm:p-9 lg:p-10">
+                      <h2 className="max-w-3xl text-2xl font-black tracking-[-0.025em] sm:text-3xl">
                         {section.title}
                       </h2>
 
-                      <div className="mt-6 space-y-5 text-sm leading-7 text-gray-500 sm:text-base sm:leading-8">
+                      <div className="mt-6 max-w-3xl space-y-5 text-sm leading-8 text-[#655b6d] sm:text-base">
                         {section.content}
                       </div>
                     </div>
@@ -639,40 +658,62 @@ export default function TermsPage() {
                 </article>
               ))}
             </div>
+
+            <div className="mt-8 rounded-[2rem] border border-[#17131f]/10 bg-[#17131f] p-7 text-white sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#c8aaff]">
+                Important
+              </p>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-white/65 sm:text-base">
+                These website terms are a general information framework and may
+                not cover every issue that can arise in a particular project or
+                jurisdiction. Specific written project agreements may contain
+                additional terms, responsibilities, commercial conditions, or
+                other provisions.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* =========================================================
-          CTA
-      ========================================================= */}
-      <section className="relative overflow-hidden px-6 pb-24 sm:px-8 lg:px-10 lg:pb-32">
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[450px] w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.05] blur-[140px]" />
+      {/* CTA */}
+      <section className="px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-[#17131f]/10 bg-white/70 p-8 shadow-[0_25px_90px_rgba(57,35,76,.08)] sm:p-12 lg:p-16">
+            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#6d35e8]/[0.11] blur-[80px]" />
+            <div className="relative grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#6d35e8]">
+                  Need clarification?
+                </p>
+                <h2 className="mt-4 max-w-3xl text-3xl font-black tracking-[-0.035em] sm:text-5xl">
+                  Let&apos;s make the project terms clear.
+                </h2>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-[#655b6d] sm:text-base">
+                  If you have questions about our services or these terms, contact
+                  the Yorra Tech team and tell us what you need to understand.
+                </p>
+              </div>
 
-        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.015] px-6 py-14 text-center sm:px-10 lg:px-16 lg:py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-400 sm:text-sm">
-            Have a question?
-          </p>
+              <Link
+                href="/contact"
+                className="group inline-flex w-fit items-center gap-3 rounded-xl bg-[#17131f] px-6 py-4 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#6d35e8]"
+              >
+                Contact Yorra Tech
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
 
-          <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
-            Let&apos;s talk about your project.
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-gray-500 sm:text-base">
-            If you have questions about our services or these terms, contact
-            the Yorra Tech team.
-          </p>
-
-          <Link
-            href="/contact"
-            className="group mt-8 inline-flex items-center gap-3 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-black transition-all duration-300 hover:-translate-y-1 hover:bg-cyan-300"
-          >
-            Contact Yorra Tech
-
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-          </Link>
+          <div className="mt-8 flex justify-end border-t border-[#17131f]/10 pt-6 text-xs text-[#806f92]">
+            <Link
+              href="/"
+              className="font-semibold transition-colors hover:text-[#6d35e8]"
+            >
+              Back to homepage →
+            </Link>
+          </div>
         </div>
       </section>
     </main>

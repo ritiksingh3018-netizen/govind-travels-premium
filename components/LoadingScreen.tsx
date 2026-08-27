@@ -9,12 +9,12 @@ export default function LoadingScreen() {
 
   useEffect(() => {
     const closeTimer = setTimeout(() => {
-  setClosing(true);
-}, 650);
+      setClosing(true);
+    }, 650);
 
-const removeTimer = setTimeout(() => {
-  setVisible(false);
-}, 1000);
+    const removeTimer = setTimeout(() => {
+      setVisible(false);
+    }, 1000);
 
     return () => {
       clearTimeout(closeTimer);
@@ -34,7 +34,7 @@ const removeTimer = setTimeout(() => {
         items-center
         justify-center
         overflow-hidden
-        bg-[#05070b]
+        bg-[#F8F3E8]
         transition-opacity
         duration-600
         ease-out
@@ -46,33 +46,56 @@ const removeTimer = setTimeout(() => {
       `}
     >
       {/* =========================================
-          BACKGROUND GLOW
+          BACKGROUND
       ========================================= */}
 
-      <div
-        className="
-          absolute
-          left-1/2
-          top-1/2
-          h-[220px]
-          w-[220px]
-          -translate-x-1/2
-          -translate-y-1/2
-          rounded-full
-          bg-cyan-400/[0.08]
-          blur-[90px]
-          animate-pulse
-        "
-      />
+      <div className="pointer-events-none absolute inset-0">
+
+        {/* Purple Glow */}
+
+        <div
+          className="
+            absolute
+            left-1/2
+            top-1/2
+            h-[260px]
+            w-[260px]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            bg-purple-500/[0.10]
+            blur-[100px]
+            animate-pulse
+          "
+        />
+
+        {/* Grid */}
+
+        <div
+          className="
+            absolute
+            inset-0
+            opacity-[0.16]
+          "
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(15,23,42,0.28) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.28) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+      </div>
 
       {/* =========================================
-          LOGO WRAPPER
+          LOGO + BRAND NAME
       ========================================= */}
 
       <div
         className={`
           relative
+          z-10
           flex
+          flex-col
           items-center
           justify-center
           transition-all
@@ -85,7 +108,7 @@ const removeTimer = setTimeout(() => {
           }
         `}
       >
-        {/* Outer glow */}
+        {/* Logo Glow */}
 
         <div
           className="
@@ -93,30 +116,51 @@ const removeTimer = setTimeout(() => {
             h-[170px]
             w-[170px]
             rounded-full
-            bg-cyan-400/[0.12]
+            bg-purple-500/[0.12]
             blur-[55px]
             animate-logoGlow
           "
         />
 
-        {/* Logo */}
+        {/* Logo Icon */}
 
         <Image
-          src="/logo.png"
-          alt="Yorra Tech"
+          src="/yorra-tech-logo.png"
+          alt="Yorra Tech Logo"
           width={180}
           height={180}
-          priority
+          loading="eager"
           className="
             relative
             z-10
             h-auto
-            w-[145px]
+            w-[120px]
             object-contain
-            drop-shadow-[0_0_35px_rgba(0,200,255,0.25)]
-            sm:w-[180px]
+            drop-shadow-[0_0_35px_rgba(67,58,143,0.25)]
+            sm:w-[145px]
           "
         />
+
+        {/* Yorra Tech */}
+
+        <div
+          className="
+            relative
+            z-10
+            mt-4
+            text-2xl
+            font-black
+            tracking-tight
+            sm:text-3xl
+          "
+        >
+          <span className="text-[#111827]">
+            Yorra
+          </span>{" "}
+          <span className="text-purple-600">
+            Tech
+          </span>
+        </div>
       </div>
 
       {/* =========================================
@@ -128,11 +172,12 @@ const removeTimer = setTimeout(() => {
           absolute
           bottom-[18%]
           left-1/2
+          z-10
           h-[1px]
           w-32
           -translate-x-1/2
           overflow-hidden
-          bg-white/[0.08]
+          bg-[#0F172A]/10
           transition-opacity
           duration-300
           ${
@@ -147,7 +192,7 @@ const removeTimer = setTimeout(() => {
             h-full
             w-full
             origin-left
-            bg-cyan-400
+            bg-purple-500
             animate-loadingLine
           "
         />

@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Privacy Policy | Yorra Tech",
   description:
-    "Read the Yorra Tech Privacy Policy to understand how we collect, use, protect, and manage information submitted through our website.",
+    "Read the Yorra Tech Privacy Policy to understand how we collect, use, protect, retain, and manage information submitted through our website.",
   alternates: {
     canonical: "/privacy",
   },
@@ -21,454 +21,548 @@ const sections = [
   {
     number: "01",
     title: "Information We Collect",
+    eyebrow: "What we receive",
     content: (
       <>
         <p>
-          When you use the Yorra Tech website, contact us, or submit a project
-          enquiry, we may collect information that you choose to provide.
+          When you visit the Yorra Tech website, contact us, or submit a project
+          enquiry, we may collect information that you voluntarily provide to us.
+          We only ask for information that is relevant to the interaction or
+          service you are requesting.
         </p>
-
         <p>
           Depending on how you interact with us, this may include your name,
           email address, phone number, company name, selected service, project
-          budget, and information about your project or requirements.
+          budget, project timeline, and information about your requirements.
         </p>
-
         <p>
-          We may also receive basic technical information associated with your
-          visit, such as browser or device information, IP address, and
-          information about how you interact with our website, where applicable
-          through website infrastructure or analytics tools.
+          We may also receive limited technical information connected with your
+          visit, such as browser or device information, IP address, referring
+          page, and information about how you interact with the website where
+          this information is made available through hosting, security, or
+          analytics technologies.
         </p>
       </>
     ),
   },
-
   {
     number: "02",
-    title: "How We Use Your Information",
+    title: "How We Use Information",
+    eyebrow: "Why it is needed",
     content: (
       <>
         <p>
-          We use information submitted through our website primarily to
-          understand your requirements and respond to your enquiry.
+          We use information collected through the website to understand your
+          requirements, communicate with you, provide requested services, and
+          operate a reliable website.
         </p>
-
-        <p>We may use the information to:</p>
-
         <ul>
-          <li>Respond to project enquiries and questions.</li>
-          <li>Understand your business and project requirements.</li>
-          <li>Prepare relevant project discussions or proposals.</li>
-          <li>Communicate with you about a requested service.</li>
-          <li>Improve our website, services, and user experience.</li>
-          <li>Maintain website security and prevent misuse.</li>
+          <li>Respond to project enquiries, questions, and requests.</li>
+          <li>Understand your business, goals, and project requirements.</li>
+          <li>Prepare relevant discussions, estimates, or proposals.</li>
+          <li>Communicate with you about requested services or ongoing work.</li>
+          <li>Improve website content, usability, services, and customer experience.</li>
+          <li>Maintain website security, reliability, and prevent misuse.</li>
+          <li>Maintain appropriate business and operational records.</li>
         </ul>
-
         <p>
-          We do not use information collected through a project enquiry for
-          unrelated purposes unless permitted by applicable law or you have
-          otherwise provided appropriate permission.
+          We do not intentionally use information submitted through a project
+          enquiry for unrelated purposes. Where a different purpose requires
+          your permission, we will seek appropriate permission where applicable.
         </p>
       </>
     ),
   },
-
   {
     number: "03",
-    title: "Project Enquiries",
+    title: "Project Enquiries & Forms",
+    eyebrow: "When you contact us",
     content: (
       <>
         <p>
-          When you submit the project enquiry form, the information you provide
-          is transmitted to Yorra Tech so that we can review and respond to
-          your request.
+          Information submitted through a Yorra Tech project enquiry form is
+          transmitted to us so that our team can review your request and decide
+          how best to respond.
         </p>
-
         <p>
-          Your enquiry may include personal and business information such as
-          your name, email, phone number, company, service requirement, budget,
-          and project description.
+          A project enquiry may contain personal and business information such
+          as your name, email, phone number, company, service requirement,
+          approximate budget, project description, and other details you choose
+          to include.
         </p>
-
-        <p>
-          Please avoid submitting passwords, financial account credentials,
-          government identification numbers, or other highly sensitive
-          information through the project enquiry form.
-        </p>
+        <div className="rounded-2xl border border-[#6d35e8]/15 bg-[#6d35e8]/[0.045] p-5">
+          <p className="font-semibold text-[#17131f]">
+            Please keep sensitive credentials out of website forms.
+          </p>
+          <p className="mt-2 text-sm leading-7 text-[#6d6475]">
+            Do not submit passwords, payment credentials, government
+            identification numbers, security keys, or other highly sensitive
+            information through a general project enquiry form.
+          </p>
+        </div>
       </>
     ),
   },
-
   {
     number: "04",
     title: "Email & Service Providers",
+    eyebrow: "Technology partners",
     content: (
       <>
         <p>
-          We may use third-party technology providers to operate parts of our
-          website and communication systems.
+          Parts of the website and communication process may rely on trusted
+          technology or service providers. For example, an enquiry may be
+          processed through an email delivery service so that it can reach the
+          Yorra Tech team.
         </p>
-
         <p>
-          For example, project enquiries may be processed through our email
-          delivery provider so that your enquiry can be delivered to the Yorra
-          Tech team.
+          These providers may process limited information on our behalf when
+          required to provide their services. We aim to use reputable providers
+          and limit shared information to what is reasonably required for the
+          relevant function.
         </p>
-
         <p>
-          These providers may process information on our behalf as necessary to
-          provide their services. We aim to use reputable service providers and
-          limit the information shared with them to what is reasonably required
-          for the relevant service.
+          Third-party providers may have their own privacy practices. Where
+          relevant, you should review the policies of services that you use or
+          interact with directly.
         </p>
       </>
     ),
   },
-
   {
     number: "05",
     title: "Cookies & Website Technologies",
+    eyebrow: "How the site works",
     content: (
       <>
         <p>
-          Yorra Tech may use cookies or similar technologies where necessary
-          for website functionality, security, performance, analytics, or
-          improving the user experience.
+          Yorra Tech may use cookies and similar technologies for essential
+          website functionality, security, performance, analytics, or improving
+          the user experience.
         </p>
-
         <p>
-          Cookies are small data files stored by your browser. They can help a
-          website remember preferences, understand usage patterns, or maintain
-          essential functionality.
+          Cookies are small files stored by your browser. Depending on how they
+          are configured, they can help a website remember preferences,
+          understand usage patterns, maintain sessions, or support essential
+          functionality.
         </p>
-
         <p>
           You can manage or restrict cookies through your browser settings.
-          Some website functionality may be affected if certain cookies are
-          disabled.
+          Disabling certain cookies may affect some website functionality.
         </p>
       </>
     ),
   },
-
   {
     number: "06",
-    title: "Data Security",
+    title: "Analytics & Performance",
+    eyebrow: "Understanding the website",
     content: (
       <>
         <p>
-          We take reasonable measures to protect information submitted through
-          our website against unauthorized access, misuse, alteration, or
-          disclosure.
+          Where analytics or performance technologies are used, they may help us
+          understand how visitors discover and use the website. This can include
+          information such as pages visited, approximate interaction patterns,
+          device or browser information, and technical performance signals.
         </p>
-
         <p>
-          However, no website, internet transmission, or electronic storage
-          system can be guaranteed to be completely secure. You should
-          therefore avoid submitting sensitive credentials or confidential
-          information through public website forms.
+          We use this type of information to identify usability issues, improve
+          content, understand which parts of the website are useful, and make
+          the website more reliable.
+        </p>
+        <p>
+          Analytics information should be interpreted as website-level insight;
+          it is not intended to be used to collect unnecessary sensitive
+          information through ordinary browsing.
         </p>
       </>
     ),
   },
-
   {
     number: "07",
-    title: "Data Retention",
+    title: "Data Security",
+    eyebrow: "Protecting information",
     content: (
       <>
         <p>
-          We retain information only for as long as reasonably necessary for
-          the purpose for which it was collected, including responding to
-          enquiries, maintaining business records, providing services, and
-          meeting applicable legal or operational requirements.
+          We take reasonable technical and organisational measures intended to
+          protect information submitted through our website against
+          unauthorised access, misuse, alteration, loss, or disclosure.
         </p>
-
         <p>
-          The period for which information is retained may depend on the type
-          of information and the nature of our relationship with you.
+          Security measures can include access controls, secure website
+          connections, provider-level safeguards, limited access to business
+          information, and reasonable operational practices.
+        </p>
+        <p>
+          No website, internet transmission, or electronic storage system can be
+          guaranteed to be completely secure. You should therefore avoid sending
+          confidential credentials or highly sensitive information through
+          public website forms.
         </p>
       </>
     ),
   },
-
   {
     number: "08",
+    title: "Data Retention",
+    eyebrow: "How long information stays",
+    content: (
+      <>
+        <p>
+          We retain information for as long as reasonably necessary for the
+          purpose for which it was collected. This may include responding to
+          enquiries, providing services, maintaining business records, resolving
+          disputes, improving operations, and meeting applicable legal or
+          operational requirements.
+        </p>
+        <p>
+          Retention periods can vary depending on the type of information, why
+          it was collected, whether an enquiry becomes a client relationship,
+          and whether there is an ongoing legitimate business or legal need to
+          retain it.
+        </p>
+        <p>
+          When information is no longer reasonably required, we may delete it,
+          anonymise it, or otherwise handle it according to applicable
+          requirements and our operational processes.
+        </p>
+      </>
+    ),
+  },
+  {
+    number: "09",
     title: "Sharing of Information",
+    eyebrow: "Who may receive it",
     content: (
       <>
         <p>
           Yorra Tech does not sell your personal information.
         </p>
-
         <p>
-          We may share limited information with service providers or
-          technology partners where reasonably necessary to operate our
-          website, communicate with you, provide requested services, maintain
-          security, or comply with legal obligations.
+          We may share limited information with service providers or technology
+          partners where reasonably necessary to operate the website,
+          communicate with you, provide requested services, maintain security,
+          or support business operations.
         </p>
-
         <p>
           We may also disclose information where required by applicable law,
-          legal process, or a lawful request from an authorized authority.
+          legal process, or a lawful request from an authorised authority.
+        </p>
+        <p>
+          We aim to avoid sharing more information than is reasonably necessary
+          for the relevant purpose.
         </p>
       </>
     ),
   },
-
   {
-    number: "09",
-    title: "Your Choices",
+    number: "10",
+    title: "Your Choices & Requests",
+    eyebrow: "Your control",
     content: (
       <>
         <p>
-          You may choose what information you provide to us. However, some
+          You decide what information you provide through our website. Some
           information may be necessary for us to respond meaningfully to a
-          project enquiry.
+          project enquiry or provide a requested service.
         </p>
-
         <p>
-          If you want to ask about information you have submitted to Yorra
-          Tech, request correction of inaccurate information, or ask about
-          deletion where applicable, you can contact us using the details
-          provided below.
+          If you want to ask about information you have submitted to Yorra Tech,
+          request correction of inaccurate information, or ask about deletion
+          where applicable, contact us using the details at the end of this
+          policy.
         </p>
-
         <p>
           Where consent is the applicable basis for processing, you may also
-          have rights regarding withdrawal of that consent, subject to
+          have rights concerning withdrawal of that consent, subject to
           applicable law and any lawful basis for continued processing.
         </p>
       </>
     ),
   },
-
   {
-    number: "10",
+    number: "11",
     title: "Third-Party Links",
+    eyebrow: "External websites",
     content: (
       <>
         <p>
-          Our website may contain links to third-party websites, social media
-          platforms, or external services.
+          Our website may contain links to third-party websites, social
+          platforms, communication services, or other external resources.
         </p>
-
         <p>
-          Once you leave the Yorra Tech website, the privacy practices and
-          policies of the third-party website will apply. We encourage you to
-          review the privacy policy of any external website you visit.
+          Once you leave the Yorra Tech website, the privacy practices,
+          security controls, and policies of the third-party service may apply.
+          We encourage you to review the relevant privacy policy before
+          submitting information to an external service.
+        </p>
+        <p>
+          A link to an external service does not by itself mean that Yorra Tech
+          controls that service or its privacy practices.
         </p>
       </>
     ),
   },
-
   {
-    number: "11",
+    number: "12",
     title: "Children's Privacy",
+    eyebrow: "Age and audience",
     content: (
       <>
         <p>
-          Our services and project enquiry process are intended for businesses
-          and general users and are not specifically directed toward children.
+          Yorra Tech provides business and digital services and its project
+          enquiry process is not specifically directed toward children.
         </p>
-
         <p>
           If you believe that a child has submitted personal information to us
-          without appropriate authorization, please contact us so that we can
+          without appropriate authorisation, please contact us so that we can
           review the situation and take appropriate action where required.
         </p>
       </>
     ),
   },
-
   {
-    number: "12",
+    number: "13",
     title: "Changes to This Policy",
+    eyebrow: "Keeping this page current",
     content: (
       <>
         <p>
-          We may update this Privacy Policy from time to time to reflect
-          changes to our website, services, technology, or applicable legal
+          We may update this Privacy Policy from time to time to reflect changes
+          to our website, services, technology, business processes, or applicable
           requirements.
         </p>
-
         <p>
-          When we make changes, the updated version will be published on this
-          page with the revised effective date.
+          When changes are made, the updated version will be published on this
+          page with a revised effective date. We encourage visitors to review
+          this page periodically when they use our website or submit information.
         </p>
       </>
     ),
   },
-
   {
-    number: "13",
-    title: "Contact Us",
+    number: "14",
+    title: "Contact Yorra Tech",
+    eyebrow: "Questions about privacy",
     content: (
       <>
         <p>
-          If you have questions about this Privacy Policy or how Yorra Tech
-          handles information, you can contact us.
+          If you have questions about this Privacy Policy, want to understand
+          how information submitted through the website is handled, or want to
+          make a privacy-related request, you can contact the Yorra Tech team.
         </p>
-
-        <div className="mt-6 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-5">
-          <p className="text-sm font-semibold text-white">
-            Yorra Tech
-          </p>
-
-          <p className="mt-2 text-sm text-gray-500">
-            Email:{" "}
-            <a
-              href="mailto:techyorra@gmail.com"
-              className="text-cyan-400 transition-colors hover:text-cyan-300"
-            >
-              techyorra@gmail.com
-            </a>
-          </p>
-
-          <p className="mt-2 text-sm text-gray-500">
-            Website:{" "}
-            <a
-              href="https://yorra.in"
-              className="text-cyan-400 transition-colors hover:text-cyan-300"
-            >
+        <div className="mt-7 grid gap-4 sm:grid-cols-2">
+          <a
+            href="mailto:info@yorra.in"
+            className="rounded-2xl border border-[#17131f]/10 bg-white/65 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#6d35e8]/30 hover:bg-white"
+          >
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#806f92]">
+              Email
+            </span>
+            <span className="mt-2 block font-semibold text-[#17131f]">
+              info@yorra.in
+            </span>
+          </a>
+          <a
+            href="https://yorra.in"
+            className="rounded-2xl border border-[#17131f]/10 bg-white/65 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#6d35e8]/30 hover:bg-white"
+          >
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#806f92]">
+              Website
+            </span>
+            <span className="mt-2 block font-semibold text-[#17131f]">
               yorra.in
-            </a>
-          </p>
+            </span>
+          </a>
         </div>
       </>
     ),
   },
 ];
 
+const quickFacts = [
+  ["01", "We collect", "Information you choose to submit and limited technical data where applicable."],
+  ["02", "We use", "Information to respond, provide services, improve the website, and maintain security."],
+  ["03", "We protect", "Information with reasonable technical and organisational safeguards."],
+  ["04", "We share", "Limited information only where reasonably needed for services, operations, or legal obligations."],
+];
+
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#05070b] text-white">
-      {/* =========================================================
-          HERO
-      ========================================================= */}
-      <section className="relative overflow-hidden px-6 pb-20 pt-36 sm:px-8 lg:px-10 lg:pb-24 lg:pt-44">
-        {/* Glow */}
-        <div className="pointer-events-none absolute left-1/2 top-[-160px] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/[0.06] blur-[140px]" />
-
-        {/* Grid */}
+    <main className="min-h-screen overflow-hidden bg-[#f7f0e5] text-[#17131f]">
+      <div className="pointer-events-none fixed inset-0 -z-10">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-            backgroundSize: "70px 70px",
-            maskImage:
-              "linear-gradient(to bottom, black, transparent 90%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black, transparent 90%)",
+              "linear-gradient(to right, rgba(23,19,31,0.16) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,19,31,0.16) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
           }}
         />
+        <div className="absolute left-[-12%] top-[6%] h-[520px] w-[520px] rounded-full bg-[#6d35e8]/[0.09] blur-[130px]" />
+        <div className="absolute right-[-12%] top-[32%] h-[520px] w-[520px] rounded-full bg-[#c9a7ff]/[0.16] blur-[150px]" />
+      </div>
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-cyan-400" />
+      <section className="relative px-5 pb-16 pt-28 sm:px-8 sm:pt-36 lg:px-10 lg:pb-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-end gap-12 lg:grid-cols-[1.15fr_.85fr]">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="h-px w-10 bg-[#6d35e8]" />
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#6d35e8]">
+                  Privacy Policy
+                </p>
+              </div>
 
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400 sm:text-sm">
-              Privacy Policy
-            </p>
-          </div>
+              <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.94] tracking-[-0.055em] sm:text-7xl lg:text-[7.2rem]">
+                Your data.
+                <br />
+                <span className="text-[#6d35e8]">Handled clearly.</span>
+              </h1>
 
-          <h1 className="mt-6 max-w-5xl text-5xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl lg:text-8xl">
-            Your information.
-            <br />
+              <p className="mt-8 max-w-2xl text-base leading-8 text-[#655b6d] sm:text-lg">
+                This Privacy Policy explains how Yorra Tech collects, uses,
+                protects, retains, and manages information provided through our
+                website, contact channels, and project enquiry process.
+              </p>
 
-            <span className="bg-gradient-to-r from-cyan-300 via-white to-blue-400 bg-clip-text text-transparent">
-              Your trust.
-            </span>
-          </h1>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {["Privacy", "Data Protection", "Transparency", "Yorra Tech"].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-[#17131f]/10 bg-white/55 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#655b6d]"
+                    >
+                      {item}
+                    </span>
+                  )
+                )}
+              </div>
+            </div>
 
-          <p className="mt-7 max-w-3xl text-base leading-7 text-gray-400 sm:text-lg sm:leading-8">
-            This Privacy Policy explains how Yorra Tech collects, uses,
-            protects, and manages information provided through our website.
-          </p>
+            <div className="relative">
+              <div className="rounded-[2rem] border border-[#17131f]/10 bg-white/65 p-6 shadow-[0_25px_80px_rgba(57,35,76,.08)] backdrop-blur-sm sm:p-8">
+                <div className="flex items-center justify-between border-b border-[#17131f]/10 pb-5">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#806f92]">
+                      Policy status
+                    </p>
+                    <p className="mt-2 text-xl font-black tracking-tight">
+                      Effective August 18, 2026
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#6d35e8] text-xl font-black text-white">
+                    ✓
+                  </div>
+                </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <span className="rounded-full border border-white/10 bg-white/[0.025] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500">
-              Privacy
-            </span>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl bg-[#f7f0e5] p-4">
+                    <p className="text-2xl font-black">14</p>
+                    <p className="mt-1 text-xs leading-5 text-[#806f92]">
+                      privacy topics covered
+                    </p>
+                  </div>
+                  <div className="rounded-2xl bg-[#f7f0e5] p-4">
+                    <p className="text-2xl font-black">Clear</p>
+                    <p className="mt-1 text-xs leading-5 text-[#806f92]">
+                      plain-language approach
+                    </p>
+                  </div>
+                </div>
 
-            <span className="rounded-full border border-white/10 bg-white/[0.025] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500">
-              Data Protection
-            </span>
-
-            <span className="rounded-full border border-white/10 bg-white/[0.025] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500">
-              Yorra Tech
-            </span>
+                <p className="mt-6 text-sm leading-7 text-[#655b6d]">
+                  Please read this policy together with any terms, notices, or
+                  service-specific information presented when you use a Yorra
+                  Tech service.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* =========================================================
-          POLICY CONTENT
-      ========================================================= */}
-      <section className="relative px-6 pb-24 sm:px-8 lg:px-10 lg:pb-32">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[280px_1fr] lg:gap-20">
-          {/* Sidebar */}
+      <section className="px-5 pb-16 sm:px-8 lg:px-10 lg:pb-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid overflow-hidden rounded-[2rem] border border-[#17131f]/10 bg-[#17131f] sm:grid-cols-2 lg:grid-cols-4">
+            {quickFacts.map(([number, title, text]) => (
+              <div
+                key={number}
+                className="border-b border-white/10 p-6 last:border-b-0 sm:border-r sm:p-7 lg:border-b-0 lg:last:border-r-0"
+              >
+                <span className="text-xs font-bold tracking-[0.2em] text-[#c8aaff]">
+                  {number}
+                </span>
+                <h2 className="mt-5 text-lg font-black text-white">{title}</h2>
+                <p className="mt-3 text-sm leading-6 text-white/55">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[250px_1fr] lg:gap-20">
           <aside className="hidden lg:block">
-            <div className="sticky top-28 rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-400">
+            <div className="sticky top-28 rounded-3xl border border-[#17131f]/10 bg-white/60 p-6 backdrop-blur-sm">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#6d35e8]">
                 On this page
               </p>
-
-              <nav className="mt-5 flex flex-col gap-3">
-                {sections.slice(0, 8).map((section) => (
+              <nav className="mt-5 flex max-h-[65vh] flex-col gap-2 overflow-auto pr-2">
+                {sections.map((section) => (
                   <a
                     key={section.number}
                     href={`#privacy-${section.number}`}
-                    className="text-xs text-gray-600 transition-colors hover:text-cyan-400"
+                    className="group flex gap-3 rounded-xl px-2 py-2 text-xs text-[#806f92] transition-colors hover:bg-[#6d35e8]/[0.06] hover:text-[#6d35e8]"
                   >
-                    {section.number} — {section.title}
+                    <span className="font-bold">{section.number}</span>
+                    <span>{section.title}</span>
                   </a>
                 ))}
               </nav>
             </div>
           </aside>
 
-          {/* Content */}
-          <div>
-            {/* Intro card */}
-            <div className="mb-6 rounded-3xl border border-cyan-400/10 bg-gradient-to-br from-cyan-400/[0.05] to-transparent p-7 sm:p-9">
-              <div className="flex items-center justify-between gap-5">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-                    Effective Date
-                  </p>
-
-                  <p className="mt-2 text-sm text-gray-400">
-                    August 18, 2026
-                  </p>
-                </div>
-
-                <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-cyan-400/20 bg-cyan-400/[0.05] text-cyan-400 sm:flex">
-                  ✓
-                </div>
-              </div>
+          <div className="min-w-0">
+            <div className="mb-8 rounded-[2rem] border border-[#6d35e8]/15 bg-[#6d35e8]/[0.055] p-7 sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#6d35e8]">
+                A note on this policy
+              </p>
+              <p className="mt-4 max-w-4xl text-base leading-8 text-[#51485a]">
+                We aim to explain our website privacy practices in practical
+                language. The exact information processed can depend on which
+                pages, forms, communication channels, or services you use. If
+                you have a question about a specific interaction, contact us
+                directly and we can clarify how it is handled.
+              </p>
             </div>
 
-            <div className="space-y-5">
-              {sections.map((section) => (
+            <div className="space-y-6">
+              {sections.map((section, index) => (
                 <article
                   id={`privacy-${section.number}`}
                   key={section.number}
-                  className="group scroll-mt-28 rounded-3xl border border-white/[0.08] bg-white/[0.02] p-7 transition-all duration-500 hover:border-cyan-400/15 hover:bg-white/[0.025] sm:p-9 lg:p-10"
+                  className={`scroll-mt-28 overflow-hidden rounded-[2rem] border border-[#17131f]/10 bg-white/65 shadow-[0_18px_60px_rgba(57,35,76,.045)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-[#6d35e8]/20 ${
+                    index % 3 === 1 ? "lg:ml-8" : index % 3 === 2 ? "lg:mr-8" : ""
+                  }`}
                 >
-                  <div className="flex items-start gap-5">
-                    <span className="shrink-0 text-xs font-bold tracking-[0.18em] text-cyan-400">
-                      {section.number}
-                    </span>
+                  <div className="grid lg:grid-cols-[120px_1fr]">
+                    <div className="border-b border-[#17131f]/10 bg-[#f0e7d9]/55 p-7 lg:border-b-0 lg:border-r lg:p-8">
+                      <span className="text-sm font-black tracking-[0.15em] text-[#6d35e8]">
+                        {section.number}
+                      </span>
+                      <span className="mt-4 block text-[10px] font-bold uppercase tracking-[0.14em] text-[#9a8da1]">
+                        {section.eyebrow}
+                      </span>
+                    </div>
 
-                    <div className="min-w-0 flex-1">
-                      <h2 className="text-2xl font-black tracking-tight sm:text-3xl">
+                    <div className="p-7 sm:p-9 lg:p-10">
+                      <h2 className="max-w-3xl text-2xl font-black tracking-[-0.025em] sm:text-3xl">
                         {section.title}
                       </h2>
 
-                      <div className="mt-6 space-y-5 text-sm leading-7 text-gray-500 sm:text-base sm:leading-8">
+                      <div className="mt-6 max-w-3xl space-y-5 text-sm leading-8 text-[#655b6d] sm:text-base">
                         {section.content}
                       </div>
                     </div>
@@ -476,40 +570,61 @@ export default function PrivacyPage() {
                 </article>
               ))}
             </div>
+
+            <div className="mt-8 rounded-[2rem] border border-[#17131f]/10 bg-[#17131f] p-7 text-white sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#c8aaff]">
+                Important
+              </p>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-white/65 sm:text-base">
+                This page describes Yorra Tech&apos;s website-level privacy
+                practices. It is not a substitute for legal advice. If your
+                business requires a policy tailored to a specific jurisdiction,
+                regulated industry, data-processing arrangement, or contractual
+                relationship, obtain appropriate professional legal review.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* =========================================================
-          CTA
-      ========================================================= */}
-      <section className="relative overflow-hidden px-6 pb-24 sm:px-8 lg:px-10 lg:pb-32">
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[450px] w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.05] blur-[140px]" />
+      <section className="relative px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-[#17131f]/10 bg-white/70 p-8 shadow-[0_25px_90px_rgba(57,35,76,.08)] sm:p-12 lg:p-16">
+            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#6d35e8]/[0.11] blur-[80px]" />
+            <div className="relative grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#6d35e8]">
+                  Need clarification?
+                </p>
+                <h2 className="mt-4 max-w-3xl text-3xl font-black tracking-[-0.035em] sm:text-5xl">
+                  Privacy questions deserve a direct answer.
+                </h2>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-[#655b6d] sm:text-base">
+                  If you have a question about information submitted through
+                  Yorra Tech, contact us and tell us what you need help with.
+                </p>
+              </div>
 
-        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.015] px-6 py-14 text-center sm:px-10 lg:px-16 lg:py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-400 sm:text-sm">
-            Have a question?
-          </p>
+              <Link
+                href="/contact"
+                className="group inline-flex w-fit items-center gap-3 rounded-xl bg-[#17131f] px-6 py-4 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#6d35e8]"
+              >
+                Contact Yorra Tech
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
 
-          <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
-            We&apos;re happy to help.
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-gray-500 sm:text-base">
-            If you have questions about how we handle your information,
-            contact the Yorra Tech team.
-          </p>
-
-          <Link
-            href="/contact"
-            className="group mt-8 inline-flex items-center gap-3 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-black transition-all duration-300 hover:-translate-y-1 hover:bg-cyan-300"
-          >
-            Contact Yorra Tech
-
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-          </Link>
+          <div className="mt-8 flex justify-end border-t border-[#17131f]/10 pt-6 text-xs text-[#806f92]">
+            <Link
+              href="/"
+              className="font-semibold transition-colors hover:text-[#6d35e8]"
+            >
+              Back to homepage →
+            </Link>
+          </div>
         </div>
       </section>
     </main>

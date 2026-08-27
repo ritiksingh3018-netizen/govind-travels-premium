@@ -1,254 +1,510 @@
 import Link from "next/link";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
-const projects = [
-  {
-    name: "Nexa Studio",
-    category: "Creative Agency",
-    description:
-      "A bold creative agency concept designed around strong visuals and a premium digital experience.",
-    number: "01",
-    image: "/Portfolio/nexa-studio.png",
-    href: "/Portfolio/nexa-studio",
-  },
-  {
-    name: "Aurex",
-    category: "Business",
-    description:
-      "A premium corporate concept focused on trust, clarity and a strong digital presence.",
-    number: "02",
-    image: "/Portfolio/aurex.png",
-    href: "/Portfolio/aurex",
-  },
-];
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function HomePortfolio() {
   return (
     <section
       id="portfolio"
-      className="relative overflow-hidden bg-[#05070b] px-5 py-24 text-white sm:px-8 lg:px-12 lg:py-32"
+      aria-labelledby="portfolio-heading"
+      className={`${plusJakartaSans.className} relative overflow-hidden bg-[#F8F3E8] px-5 py-24 text-black sm:px-8 lg:px-12 lg:py-32`}
     >
       {/* =========================================================
           BACKGROUND
       ========================================================== */}
 
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-[10%] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-400/[0.025] blur-[150px]" />
 
-        <div className="absolute left-[-180px] top-[50%] h-[400px] w-[400px] rounded-full bg-blue-500/[0.025] blur-[140px]" />
+        {/* Purple ambient glow */}
 
-        <div className="absolute right-[-180px] top-[25%] h-[350px] w-[350px] rounded-full bg-cyan-400/[0.02] blur-[130px]" />
+        <div className="absolute left-1/2 top-[10%] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-purple-600/[0.035] blur-[150px]" />
 
-        {/* subtle grid */}
+        <div className="absolute left-[-180px] top-[50%] h-[400px] w-[400px] rounded-full bg-purple-500/[0.025] blur-[140px]" />
+
+        <div className="absolute right-[-180px] top-[25%] h-[350px] w-[350px] rounded-full bg-purple-600/[0.025] blur-[130px]" />
+
+        {/* SAME 28px GRID */}
+
         <div
-          className="absolute inset-0 opacity-[0.018]"
+          className="absolute inset-0 opacity-[0.13]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
+              "linear-gradient(rgba(15,23,42,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.35) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
           }}
         />
+
       </div>
 
+      {/* =========================================================
+          MAIN CONTAINER
+      ========================================================== */}
+
       <div className="relative mx-auto max-w-[1400px]">
+
         {/* =========================================================
             HEADER
         ========================================================== */}
 
         <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
-          <div>
-            {/* Eyebrow */}
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-cyan-400" />
 
-              <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">
-                Portfolio
+          <div>
+
+            {/* EYEBROW */}
+
+            <div className="flex items-center gap-3">
+
+              <span aria-hidden="true" className="h-px w-8 bg-purple-600" />
+
+              <span
+                className="
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.28em]
+                  text-purple-600
+
+                  sm:text-sm
+                "
+              >
+                Contact for Portfolio
               </span>
+
             </div>
 
-            {/* Heading */}
-            <h2 className="mt-5 max-w-3xl text-5xl font-black leading-[0.92] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
-              Work that
+            {/* =====================================================
+                MAIN HEADING
+                ONLY THIS HEADING IS #433A8F
+            ====================================================== */}
+
+            <h2
+              id="portfolio-heading"
+              className="
+                mt-5
+                max-w-4xl
+                text-5xl
+                font-extrabold
+                leading-[0.94]
+                tracking-[-0.055em]
+                text-[#433A8F]
+
+                sm:text-6xl
+                lg:text-7xl
+              "
+            >
+              Want to see
               <br />
-              <span className="text-gray-600">speaks for itself.</span>
+
+              <span className="text-[#433A8F]">
+                our portfolio?
+              </span>
             </h2>
+
           </div>
 
-          {/* Description */}
+          {/* =====================================================
+              DESCRIPTION
+          ====================================================== */}
+
           <div className="max-w-md lg:pb-1">
-            <p className="text-sm leading-7 text-gray-500 sm:text-base sm:leading-8">
-              Explore a selection of original digital concepts created to
-              demonstrate how Yorra Tech approaches design, technology, and
-              digital experiences.
+
+            <p
+              className="
+                text-sm
+                font-medium
+                leading-7
+                tracking-[-0.01em]
+                text-slate-500
+
+                sm:text-base
+                sm:leading-8
+              "
+            >
+              We keep our selected work private and share relevant projects
+              directly based on your requirements, industry, and goals.
             </p>
 
-            <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.7)]" />
+            {/* STATUS */}
 
-              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-gray-500">
-                Featured Concepts
+            <div
+              className="
+                mt-5
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                border
+                border-slate-900/[0.08]
+                bg-white/[0.3]
+                px-4
+                py-2
+              "
+            >
+
+              <span
+                className="
+                  h-1.5
+                  w-1.5
+                  rounded-full
+                  bg-purple-600
+                  shadow-[0_0_10px_rgba(124,58,237,0.35)]
+                "
+              />
+
+              <span
+                className="
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.2em]
+                  text-slate-500
+                "
+              >
+                Selected Work Available
               </span>
+
             </div>
+
           </div>
+
         </div>
 
         {/* =========================================================
-            PROJECTS
+            CONTACT FOR PORTFOLIO
         ========================================================== */}
 
-        <div className="mt-14 grid grid-cols-1 gap-7 md:grid-cols-2 lg:mt-20 lg:gap-8">
-          {projects.map((project) => (
-            <article
-              key={project.name}
-              className="group relative overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-[#090d14] transition-all duration-500 hover:-translate-y-1 hover:border-cyan-400/25 hover:shadow-[0_30px_100px_rgba(0,0,0,0.35)]"
+        <div
+          aria-label="Yorra Tech selected portfolio work"
+          className="mt-14 lg:mt-20">
+
+          <div
+            className="
+              group
+              relative
+              overflow-hidden
+              rounded-[2rem]
+              border
+              border-slate-900/[0.08]
+              bg-white/[0.28]
+              p-7
+              transition-all
+              duration-500
+
+              hover:-translate-y-1
+              hover:border-purple-600/25
+              hover:bg-white/[0.42]
+              hover:shadow-[0_30px_100px_rgba(45,35,30,0.08)]
+
+              sm:p-10
+              lg:p-14
+            "
+          >
+
+            {/* =====================================================
+                DECORATIVE PURPLE GLOW
+            ====================================================== */}
+
+            <div
+              className="
+                pointer-events-none
+                absolute
+                -right-24
+                -top-24
+                h-[320px]
+                w-[320px]
+                rounded-full
+                bg-purple-600/[0.06]
+                blur-[100px]
+                transition-all
+                duration-700
+
+                group-hover:bg-purple-600/[0.10]
+              "
+            />
+
+            <div
+              className="
+                pointer-events-none
+                absolute
+                -bottom-32
+                -left-24
+                h-[280px]
+                w-[280px]
+                rounded-full
+                bg-purple-500/[0.035]
+                blur-[100px]
+              "
+            />
+
+            {/* =====================================================
+                INNER CONTENT
+            ====================================================== */}
+
+            <div
+              className="
+                relative
+                z-10
+                flex
+                flex-col
+                gap-10
+
+                lg:flex-row
+                lg:items-center
+                lg:justify-between
+              "
             >
-              {/* =====================================================
-                  IMAGE
-              ====================================================== */}
 
-              <div className="relative aspect-[16/10] overflow-hidden bg-[#0b1018]">
-                {/* Image */}
-                <img
-                  src={project.image}
-                  alt={`${project.name} website prototype`}
-                  className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.045]"
-                />
+              {/* ===================================================
+                  LEFT CONTENT
+              ==================================================== */}
 
-                {/* Dark overlay */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#05070b] via-transparent to-black/20 opacity-90" />
+              <div className="max-w-3xl">
 
-                {/* Hover cyan light */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/[0.08] via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+                {/* NUMBER */}
 
-                {/* =================================================
-                    TOP META
-                ================================================== */}
+                <div className="flex items-center gap-3">
 
-                <div className="absolute left-5 right-5 top-5 z-10 flex items-center justify-between">
-                  <span className="text-xs font-bold tracking-[0.22em] text-cyan-400">
-                    {project.number}
-                  </span>
-
-                  <span className="rounded-full border border-white/10 bg-black/35 px-3 py-1.5 text-[8px] font-semibold uppercase tracking-[0.18em] text-white/60 backdrop-blur-xl">
-                    Concept
-                  </span>
-                </div>
-
-                {/* =================================================
-                    IMAGE BOTTOM INFO
-                ================================================== */}
-
-                <div className="absolute bottom-5 left-5 right-5 z-10 flex items-end justify-between gap-5">
-                  <div>
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/45">
-                      {project.category}
-                    </p>
-
-                    <h3 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                      {project.name}
-                    </h3>
-                  </div>
-
-                  {/* Circle arrow */}
-                  <Link
-                    href={project.href}
-                    aria-label={`View ${project.name} prototype`}
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/35 text-lg text-white/70 backdrop-blur-xl transition-all duration-300 group-hover:border-cyan-400/40 group-hover:bg-cyan-400 group-hover:text-black"
+                  <span
+                    className="
+                      text-[10px]
+                      font-bold
+                      uppercase
+                      tracking-[0.2em]
+                      text-purple-600
+                    "
                   >
-                    ↗
-                  </Link>
+                    01
+                  </span>
+
+                  <span aria-hidden="true" className="h-px w-8 bg-purple-600/40" />
+
+                  <span
+                    className="
+                      text-[10px]
+                      font-bold
+                      uppercase
+                      tracking-[0.2em]
+                      text-slate-400
+                    "
+                  >
+                    Selected Work
+                  </span>
+
                 </div>
 
                 {/* =================================================
-                    CENTER HOVER CTA
+                    CTA TITLE
                 ================================================== */}
 
-                <Link
-                  href={project.href}
-                  aria-label={`View ${project.name} prototype`}
-                  className="absolute inset-0 z-20 flex items-center justify-center bg-black/[0.08] opacity-0 transition-all duration-500 group-hover:opacity-100"
+                <h3
+                  className="
+                    mt-6
+                    text-3xl
+                    font-extrabold
+                    leading-[1.02]
+                    tracking-[-0.05em]
+                    text-black
+
+                    sm:text-4xl
+                    lg:text-5xl
+                  "
                 >
-                  <span className="flex translate-y-3 items-center gap-3 rounded-full border border-white/15 bg-black/55 px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-xl transition-transform duration-500 group-hover:translate-y-0">
-                    View Prototype
+                  Contact for
 
-                    <span className="text-cyan-400">↗</span>
+                  <br />
+
+                  <span className="text-purple-600">
+                    Portfolio.
                   </span>
-                </Link>
-              </div>
+                </h3>
 
-              {/* =====================================================
-                  CONTENT
-              ====================================================== */}
+                {/* DESCRIPTION */}
 
-              <div className="relative p-6 sm:p-7">
-                {/* subtle top line */}
-                <div className="absolute left-6 right-6 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+                <p
+                  className="
+                    mt-5
+                    max-w-2xl
+                    text-sm
+                    font-medium
+                    leading-7
+                    text-slate-500
 
-                <div className="flex items-start justify-between gap-6">
-                  <div>
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-cyan-400">
-                      {project.category}
-                    </p>
-
-                    <h3 className="mt-2 text-xl font-bold tracking-tight text-white sm:text-2xl">
-                      {project.name}
-                    </h3>
-                  </div>
-
-                  <span className="text-[10px] font-medium tracking-[0.2em] text-gray-700">
-                    {project.number}
-                  </span>
-                </div>
-
-                <p className="mt-4 max-w-xl text-xs leading-6 text-gray-500 sm:text-sm sm:leading-7">
-                  {project.description}
+                    sm:text-base
+                    sm:leading-8
+                  "
+                >
+                  Looking for examples of our work? Get in touch and we will
+                  share the most relevant portfolio pieces based on your
+                  project, industry, and requirements.
                 </p>
 
-                <Link
-                  href={project.href}
-                  className="group/link mt-6 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.17em] text-white/50 transition-colors duration-300 hover:text-cyan-400"
-                >
-                  Explore Project
+              </div>
 
-                  <span className="transition-transform duration-300 group-hover/link:translate-x-1">
+              {/* ===================================================
+                  RIGHT CTA
+              ==================================================== */}
+
+              <div className="shrink-0">
+
+                <Link
+                  href="/contact"
+                  aria-label="Contact Yorra Tech to request relevant portfolio examples"
+                  className="
+                    group/button
+                    relative
+                    inline-flex
+                    items-center
+                    gap-4
+                    overflow-hidden
+                    rounded-full
+                    bg-purple-600
+                    px-7
+                    py-4
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    tracking-[0.18em]
+                    text-white
+                    shadow-[0_12px_35px_rgba(124,58,237,0.18)]
+                    transition-all
+                    duration-300
+
+                    hover:-translate-y-0.5
+                    hover:bg-purple-700
+                    hover:shadow-[0_18px_45px_rgba(124,58,237,0.25)]
+
+                    sm:px-8
+                    sm:py-4
+                  "
+                >
+
+                  <span>
+                    Contact for Portfolio
+                  </span>
+
+                  <span
+                    aria-hidden="true"
+                    className="
+                      text-base
+                      transition-transform
+                      duration-300
+
+                      group-hover/button:translate-x-1
+                    "
+                  >
                     →
                   </span>
+
                 </Link>
+
               </div>
-            </article>
-          ))}
-        </div>
 
-        {/* =========================================================
-            VIEW ALL CTA
-        ========================================================== */}
+            </div>
 
-        <div className="mt-12 flex justify-center lg:mt-14">
-          <Link
-            href="/Portfolio"
-            className="group relative inline-flex items-center gap-4 overflow-hidden rounded-full border border-white/[0.1] bg-white/[0.025] px-7 py-3.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:border-cyan-400/30 hover:bg-white hover:text-black"
-          >
-            <span>View All Projects</span>
+            {/* =====================================================
+                BOTTOM META
+            ====================================================== */}
 
-            <span className="text-cyan-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-black">
-              →
-            </span>
-          </Link>
+            <div
+              className="
+                relative
+                z-10
+                mt-10
+                flex
+                flex-col
+                gap-3
+                border-t
+                border-slate-900/[0.08]
+                pt-6
+
+                sm:flex-row
+                sm:items-center
+                sm:justify-between
+              "
+            >
+
+              <span
+                className="
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.2em]
+                  text-slate-400
+                "
+              >
+                Yorra Tech / Selected Work
+              </span>
+
+              <span
+                className="
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.2em]
+                  text-purple-600
+                "
+              >
+                Available on request
+              </span>
+
+            </div>
+
+          </div>
+
         </div>
 
         {/* =========================================================
             FOOTER META
         ========================================================== */}
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/[0.06] pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <span className="text-[9px] uppercase tracking-[0.2em] text-gray-700">
-            Yorra Tech / Selected Work
+        <div
+          className="
+            mt-10
+            flex
+            flex-col
+            gap-3
+            border-t
+            border-slate-900/[0.08]
+            pt-6
+
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+
+          <span
+            className="
+              text-[9px]
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              text-slate-400
+            "
+          >
+            Yorra Tech
           </span>
 
-          <span className="text-[9px] uppercase tracking-[0.2em] text-gray-700">
-            02 Featured Concepts
+          <span
+            className="
+              text-[9px]
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              text-slate-400
+            "
+          >
+            Digital Experiences / Selected Work
           </span>
+
         </div>
+
       </div>
+
     </section>
   );
 }

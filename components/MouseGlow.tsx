@@ -3,54 +3,164 @@
 import { useEffect, useRef } from "react";
 
 export default function MouseGlow() {
-  const dotRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
-  const mouse = useRef({ x: 0, y: 0 });
-  const position = useRef({ x: 0, y: 0 });
+  const mouse = useRef({
+    x: 0,
+    y: 0,
+  });
+
+  const isClickable = useRef(false);
 
   useEffect(() => {
-    const dot = dotRef.current;
-    if (!dot) return;
+    const cursor = cursorRef.current;
+
+    if (!cursor) return;
+
+    const circle = cursor.querySelector(
+      "[data-cursor-circle]"
+    ) as HTMLDivElement | null;
+
+    const dot = cursor.querySelector(
+      "[data-cursor-dot]"
+    ) as HTMLDivElement | null;
+
+    if (!circle || !dot) return;
 
     const handleMouseMove = (e: MouseEvent) => {
+      /*
+      =====================================
+      EXACT MOUSE POSITION
+      =====================================
+      */
+
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
+
+      /*
+      =====================================
+      CHECK CLICKABLE ELEMENT
+      =====================================
+      */
+
+      const target = e.target as HTMLElement;
+
+      isClickable.current =
+        target.closest(
+          "a, button, input, textarea, select, [role='button'], [onclick]"
+        ) !== null;
+
+      /*
+      =====================================
+      HOVER EFFECT
+      =====================================
+      */
+
+      if (isClickable.current) {
+        circle.style.transform =
+          "scale(1.45)";
+
+        circle.style.opacity = "0.65";
+      } else {
+        circle.style.transform =
+          "scale(1)";
+
+        circle.style.opacity = "0.4";
+      }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    const handleMouseLeave = () => {
+      cursor.style.opacity = "0";
+    };
+
+    const handleMouseEnter = () => {
+      cursor.style.opacity = "1";
+    };
+
+    window.addEventListener(
+      "mousemove",
+      handleMouseMove
+    );
+
+    window.addEventListener(
+      "mouseleave",
+      handleMouseLeave
+    );
+
+    window.addEventListener(
+      "mouseenter",
+      handleMouseEnter
+    );
+
+    /*
+    =====================================
+    EXACT CURSOR POSITION
+    =====================================
+    */
 
     let animationFrame: number;
 
     const animate = () => {
-      // Smooth follow / trailing effect
-      position.current.x +=
-        (mouse.current.x - position.current.x) * 0.12;
+      cursor.style.transform =
+        "translate3d(" +
+        (mouse.current.x - 16) +
+        "px, " +
+        (mouse.current.y - 16) +
+        "px, 0)";
 
-      position.current.y +=
-        (mouse.current.y - position.current.y) * 0.12;
-
-      dot.style.transform = `translate3d(
-        ${position.current.x - 5}px,
-        ${position.current.y - 5}px,
-        0
-      )`;
-
-      animationFrame = requestAnimationFrame(animate);
+      animationFrame =
+        requestAnimationFrame(
+          animate
+        );
     };
 
     animate();
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(animationFrame);
+      window.removeEventListener(
+        "mousemove",
+        handleMouseMove
+      );
+
+      window.removeEventListener(
+        "mouseleave",
+        handleMouseLeave
+      );
+
+      window.removeEventListener(
+        "mouseenter",
+        handleMouseEnter
+      );
+
+      cancelAnimationFrame(
+        animationFrame
+      );
     };
   }, []);
 
   return (
     <div
-      ref={dotRef}
-      className="pointer-events-none fixed left-0 top-0 z-[9999] hidden h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_14px_4px_rgba(34,211,238,0.7)] md:block"
+      ref={cursorRef}
+      className="pointer-events-none fixed left-0 top-0 z-[9999] hidden h-8 w-8 md:block"
       aria-hidden="true"
-    />
+    >
+      {/* =================================
+          OUTER PURPLE CIRCLE
+      ================================== */}
+
+      <div
+        data-cursor-circle
+        className="absolute inset-0 rounded-full border border-purple-500/50 bg-purple-500/10 opacity-40 transition-[transform,opacity] duration-200 ease-out"
+      />
+
+      {/* =================================
+          CENTER PURPLE DOT
+      ================================== */}
+
+      <div
+        data-cursor-dot
+        className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500 shadow-[0_0_12px_3px_rgba(168,85,247,0.7)]"
+      />
+    </div>
   );
 }

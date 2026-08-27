@@ -6,27 +6,32 @@ import ParticleFootball from "./ParticleFootball";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#05070b] text-white">
-
+    <section
+      className="relative min-h-screen overflow-hidden bg-[#F8F3E8] text-[#0F172A]"
+      aria-labelledby="hero-heading"
+    >
       {/* =========================
           BACKGROUND
       ========================== */}
 
       <div className="pointer-events-none absolute inset-0">
 
-        {/* Cyan glow */}
-        <div className="absolute left-1/2 top-[-180px] h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px] sm:h-[600px] sm:w-[600px]" />
+        {/* Purple glow */}
 
-        {/* Blue glow */}
-        <div className="absolute right-[-150px] top-1/3 h-[300px] w-[300px] rounded-full bg-blue-600/10 blur-[110px]" />
+        <div className="absolute left-[35%] top-[-180px] h-[420px] w-[420px] rounded-full bg-purple-500/10 blur-[120px] sm:h-[600px] sm:w-[600px]" />
+
+        {/* Green glow */}
+
+        <div className="absolute right-[-150px] top-1/3 h-[300px] w-[300px] rounded-full bg-emerald-500/10 blur-[110px]" />
 
         {/* Grid */}
+
         <div
-          className="absolute inset-0 opacity-[0.035]"
+          className="absolute inset-0 opacity-[0.13]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
+              "linear-gradient(rgba(15,23,42,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.35) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
           }}
         />
 
@@ -51,13 +56,13 @@ export default function Hero() {
               LEFT
           ========================== */}
 
-          <div className="relative max-w-3xl">
+          <div className="relative max-w-4xl">
 
             {/* Badge */}
 
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-gray-300 backdrop-blur-md sm:text-sm">
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#0F172A]/10 bg-white/50 px-4 py-2 text-xs font-medium text-[#0F172A] backdrop-blur-md sm:text-sm">
 
-              <Sparkles className="h-4 w-4 text-cyan-400" />
+              <Sparkles className="h-4 w-4 text-purple-600" />
 
               Digital Solutions for Modern Businesses
 
@@ -65,29 +70,33 @@ export default function Hero() {
 
             {/* Heading */}
 
-            <h1 className="text-5xl font-black leading-[0.95] tracking-[-0.04em] sm:text-6xl md:text-7xl lg:text-8xl">
+            <h1
+              id="hero-heading"
+              className="text-5xl font-black leading-[0.88] tracking-[-0.055em] sm:text-6xl md:text-7xl lg:text-[7.5rem]"
+            >
 
-              Build.
+              <span className="block font-extrabold text-[#433A8F]">
+                Build.
+              </span>
 
-              <br />
-
-              <span className="bg-gradient-to-r from-cyan-300 via-white to-blue-400 bg-clip-text text-transparent">
+              <span className="block font-extrabold text-[#075C4D]">
                 Grow.
               </span>
 
-              <br />
-
-              Automate.
+              <span className="block font-extrabold text-[#7D3014]">
+                Automate.
+              </span>
 
             </h1>
 
             {/* Description */}
 
-            <p className="mt-7 max-w-2xl text-base leading-7 text-gray-400 sm:text-lg sm:leading-8 lg:text-xl">
+            <p className="mt-8 max-w-2xl text-base font-medium leading-8 tracking-[-0.01em] text-[#475569] sm:text-lg lg:text-xl">
 
-              We help businesses build powerful digital experiences, grow
-              their online presence, and automate the work that slows them
-              down.
+              Yorra Tech is a digital solutions company helping businesses
+              build high-performance websites, strengthen their online
+              presence, and automate business operations with modern,
+              scalable technology.
 
             </p>
 
@@ -95,9 +104,12 @@ export default function Hero() {
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
 
+              {/* Start a Project */}
+
               <Link
                 href="/contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-black transition duration-300 hover:-translate-y-1 hover:bg-cyan-300 hover:shadow-[0_10px_40px_rgba(34,211,238,0.18)] sm:px-7 sm:py-4"
+                aria-label="Start a digital project with Yorra Tech"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-[#433A8F] px-6 py-3.5 text-sm font-bold text-white transition duration-300 hover:-translate-y-1 hover:bg-[#342D72] hover:shadow-[0_10px_40px_rgba(67,58,143,0.30)] sm:px-7 sm:py-4"
               >
 
                 Start a Project
@@ -106,9 +118,12 @@ export default function Hero() {
 
               </Link>
 
+              {/* Explore Services */}
+
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-6 py-3.5 text-sm font-bold text-white transition duration-300 hover:-translate-y-1 hover:bg-white/[0.07] sm:px-7 sm:py-4"
+                aria-label="Explore Yorra Tech digital services"
+                className="inline-flex items-center justify-center rounded-xl border border-[#0F172A]/15 bg-white/40 px-6 py-3.5 text-sm font-bold text-[#0F172A] transition duration-300 hover:-translate-y-1 hover:border-[#075C4D]/40 hover:bg-white/70 sm:px-7 sm:py-4"
               >
 
                 Explore Services
@@ -117,19 +132,22 @@ export default function Hero() {
 
             </div>
 
-            {/* Trust points */}
+            {/* Trust Points */}
 
-            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs text-gray-500 sm:text-sm">
+            <div
+              className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs text-[#64748B] sm:text-sm"
+              aria-label="Yorra Tech core services"
+            >
 
-              <span>Custom Solutions</span>
+              <span>Website Development</span>
 
-              <span>•</span>
+              <span aria-hidden="true">•</span>
 
-              <span>Modern Technology</span>
+              <span>Digital Growth</span>
 
-              <span>•</span>
+              <span aria-hidden="true">•</span>
 
-              <span>Business Focused</span>
+              <span>Business Automation</span>
 
             </div>
 
@@ -141,7 +159,7 @@ export default function Hero() {
 
       {/* Bottom fade */}
 
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 h-28 bg-gradient-to-t from-[#05070b] to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 h-28 bg-gradient-to-t from-[#F8F3E8] to-transparent" />
 
     </section>
   );
